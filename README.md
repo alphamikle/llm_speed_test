@@ -81,8 +81,8 @@ For reasoning-model endpoints that reject `max_tokens`, set the slot's `output_t
 ## Run
 
 ```sh
-# Fast installation/transport check, explicitly labeled smoke
-sllm --slot server run --profile smoke --languages en --output ./smoke
+# Small SQL installation/transport check, explicitly labeled smoke
+sllm --slot server run --profile smoke --languages en --kits 05 --output ./smoke
 
 # The complete 48-case workload for each model
 sllm run --slots default,another-model --languages en,ste,zh,ru --output ./matrix
@@ -100,6 +100,8 @@ sllm report ./matrix
 ```
 
 The full matrix is intentionally expensive. Each of the two screenplays contains 50 explicitly paginated A4-equivalent pages with a minimum text length, generated in bounded page batches. Each batch has its own measured prefill and decode. Continuity context grows between batches; this is documented rather than presented as one uninterrupted decode. The HTML screenplay artifact uses real A4 print page breaks. The short-prompt screenplay has a short initial premise; the detailed counterpart repeats a coherent historical/scientific dossier, including twelve secondary characters.
+
+The smoke profile reduces direct prose/data volumes. Agent kits still request complete projects and can take substantial time; use `--kits 05` for a quick transport check. For a single long-decode screenplay request, choose `--page-batch 50` and an output budget large enough for the endpoint. The default five-page batches support smaller output limits without silently treating an incomplete screenplay as a full result.
 
 ## Workloads
 
