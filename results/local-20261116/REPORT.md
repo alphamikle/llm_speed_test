@@ -1,11 +1,23 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 96/192 cases. Quality passes: 68. Active wall time: 25783.64 s.
+Profile: **full**. Finished 108/192 cases. Quality passes: 78. Active wall time: 31458.08 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
 | Model | Language | Kit | Quality | PP mean | PP median | PP min | PP max | TG mean | TG median | TG min | TG max | TTFT mean | Wall s | Steps |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| deepseek | en | 01-prose-short | pass | 1238.47 | 1336.41 | 91.94 | 1541.15 | 56.80 | 55.81 | 47.39 | 74.00 | 2837.77 | 674.77 | 0.00 |
+| deepseek | en | 02-prose-long | pass | 1369.45 | 1504.31 | 584.15 | 1534.11 | 61.74 | 58.27 | 43.21 | 86.53 | 2961.56 | 514.04 | 0.00 |
+| deepseek | en | 03-prose-summary-short | pass | 4140.06 | 4140.06 | 4140.06 | 4140.06 | 38.07 | 38.07 | 38.07 | 38.07 | 8844.96 | 64.66 | 0.00 |
+| deepseek | en | 04-prose-summary-long | pass | 3965.08 | 3965.08 | 3965.08 | 3965.08 | 44.42 | 44.42 | 44.42 | 44.42 | 7286.53 | 74.78 | 0.00 |
+| deepseek | en | 05-sql-generation | fail | 177.38 | 188.12 | 148.64 | 195.37 | 45.66 | 45.57 | 37.69 | 53.71 | 1941.07 | 46.59 | 0.00 |
+| deepseek | en | 06-json-generation | pass | 154.66 | 154.66 | 154.66 | 154.66 | 63.60 | 63.60 | 63.60 | 63.60 | 1477.96 | 161.14 | 0.00 |
+| deepseek | en | 07-json-prefill | fail | 4456.45 | 4456.45 | 4456.45 | 4456.45 | 33.86 | 33.86 | 33.86 | 33.86 | 39128.23 | 42.94 | 0.00 |
+| deepseek | en | 08-code-generation | pass | 175.68 | 175.68 | 175.68 | 175.68 | 41.85 | 41.85 | 41.85 | 41.85 | 2081.47 | 49.45 | 0.00 |
+| deepseek | en | 09-code-prefill | pass | 4582.27 | 4582.27 | 4582.27 | 4582.27 | 38.91 | 38.91 | 38.91 | 38.91 | 19822.51 | 31.31 | 0.00 |
+| deepseek | en | 10-agent-battleship | pass | 265.21 | 163.59 | 60.15 | 3088.20 | 54.87 | 56.91 | 35.66 | 70.16 | 1382.25 | 3499.89 | 149.00 |
+| deepseek | en | 11-agent-repair | pass | 224.73 | 213.91 | 89.63 | 565.73 | 54.98 | 56.23 | 39.76 | 63.27 | 1366.14 | 310.78 | 21.00 |
+| deepseek | en | 12-mixed-iterations | pass | 780.47 | 112.57 | 102.85 | 4128.87 | 56.19 | 62.47 | 33.75 | 68.52 | 2606.69 | 133.58 | 0.00 |
 | flash-next | en | 01-prose-short | pass | 3838.20 | 4255.66 | 557.22 | 4423.56 | 276.42 | 280.60 | 248.10 | 307.59 | 908.21 | 117.38 | 0.00 |
 | flash-next | en | 02-prose-long | pass | 4598.95 | 4888.42 | 2652.83 | 4960.82 | 296.38 | 297.79 | 281.15 | 311.12 | 1173.80 | 115.98 | 0.00 |
 | flash-next | en | 03-prose-summary-short | pass | 10694.46 | 10694.46 | 10694.46 | 10694.46 | 264.34 | 264.34 | 264.34 | 264.34 | 2869.63 | 10.82 | 0.00 |
