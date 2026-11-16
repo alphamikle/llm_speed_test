@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {finished} from 'node:stream/promises';
+import killTree from 'tree-kill';
 
 export const now = () => performance.now();
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -56,24 +57,23 @@ export function redact(value) {
 }
 export async function runCommand(command, args = [], options = {}) {
   const {cwd, env, timeoutMs = 60000, signal, onOutput} = options;
+  signal?.throwIfAborted();
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {cwd, env: {...process.env, ...env}, windowsHide: true, detached: process.platform!=='win32', signal, stdio: ['ignore', 'pipe', 'pipe']});
+    const child = spawn(command, args, {cwd, env: {...process.env, ...env}, windowsHide: true, detached: process.platform!=='win32', stdio: ['ignore', 'pipe', 'pipe']});
     let stdout = '', stderr = '', timedOut = false;
     const timer = setTimeout(() => { timedOut = true; terminate(child); }, timeoutMs);
+    const abort=()=>terminate(child);signal?.addEventListener('abort',abort,{once:true});
+    const cleanup=()=>{clearTimeout(timer);signal?.removeEventListener('abort',abort);};
     child.stdout.on('data', data => { stdout += data; onOutput?.('stdout', data.toString()); if (stdout.length > 8000000) stdout = stdout.slice(-8000000); });
     child.stderr.on('data', data => { stderr += data; onOutput?.('stderr', data.toString()); if (stderr.length > 8000000) stderr = stderr.slice(-8000000); });
-    child.on('error', error => {clearTimeout(timer); reject(error);});
-    child.on('close', (code, sig) => {clearTimeout(timer); resolve({code, signal: sig, stdout, stderr, timedOut});});
+    child.on('error', error => {cleanup(); reject(error);});
+    child.on('close', (code, sig) => {cleanup();if(signal?.aborted){reject(signal.reason||new Error('Command aborted'));return;}resolve({code, signal: sig, stdout, stderr, timedOut});});
   });
 }
 export function terminate(child) {
-  if (!child || child.exitCode !== null) return;
-  if (process.platform === 'win32') spawn('taskkill', ['/pid', String(child.pid), '/t', '/f'], {windowsHide: true, stdio: 'ignore'});
-  else {
-    try {process.kill(-child.pid, 'SIGTERM');} catch {child.kill('SIGTERM');}
-    const timer = setTimeout(() => {try {process.kill(-child.pid, 'SIGKILL');} catch {child.kill('SIGKILL');}}, 5000);
-    timer.unref();
-  }
+  if (!child || child.exitCode !== null || !Number.isSafeInteger(child.pid)) return;
+  killTree(child.pid,'SIGTERM',error=>{if(error&&child.exitCode===null)child.kill('SIGTERM');});
+  const timer=setTimeout(()=>{if(child.exitCode===null)killTree(child.pid,'SIGKILL',()=>{});},5000);timer.unref();
 }
 export function csv(rows) {
   if (!rows.length) return '';
