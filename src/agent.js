@@ -18,7 +18,7 @@ export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxS
     const id=`agent-${String(sequence).padStart(5,'0')}`;const recordDir=path.join(dir,'requests',id);ensureDir(recordDir);
     const meter=new Measurement({...metadata,request_id:id,agent_step:sequence,timestamp:new Date().toISOString()});
     const controller=new AbortController();controllers.add(controller);
-    res.on('close',()=>{if(!res.writableEnded)controller.abort();});
+    res.on('close',()=>{if(!res.writableEnded&&!meter.protocolDone)controller.abort();});
     try{
       let body='';for await(const chunk of req){body+=chunk;if(body.length>32000000)throw new Error('Agent request exceeds 32 MB');}
       const payload={...JSON.parse(body),...slot.request,model:slot.model};
@@ -33,7 +33,7 @@ export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxS
       else{
         res.writeHead(200,{'content-type':response.headers.get('content-type')||'text/event-stream','cache-control':'no-cache'});
         await measureResponse(response,meter,{eventsFile:path.join(recordDir,'events.jsonl'),forward:async chunk=>{if(!res.write(chunk))await new Promise((resolve,reject)=>{const cleanup=()=>{res.removeListener('drain',drain);res.removeListener('close',close);res.removeListener('error',fail);};const drain=()=>{cleanup();resolve();};const close=()=>{cleanup();reject(new Error('Agent disconnected during response streaming'));};const fail=error=>{cleanup();reject(error);};res.once('drain',drain);res.once('close',close);res.once('error',fail);});}});
-        res.end();
+        if(!res.destroyed)res.end();
       }
     }catch(error){meter.error=error.message;if(!res.headersSent)res.writeHead(502,{'content-type':'application/json'});if(!res.destroyed)res.end(JSON.stringify({error:{message:error.message}}));}
     finally{controllers.delete(controller);const record=meter.finish();records.push(record);appendJSON(path.join(dir,'requests.jsonl'),record);writeJSON(path.join(recordDir,'result.json'),record);onRecord?.(record);}
@@ -65,11 +65,11 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const substitutions={base_url:proxy.baseUrl,model:slot.model,prompt_file:promptFile,workspace};
   const args=agent.command?(agent.args||[]).map(value=>String(value).replace(/\{(base_url|model|prompt_file|workspace)\}/g,(_,key)=>substitutions[key])):[pi.cli,'--mode','json','--provider',agent.native_provider||'sllm','--model',agent.native_model||slot.model,'--thinking',agent.thinking,'--no-session','--no-extensions','--no-skills','--no-prompt-templates','--no-approve','--append-system-prompt',systemFile,...(noTools?['--no-tools']:['--tools','read,write,edit,bash']),`@${promptFile}`];
   const command=agent.command||process.execPath;
-  const start=now();let buffer='',stderr='',finalMessage='',lastStopReason=null,lastMessageError=null,turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];const eventWriter=new JSONLWriter(path.join(dir,'agent-events.jsonl'));
+  const start=now();let buffer='',stderr='',finalMessage='',lastStopReason=null,lastMessageError=null,terminationReason=null,turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];const eventWriter=new JSONLWriter(path.join(dir,'agent-events.jsonl'));
   const child=spawn(command,args,{cwd:workspace,env:isolatedEnv(home,extraEnv),windowsHide:true,detached:process.platform!=='win32',stdio:['ignore','pipe','pipe']});
   const decoder=new StringDecoder('utf8');
-  const timeout=setTimeout(()=>terminate(child),defaults.agent_timeout_seconds*1000);
-  const abort=()=>terminate(child);signal?.addEventListener('abort',abort,{once:true});
+  const timeout=setTimeout(()=>{terminationReason='timeout';terminate(child);},defaults.agent_timeout_seconds*1000);
+  const abort=()=>{terminationReason='interrupted';terminate(child);};signal?.addEventListener('abort',abort,{once:true});
   const processLine=line=>{
     if(!line.trim())return;
     let event;try{event=JSON.parse(line);}catch{appendJSON(path.join(dir,'agent-unparsed.jsonl'),{line});return;}
@@ -88,7 +88,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
       tools.push({id:event.toolCallId,name:first.name,args:first.args,duration_ms:time-first.start,is_error:Boolean(event.isError||(typeof exitCode==='number'&&exitCode!==0)),exit_code:exitCode,result:event.result});toolStarts.delete(event.toolCallId);
     }
     if(event.type==='agent_end')ended=true;if(event.type==='agent_settled')settled=!event.aborted;
-    if(turns>defaults.agent_max_steps)terminate(child);
+    if(turns>defaults.agent_max_steps){terminationReason='step_limit';terminate(child);}
   };
   child.stdout.on('data',chunk=>{buffer+=decoder.write(chunk);for(;;){const index=buffer.indexOf('\n');if(index<0)break;const line=buffer.slice(0,index).replace(/\r$/,'');buffer=buffer.slice(index+1);processLine(line);}if(buffer.length>64000000){stderr+='\nAgent JSONL record exceeded 64 MB';terminate(child);}});
   child.stderr.on('data',chunk=>{fs.appendFileSync(path.join(dir,'agent-stderr.txt'),chunk);stderr=(stderr+chunk).slice(-20000);});
@@ -100,6 +100,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const records=(useFallback?fallbackRecords:proxy.records).toSorted((a,b)=>(a.agent_step||0)-(b.agent_step||0));
   if(useFallback)for(const record of records){appendJSON(path.join(dir,'requests.jsonl'),record);onRecord?.(record);}
   const recoveredErrors=records.filter(record=>record.status!=='ok');
-  const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,terminal_reason:lastStopReason,pi_version:pi.version,content:finalMessage,records,recovered_request_errors:recoveredErrors.length,success:code===0&&records.some(record=>record.status==='ok')&&(ended||settled)&&!['error','aborted'].includes(lastStopReason)&&!lastMessageError};
+  error=error||lastMessageError||(terminationReason?`Agent stopped: ${terminationReason} (step limit ${defaults.agent_max_steps}, timeout ${defaults.agent_timeout_seconds}s)`:null);
+  const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,terminal_reason:lastStopReason,termination_reason:terminationReason,pi_version:pi.version,content:finalMessage,records,recovered_request_errors:recoveredErrors.length,success:!terminationReason&&code===0&&records.some(record=>record.status==='ok')&&(ended||settled)&&!['error','aborted'].includes(lastStopReason)&&!lastMessageError};
   writeJSON(path.join(dir,'agent-result.json'),result);return result;
 }

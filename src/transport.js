@@ -47,14 +47,23 @@ export async function measureResponse(response, meter, options = {}) {
       const t = now(); meter.ingest(event, t);
       writer?.write({elapsed_ms: t - meter.start, event});
     });
-    for await (const chunk of response.body) {parser.push(chunk); if (forward) await forward(chunk);}
+    try{
+      for await (const chunk of response.body) {
+        parser.push(chunk);if(parser.done){meter.protocolDone=true;meter.completionSignal='done';}
+        if (forward) await forward(chunk);
+        if(parser.done)break;
+      }
+    }catch(error){if(!parser.done&&!meter.finishReason)throw error;}
     parser.finish();
     // Some compatible servers close after a finish_reason without a [DONE].
     if (!parser.done && !meter.finishReason) throw new Error('SSE stream ended without [DONE] or finish_reason');
+    meter.protocolDone=true;meter.completionSignal=parser.done?'done':'finish_reason';
+    writer?.write({elapsed_ms:now()-meter.start,transport:{completed:true,signal:meter.completionSignal}});
   } else {
     const text = await response.text();
     let data; try {data = JSON.parse(text);} catch {throw new Error(`Expected JSON/SSE, got: ${text.slice(0, 150)}`);}
     meter.ingest(data);
+    meter.protocolDone=true;meter.completionSignal='json_response';
     // A nonstreaming response cannot reveal TTFT or decode intervals.
     meter.first = meter.firstAnswer = meter.last = null;
     writer?.write({elapsed_ms: now() - meter.start, event: data});
