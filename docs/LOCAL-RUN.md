@@ -24,3 +24,5 @@ Development checks completed before the full run:
 - Browser validation uses actual Chromium, not a simulated DOM.
 
 Raw local output lives under the configured `output_dir`; committed matrix reports will identify the actual run directory, source revision, observed completion counts and failures. Model-created projects, raw prompts and SSE logs remain local to avoid inflating Git history. Authentication fields are redacted from committed reports.
+
+During the initial full agent case, Pi cancelled one upstream request, recovered, and finished with exit code zero. The harness incorrectly treated the recovered request as a session failure. This was fixed with a dedicated integration regression test. The active agent case was interrupted and rerun from a fresh workspace; the first nine completed API cases were retained. Failed/interrupted attempts remain in local artifacts. Execution segments record source revisions and interruption time rather than silently omitting development/recovery overhead.

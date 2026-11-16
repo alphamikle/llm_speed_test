@@ -136,6 +136,7 @@ export async function runSuite(options) {
       const existing=readJSON(file);if(existing.fingerprint!==fingerprint)throw new Error('Resume configuration, prompts or workload differ from the original run');state=existing;
     }else state={schema_version:1,id:path.basename(dir),fingerprint,profile:profileName,started_at:new Date().toISOString(),status:'running',active_ms:0,planned_cases:selected.length*languages.length*kits.length*repetitions,cases:{},models:selected.map(value=>({slot:value.slotName,...redact(value.slot),agent:redact(value.agent)})),environment:await environmentInfo()};
     const executionEnvironment=await environmentInfo();
+    if(!state.execution_segments&&state.active_ms>0)state.execution_segments=[{started_at:state.started_at,finished_at:state.updated_at,source_revision:state.environment.source_revision,status:state.status,duration_ms:state.active_ms,scope:'Legacy checkpoint before execution-segment tracking'}];
     segment={started_at:new Date().toISOString(),source_revision:executionEnvironment.source_revision};state.execution_segments=state.execution_segments||[];state.execution_segments.push(segment);
     state.status='running';delete state.finished_at;delete state.error;writeJSON(file,state);
     for(const selectedSlot of selected){
