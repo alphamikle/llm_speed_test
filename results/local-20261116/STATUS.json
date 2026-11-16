@@ -1,11 +1,11 @@
 {
   "status": "running",
   "profile": "full",
-  "completed_cases": 33,
+  "completed_cases": 42,
   "planned_cases": 192,
-  "quality_passes": 27,
+  "quality_passes": 34,
   "harness_errors": 0,
   "source_revision": "7d822c22012668b4fa555d5d064611a7490cb364",
   "local_raw_artifacts": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116",
-  "snapshot_utc": "2026-11-16T10:51:49.601Z"
+  "snapshot_utc": "2026-11-16T11:28:04.507Z"
 }

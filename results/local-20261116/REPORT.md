@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 33/192 cases. Quality passes: 27. Active wall time: 4306.12 s.
+Profile: **full**. Finished 42/192 cases. Quality passes: 34. Active wall time: 9571.43 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -18,6 +18,12 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | en | 10-agent-battleship | pass | 662.91 | 372.15 | 115.58 | 4322.99 | 180.55 | 173.68 | 101.55 | 349.83 | 537.35 | 1045.18 | 149.00 |
 | flash-next | en | 11-agent-repair | pass | 524.12 | 247.62 | 117.29 | 1688.26 | 172.75 | 167.52 | 102.93 | 246.13 | 467.64 | 87.85 | 21.00 |
 | flash-next | en | 12-mixed-iterations | pass | 1953.65 | 327.50 | 317.82 | 10067.64 | 179.22 | 179.59 | 165.77 | 193.55 | 1010.08 | 52.00 | 0.00 |
+| flash-next | ru | 01-prose-short | pass | 3909.93 | 4569.54 | 577.46 | 4845.87 | 247.18 | 248.30 | 213.96 | 274.81 | 947.84 | 143.95 | 0.00 |
+| flash-next | ru | 02-prose-long | pass | 5140.27 | 5342.75 | 3465.32 | 5398.37 | 254.16 | 253.80 | 232.78 | 265.38 | 1440.43 | 145.97 | 0.00 |
+| flash-next | ru | 03-prose-summary-short | pass | 10459.12 | 10459.12 | 10459.12 | 10459.12 | 209.77 | 209.77 | 209.77 | 209.77 | 2801.96 | 14.12 | 0.00 |
+| flash-next | ru | 04-prose-summary-long | pass | 10163.76 | 10163.76 | 10163.76 | 10163.76 | 196.06 | 196.06 | 196.06 | 196.06 | 3367.68 | 9.54 | 0.00 |
+| flash-next | ru | 05-sql-generation | fail | 764.98 | 779.38 | 730.23 | 785.32 | 288.65 | 324.43 | 206.28 | 335.23 | 624.06 | 9.82 | 0.00 |
+| flash-next | ru | 06-json-generation | pass | 587.95 | 587.95 | 576.89 | 599.02 | 463.02 | 463.02 | 431.29 | 494.75 | 629.37 | 60.22 | 0.00 |
 | flash-next | ste | 01-prose-short | pass | 4033.17 | 4421.12 | 464.84 | 4623.93 | 300.58 | 296.23 | 272.15 | 337.96 | 936.94 | 110.04 | 0.00 |
 | flash-next | ste | 02-prose-long | pass | 4542.03 | 4700.19 | 2728.69 | 4917.41 | 339.52 | 320.03 | 277.17 | 527.42 | 1388.99 | 132.04 | 0.00 |
 | flash-next | ste | 03-prose-summary-short | pass | 10603.60 | 10603.60 | 10603.60 | 10603.60 | 210.53 | 210.53 | 210.53 | 210.53 | 2921.49 | 8.69 | 0.00 |
@@ -39,3 +45,6 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | zh | 07-json-prefill | fail | 10018.91 | 10018.91 | 10018.91 | 10018.91 | 99.39 | 99.39 | 99.39 | 99.39 | 19154.40 | 20.94 | 0.00 |
 | flash-next | zh | 08-code-generation | pass | 808.27 | 808.27 | 589.14 | 1027.40 | 234.83 | 234.83 | 219.79 | 249.86 | 726.69 | 20.94 | 0.00 |
 | flash-next | zh | 09-code-prefill | pass | 10503.74 | 10503.74 | 10503.74 | 10503.74 | 193.52 | 193.52 | 193.52 | 193.52 | 9899.67 | 13.18 | 0.00 |
+| flash-next | zh | 10-agent-battleship | fail | 1073.17 | 553.41 | 120.13 | 10520.13 | 180.82 | 177.63 | 77.05 | 312.97 | 731.31 | 826.91 | 200.00 |
+| flash-next | zh | 11-agent-repair | pass | 507.72 | 250.98 | 116.17 | 1512.20 | 192.18 | 184.72 | 96.64 | 329.53 | 453.04 | 54.37 | 11.00 |
+| flash-next | zh | 12-mixed-iterations | pass | 1891.62 | 304.98 | 272.73 | 9854.87 | 174.02 | 180.43 | 152.08 | 190.88 | 1109.39 | 58.77 | 0.00 |
