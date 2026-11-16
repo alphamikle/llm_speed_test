@@ -43,7 +43,7 @@ async function executeKit(context) {
       if(!result.success)throw new Error(result.error||result.stderr||'Pi inference failed');
       return {...result.records.at(-1),content:result.content};
     }
-    const before=client.records.length;try{return await client.chat(messages,{...metadata,phase:label},overrides);}finally{records.push(...client.records.slice(before));}
+    const before=client.records.length;try{const result=await client.chat(messages,{...metadata,phase:label},overrides);return {...result,content:result.content||result.refusal||''};}finally{records.push(...client.records.slice(before));}
   }
   async function repaired(prompt,label,validator) {
     let result,check;

@@ -94,7 +94,7 @@ export class Client {
         const response = await fetch(endpoint(this.slot.base_url), {method: 'POST', body: JSON.stringify(payload), headers: requestHeaders(this.slot), signal});
         await measureResponse(response, meter, {eventsFile: path.join(requestDir, `events-${attempt}.jsonl`)});
         if (meter.error) throw new Error(meter.error);
-        if (!meter.content && !meter.reasoning && !meter.toolCalls.size) throw new Error('The model returned no content, reasoning, or tool calls');
+        if (!meter.content && !meter.reasoning && !meter.refusal && !meter.toolCalls.size) throw new Error('The model returned no content, reasoning, refusal, or tool calls');
       } catch (error) {failure = error; meter.error = error.message;}
       if(heartbeat)clearInterval(heartbeat);
       const record = meter.finish();

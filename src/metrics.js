@@ -12,7 +12,7 @@ const rate = (tokens, ms) => tokens > 0 && ms > 0 ? tokens * 1000 / ms : null;
 export class Measurement {
   constructor(metadata = {}, start = now()) {
     this.start = start; this.metadata = metadata; this.first = null; this.firstAnswer = null; this.last = null;
-    this.content = ''; this.reasoning = ''; this.toolCalls = new Map(); this.usage = {}; this.native = {}; this.intervals = [];
+    this.content = ''; this.reasoning = ''; this.refusal=''; this.toolCalls = new Map(); this.usage = {}; this.native = {}; this.intervals = [];
     this.finishReason = null; this.eventCount = 0; this.error = null; this.serverModel = null; this.protocolDone=false; this.completionSignal=null;
   }
   ingest(event, time = now()) {
@@ -27,14 +27,15 @@ export class Measurement {
     const delta = choice.delta || choice.message || {};
     const content = typeof delta.content === 'string' ? delta.content : Array.isArray(delta.content) ? delta.content.filter(x => x.type === 'text').map(x => x.text || '').join('') : '';
     const reasoning = delta.reasoning_content || delta.reasoning || '';
+    const refusal=typeof delta.refusal==='string'?delta.refusal:'';
     const toolText = (delta.tool_calls || []).map(tool => tool.function?.arguments || tool.function?.name || '').join('');
-    if (content || reasoning || toolText) {
+    if (content || reasoning || refusal || toolText) {
       if (this.first === null) this.first = time;
       if (this.last !== null) this.intervals.push(time - this.last);
       this.last = time;
     }
-    if (content && this.firstAnswer === null) this.firstAnswer = time;
-    this.content += content; this.reasoning += reasoning;
+    if ((content||refusal) && this.firstAnswer === null) this.firstAnswer = time;
+    this.content += content; this.reasoning += reasoning;this.refusal+=refusal;
     for (const tool of delta.tool_calls || []) {
       const key = tool.index ?? tool.id ?? 0;
       const previous = this.toolCalls.get(key) || {id: '', type: 'function', function: {name: '', arguments: ''}};
@@ -66,7 +67,7 @@ export class Measurement {
       tg_source: rate(decodeCount, decodeMs) === null ? 'unavailable' : 'server_timings',
       prompt_ms: promptMs, decode_ms: decodeMs, native_prompt_tokens: promptCount, native_decode_tokens: decodeCount,
       stream_event_count: this.eventCount, inter_delta_ms: stats(this.intervals), finish_reason: this.finishReason,
-      usage: this.usage, native_timings: this.native, content: this.content, reasoning: this.reasoning, tool_calls: [...this.toolCalls.values()]};
+      usage: this.usage, native_timings: this.native, content: this.content, reasoning: this.reasoning, refusal:this.refusal, tool_calls: [...this.toolCalls.values()]};
   }
 }
 export function aggregate(records) {

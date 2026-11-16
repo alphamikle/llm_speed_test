@@ -31,3 +31,4 @@ test('SSE parser preserves fragmented UTF-8, CRLF, comments and multiline data',
   for(const byte of Buffer.from(text))parser.push(Uint8Array.of(byte));parser.finish();assert.equal(events.length,2);assert.equal(events[0].choices[0].delta.content,'\u4e2d\u6587 \u041f\u0440\u0438\u0432\u0435\u0442');assert.equal(events[1].usage.completion_tokens,2);assert.equal(parser.done,true);
 });
 test('malformed SSE is an explicit protocol error',()=>{const p=new SSEParser(()=>{});assert.throws(()=>p.push('data: not-json\n\n'),/Invalid SSE/);});
+test('a streamed refusal is observable model output, not an empty response',()=>{const m=new Measurement({},0);m.ingest({choices:[{delta:{refusal:'Cannot fulfill this request.'}}]},75);const result=m.finish(100);assert.equal(result.refusal,'Cannot fulfill this request.');assert.equal(result.ttft_ms,75);assert.equal(result.first_answer_ms,75);assert.equal(result.content,'');});
