@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 141/192 cases. Quality passes: 102. Active suite wall time: 46747.89 s. End-to-end elapsed time: 48761.99 s.
+Profile: **full**. Finished 144/192 cases. Quality passes: 105. Active suite wall time: 48762.50 s. End-to-end elapsed time: 49571.32 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`. Request statistics use the latest case attempts; original and interrupted attempts remain in raw artifacts.
 
@@ -8,7 +8,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 
 | Model | Cases | Requests | Validation passes | PP mean | PP median | PP min | PP max | TG mean | TG median | TG min | TG max | TTFT mean | TTFT median | TTFT min | TTFT max | Case wall s | Startup s |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| deepseek | 45 | 643 | 34/45 | 564.74 | 224.16 | 12.89 | 4626.29 | 56.69 | 56.54 | 32.51 | 108.05 | 2214.10 | 1547.47 | 43.57 | 39128.23 | 20800.36 | 68.05 |
+| deepseek | 48 | 873 | 37/48 | 476.44 | 198.66 | 12.89 | 4626.29 | 57.68 | 57.70 | 32.51 | 108.05 | 1993.05 | 1386.24 | 43.57 | 39128.23 | 22814.27 | 68.05 |
 | flash-next | 48 | 955 | 38/48 | 1362.09 | 509.28 | 115.58 | 10694.46 | 194.20 | 183.95 | 77.05 | 527.42 | 826.18 | 518.17 | 91.74 | 19603.89 | 5941.53 | 23.84 |
 | flash-next-uncensored | 48 | 1487 | 30/48 | 5708.96 | 6362.16 | 495.01 | 8600.66 | 167.61 | 166.72 | 82.37 | 531.03 | 1537.37 | 1344.79 | 400.63 | 24221.68 | 15069.35 | 23.77 |
 
@@ -37,6 +37,9 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek | ru | 07-json-prefill | fail | 4471.91 | 4471.91 | 4471.91 | 4471.91 | 33.12 | 33.12 | 33.12 | 33.12 | 39018.74 | 39018.74 | 39018.74 | 39018.74 | 43.10 | 0.00 |
 | deepseek | ru | 08-code-generation | pass | 206.55 | 206.55 | 206.55 | 206.55 | 41.02 | 41.02 | 41.02 | 41.02 | 2420.73 | 2420.73 | 2420.73 | 2420.73 | 43.48 | 0.00 |
 | deepseek | ru | 09-code-prefill | pass | 4626.29 | 4626.29 | 4626.29 | 4626.29 | 40.42 | 40.42 | 40.42 | 40.42 | 19631.21 | 19631.21 | 19631.21 | 19631.21 | 33.49 | 0.00 |
+| deepseek | ru | 10-agent-battleship | pass | 212.64 | 134.49 | 63.64 | 2698.49 | 60.75 | 61.19 | 40.95 | 81.97 | 1327.33 | 1055.94 | 318.11 | 4929.31 | 1540.88 | 197.00 |
+| deepseek | ru | 11-agent-repair | pass | 217.25 | 212.24 | 66.35 | 613.18 | 56.02 | 58.16 | 43.40 | 66.90 | 1378.64 | 1174.44 | 384.27 | 3629.37 | 296.75 | 27.00 |
+| deepseek | ru | 12-mixed-iterations | pass | 841.85 | 140.77 | 134.39 | 4351.78 | 70.42 | 77.60 | 42.46 | 86.34 | 2926.55 | 1045.79 | 989.37 | 12386.71 | 176.28 | 0.00 |
 | deepseek | ste | 01-prose-short | pass | 1092.16 | 1142.13 | 144.26 | 1492.52 | 76.07 | 86.62 | 41.56 | 87.38 | 3149.60 | 3392.90 | 1487.15 | 3566.21 | 664.69 | 0.00 |
 | deepseek | ste | 02-prose-long | pass | 1181.00 | 1251.14 | 638.45 | 1286.59 | 69.44 | 73.18 | 44.41 | 85.54 | 3186.90 | 3175.29 | 2944.66 | 3435.69 | 741.26 | 0.00 |
 | deepseek | ste | 03-prose-summary-short | pass | 4365.54 | 4365.54 | 4365.54 | 4365.54 | 36.94 | 36.94 | 36.94 | 36.94 | 10507.32 | 10507.32 | 10507.32 | 10507.32 | 46.54 | 0.00 |
