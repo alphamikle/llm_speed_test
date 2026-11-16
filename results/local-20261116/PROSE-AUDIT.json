@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "run_id": "full-local-20261116",
-  "created_at": "2026-11-16T21:16:25.691Z",
+  "created_at": "2026-11-16T21:57:50.257Z",
   "scope": "Post-run diagnostic only. Original validation and timing records are unchanged. A flag requests review; it is not a semantic quality verdict.",
   "method": {
     "version": 1,
@@ -12,9 +12,9 @@
     "internal_repetition_fraction": 0.65,
     "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
   },
-  "cases": 22,
-  "audited_cases": 22,
-  "flagged_cases": 16,
+  "cases": 24,
+  "audited_cases": 24,
+  "flagged_cases": 18,
   "unavailable_cases": 0,
   "rows": [
     {
@@ -727,6 +727,769 @@
           "page": 50,
           "tokens": 456,
           "internal_repetition": 0.06858407079646023
+        }
+      ]
+    },
+    {
+      "slot": "deepseek",
+      "language": "ru",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 29,
+          "similar_to": 26,
+          "similarity": 0.9225225225225225
+        },
+        {
+          "page": 33,
+          "similar_to": 29,
+          "similarity": 0.9784172661870504
+        },
+        {
+          "page": 34,
+          "similar_to": 32,
+          "similarity": 0.900398406374502
+        },
+        {
+          "page": 38,
+          "similar_to": 33,
+          "similarity": 0.9820143884892086
+        },
+        {
+          "page": 39,
+          "similar_to": 37,
+          "similarity": 0.900398406374502
+        }
+      ],
+      "near_duplicate_page_fraction": 0.1,
+      "near_duplicate_pair_count": 8,
+      "most_similar_pairs": [
+        {
+          "page": 38,
+          "similar_to": 33,
+          "similarity": 0.9820143884892086
+        },
+        {
+          "page": 33,
+          "similar_to": 29,
+          "similarity": 0.9784172661870504
+        },
+        {
+          "page": 38,
+          "similar_to": 29,
+          "similarity": 0.9784172661870504
+        },
+        {
+          "page": 29,
+          "similar_to": 26,
+          "similarity": 0.9225225225225225
+        },
+        {
+          "page": 33,
+          "similar_to": 26,
+          "similarity": 0.918918918918919
+        },
+        {
+          "page": 38,
+          "similar_to": 26,
+          "similarity": 0.918918918918919
+        },
+        {
+          "page": 34,
+          "similar_to": 32,
+          "similarity": 0.900398406374502
+        },
+        {
+          "page": 39,
+          "similar_to": 37,
+          "similarity": 0.900398406374502
+        }
+      ],
+      "maximum_page_similarity": 0.9820143884892086,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 392,
+          "internal_repetition": 0.002577319587628857
+        },
+        {
+          "page": 2,
+          "tokens": 314,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 271,
+          "internal_repetition": 0.0037453183520599342
+        },
+        {
+          "page": 4,
+          "tokens": 195,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 237,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 224,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 315,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 215,
+          "internal_repetition": 0.004739336492891044
+        },
+        {
+          "page": 9,
+          "tokens": 219,
+          "internal_repetition": 0.06511627906976747
+        },
+        {
+          "page": 10,
+          "tokens": 228,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 360,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 228,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 193,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 377,
+          "internal_repetition": 0.002680965147453085
+        },
+        {
+          "page": 15,
+          "tokens": 223,
+          "internal_repetition": 0.0091324200913242
+        },
+        {
+          "page": 16,
+          "tokens": 238,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 204,
+          "internal_repetition": 0.0050000000000000044
+        },
+        {
+          "page": 18,
+          "tokens": 206,
+          "internal_repetition": 0.014851485148514865
+        },
+        {
+          "page": 19,
+          "tokens": 201,
+          "internal_repetition": 0.010152284263959421
+        },
+        {
+          "page": 20,
+          "tokens": 185,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 269,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 230,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 216,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 240,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 270,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 281,
+          "internal_repetition": 0.0036101083032491488
+        },
+        {
+          "page": 27,
+          "tokens": 268,
+          "internal_repetition": 0.011363636363636354
+        },
+        {
+          "page": 28,
+          "tokens": 250,
+          "internal_repetition": 0.05284552845528456
+        },
+        {
+          "page": 29,
+          "tokens": 282,
+          "internal_repetition": 0.003597122302158251
+        },
+        {
+          "page": 30,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 31,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 32,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 33,
+          "tokens": 282,
+          "internal_repetition": 0.003597122302158251
+        },
+        {
+          "page": 34,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 35,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 36,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 37,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 38,
+          "tokens": 282,
+          "internal_repetition": 0.003597122302158251
+        },
+        {
+          "page": 39,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 40,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 41,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 42,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 43,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 44,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 45,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 46,
+          "tokens": 247,
+          "internal_repetition": 0.004115226337448541
+        },
+        {
+          "page": 47,
+          "tokens": 255,
+          "internal_repetition": 0.05179282868525892
+        },
+        {
+          "page": 48,
+          "tokens": 251,
+          "internal_repetition": 0.004048582995951455
+        },
+        {
+          "page": 49,
+          "tokens": 261,
+          "internal_repetition": 0.054474708171206254
+        },
+        {
+          "page": 50,
+          "tokens": 254,
+          "internal_repetition": 0.0040000000000000036
+        }
+      ]
+    },
+    {
+      "slot": "deepseek",
+      "language": "ru",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 15,
+          "similar_to": 10,
+          "similarity": 1
+        },
+        {
+          "page": 18,
+          "similar_to": 12,
+          "similarity": 0.986627043090639
+        },
+        {
+          "page": 19,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 20,
+          "similar_to": 14,
+          "similarity": 1
+        },
+        {
+          "page": 27,
+          "similar_to": 22,
+          "similarity": 0.989935956084172
+        },
+        {
+          "page": 28,
+          "similar_to": 23,
+          "similarity": 1
+        },
+        {
+          "page": 29,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 30,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 33,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 27,
+          "similarity": 0.9927007299270073
+        },
+        {
+          "page": 39,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 40,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 48,
+          "similar_to": 24,
+          "similarity": 0.9910394265232975
+        },
+        {
+          "page": 49,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 45,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.36,
+      "near_duplicate_pair_count": 39,
+      "most_similar_pairs": [
+        {
+          "page": 15,
+          "similar_to": 10,
+          "similarity": 1
+        },
+        {
+          "page": 19,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 20,
+          "similar_to": 14,
+          "similarity": 1
+        },
+        {
+          "page": 28,
+          "similar_to": 23,
+          "similarity": 1
+        },
+        {
+          "page": 29,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 30,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 33,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 33,
+          "similar_to": 29,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 30,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 589,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 582,
+          "internal_repetition": 0.00519031141868509
+        },
+        {
+          "page": 3,
+          "tokens": 609,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 581,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 666,
+          "internal_repetition": 0.013595166163142047
+        },
+        {
+          "page": 6,
+          "tokens": 533,
+          "internal_repetition": 0.003780718336483968
+        },
+        {
+          "page": 7,
+          "tokens": 480,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 511,
+          "internal_repetition": 0.00591715976331364
+        },
+        {
+          "page": 9,
+          "tokens": 414,
+          "internal_repetition": 0.08780487804878045
+        },
+        {
+          "page": 10,
+          "tokens": 478,
+          "internal_repetition": 0.07172995780590719
+        },
+        {
+          "page": 11,
+          "tokens": 376,
+          "internal_repetition": 0.051075268817204256
+        },
+        {
+          "page": 12,
+          "tokens": 341,
+          "internal_repetition": 0.0741839762611276
+        },
+        {
+          "page": 13,
+          "tokens": 353,
+          "internal_repetition": 0.08309455587392545
+        },
+        {
+          "page": 14,
+          "tokens": 339,
+          "internal_repetition": 0.09850746268656718
+        },
+        {
+          "page": 15,
+          "tokens": 478,
+          "internal_repetition": 0.07172995780590719
+        },
+        {
+          "page": 16,
+          "tokens": 324,
+          "internal_repetition": 0.05625000000000002
+        },
+        {
+          "page": 17,
+          "tokens": 360,
+          "internal_repetition": 0.050561797752809
+        },
+        {
+          "page": 18,
+          "tokens": 340,
+          "internal_repetition": 0.07440476190476186
+        },
+        {
+          "page": 19,
+          "tokens": 353,
+          "internal_repetition": 0.08309455587392545
+        },
+        {
+          "page": 20,
+          "tokens": 339,
+          "internal_repetition": 0.09850746268656718
+        },
+        {
+          "page": 21,
+          "tokens": 703,
+          "internal_repetition": 0.28183118741058655
+        },
+        {
+          "page": 22,
+          "tokens": 549,
+          "internal_repetition": 0.22568807339449537
+        },
+        {
+          "page": 23,
+          "tokens": 502,
+          "internal_repetition": 0.20481927710843373
+        },
+        {
+          "page": 24,
+          "tokens": 562,
+          "internal_repetition": 0.11469534050179209
+        },
+        {
+          "page": 25,
+          "tokens": 428,
+          "internal_repetition": 0.14622641509433965
+        },
+        {
+          "page": 26,
+          "tokens": 497,
+          "internal_repetition": 0.21501014198782964
+        },
+        {
+          "page": 27,
+          "tokens": 552,
+          "internal_repetition": 0.22445255474452552
+        },
+        {
+          "page": 28,
+          "tokens": 502,
+          "internal_repetition": 0.20481927710843373
+        },
+        {
+          "page": 29,
+          "tokens": 562,
+          "internal_repetition": 0.11469534050179209
+        },
+        {
+          "page": 30,
+          "tokens": 428,
+          "internal_repetition": 0.14622641509433965
+        },
+        {
+          "page": 31,
+          "tokens": 550,
+          "internal_repetition": 0.23076923076923073
+        },
+        {
+          "page": 32,
+          "tokens": 503,
+          "internal_repetition": 0.19038076152304606
+        },
+        {
+          "page": 33,
+          "tokens": 562,
+          "internal_repetition": 0.11469534050179209
+        },
+        {
+          "page": 34,
+          "tokens": 428,
+          "internal_repetition": 0.14622641509433965
+        },
+        {
+          "page": 35,
+          "tokens": 552,
+          "internal_repetition": 0.22445255474452552
+        },
+        {
+          "page": 36,
+          "tokens": 405,
+          "internal_repetition": 0.07231920199501252
+        },
+        {
+          "page": 37,
+          "tokens": 364,
+          "internal_repetition": 0.1527777777777778
+        },
+        {
+          "page": 38,
+          "tokens": 333,
+          "internal_repetition": 0.18844984802431608
+        },
+        {
+          "page": 39,
+          "tokens": 562,
+          "internal_repetition": 0.11469534050179209
+        },
+        {
+          "page": 40,
+          "tokens": 428,
+          "internal_repetition": 0.14622641509433965
+        },
+        {
+          "page": 41,
+          "tokens": 478,
+          "internal_repetition": 0.15822784810126578
+        },
+        {
+          "page": 42,
+          "tokens": 413,
+          "internal_repetition": 0.20293398533007334
+        },
+        {
+          "page": 43,
+          "tokens": 562,
+          "internal_repetition": 0.11469534050179209
+        },
+        {
+          "page": 44,
+          "tokens": 428,
+          "internal_repetition": 0.14622641509433965
+        },
+        {
+          "page": 45,
+          "tokens": 433,
+          "internal_repetition": 0.303030303030303
+        },
+        {
+          "page": 46,
+          "tokens": 424,
+          "internal_repetition": 0.11428571428571432
+        },
+        {
+          "page": 47,
+          "tokens": 434,
+          "internal_repetition": 0.2837209302325582
+        },
+        {
+          "page": 48,
+          "tokens": 562,
+          "internal_repetition": 0.11469534050179209
+        },
+        {
+          "page": 49,
+          "tokens": 428,
+          "internal_repetition": 0.14622641509433965
+        },
+        {
+          "page": 50,
+          "tokens": 433,
+          "internal_repetition": 0.303030303030303
         }
       ]
     },
