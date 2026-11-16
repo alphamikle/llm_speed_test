@@ -100,7 +100,7 @@ sllm report ./matrix
 sllm audit-prose ./matrix
 ```
 
-The full matrix is intentionally expensive. Each of the two screenplays contains 50 explicitly paginated A4-equivalent pages with a minimum text length, generated in bounded page batches. Each batch has its own measured prefill and decode. Continuity context grows between batches; this is documented rather than presented as one uninterrupted decode. The HTML screenplay artifact uses real A4 print page breaks. The short-prompt screenplay has a short initial premise; the detailed counterpart repeats a coherent historical/scientific dossier, including twelve secondary characters.
+The full matrix is intentionally expensive. Each of the two screenplays contains 50 explicitly paginated A4-equivalent pages with a minimum text length, generated in bounded page batches. Each batch has its own measured prefill and decode. Later batches receive up to the last 14,000 characters of prior output as continuity context. These requests are measured separately from the short initial prompt. The HTML screenplay artifact uses real A4 print page breaks. The detailed counterpart repeats a coherent historical/scientific dossier, including twelve secondary characters.
 
 The smoke profile reduces direct prose/data volumes. Agent kits still request complete projects and can take substantial time; use `--kits 05` for a quick transport check. For a single long-decode screenplay request, choose `--page-batch 50` and an output budget large enough for the endpoint. The default five-page batches support smaller output limits without silently treating an incomplete screenplay as a full result.
 
@@ -120,6 +120,8 @@ The smoke profile reduces direct prose/data volumes. Agent kits still request co
 | 10 | Pi builds and tests browser Battleship with SVG assets | Project tests, 30 external AI games, actual desktop/mobile Chromium interaction and screenshots |
 | 11 | Pi repairs a flawed inventory HTTP service | Project tests and external transactional/API contracts |
 | 12 | Six sequential mixed prose/JSON/code tasks | Step schemas, history continuity and test-plan requirements |
+
+The SQL workload counts rows after an actual import. Recursive CTEs are permitted, so 5,000 related rows do not require 5,000 literal INSERT statements. Code and agent workloads evaluate generated deliverables by executing them, rather than comparing output length alone.
 
 Each kit has English (`en`), Simplified Technical English (`ste`), Simplified Chinese (`zh`) and Russian (`ru`) prompts. Programming interfaces stay English. Localized text exists only as benchmark data; all source code, comments, CLI messages and development documentation are English. STE is targeted through explicit instructions and audited sentence lengths; this is **not** a licensed ASD-STE100 dictionary compliance certificate. Semantic literary quality and the truth of arbitrary film claims are not certified by structural validators.
 
