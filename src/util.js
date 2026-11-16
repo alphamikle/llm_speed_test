@@ -38,7 +38,19 @@ export function parsePositive(value, label, max = 10000000) {
   return number;
 }
 export function redact(value) {
-  if (Array.isArray(value)) return value.map(redact);
+  if (Array.isArray(value)) {
+    let hideNext=false;
+    return value.map(item=>{
+      if(hideNext){hideNext=false;return '[REDACTED]';}
+      if(typeof item==='string'){
+        const flag=item.split('=')[0];
+        if(/^(?:--(?:api[-_]?key|auth(?:orization|[-_]token)?|access[-_]token|bearer|password|secret|token|header)|-H)$/i.test(flag)){
+          if(item.includes('='))return flag+'=[REDACTED]';hideNext=true;return item;
+        }
+      }
+      return redact(item);
+    });
+  }
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, /api.?key$|authorization|password|secret|access.?token|^headers$|^env$/i.test(key) ? '[REDACTED]' : redact(item)]));
   return value;
 }
