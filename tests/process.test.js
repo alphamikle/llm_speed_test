@@ -11,3 +11,10 @@ test('command timeout also stops a detached descendant',{timeout:15000},async t=
 test('command cancellation rejects without waiting for its normal deadline',{timeout:10000},async()=>{
   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(new Error('Cancelled test')),100);try{await assert.rejects(runCommand(process.execPath,['-e','setInterval(()=>{},1000)'],{timeoutMs:30000,signal:controller.signal}),/Cancelled test/);}finally{clearTimeout(timer);}
 });
+test('timeout reaches inherited pipes after the process-group leader exits',{skip:process.platform==='win32',timeout:10000},async t=>{
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'sllm-pipes-'));const pidFile=path.join(root,'child.pid');let pid;
+  t.after(()=>{if(pid&&alive(pid))try{process.kill(pid,'SIGKILL');}catch{}fs.rmSync(root,{recursive:true,force:true});});
+  const source=`const {spawn}=require('node:child_process');const fs=require('node:fs');const child=spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'inherit'});fs.writeFileSync(process.argv[1],String(child.pid));child.unref();`;
+  const result=await runCommand(process.execPath,['-e',source,pidFile],{timeoutMs:500});pid=Number(fs.readFileSync(pidFile,'utf8'));
+  assert.equal(result.timedOut,true);for(let i=0;i<100&&alive(pid);i++)await new Promise(resolve=>setTimeout(resolve,20));assert.equal(alive(pid),false);
+});

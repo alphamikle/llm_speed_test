@@ -71,9 +71,15 @@ export async function runCommand(command, args = [], options = {}) {
   });
 }
 export function terminate(child) {
-  if (!child || child.exitCode !== null || !Number.isSafeInteger(child.pid)) return;
-  killTree(child.pid,'SIGTERM',error=>{if(error&&child.exitCode===null)child.kill('SIGTERM');});
-  const timer=setTimeout(()=>{if(child.exitCode===null)killTree(child.pid,'SIGKILL',()=>{});},5000);timer.unref();
+  if (!child || !Number.isSafeInteger(child.pid)) return;
+  // Capture and kill descendants before their parent disappears. A second
+  // process-group kill also reaches inherited pipes after the leader exits.
+  killTree(child.pid,'SIGKILL',()=>{
+    if(process.platform!=='win32')try{process.kill(-child.pid,'SIGKILL');}catch{}
+  });
+  // Escaped descendants must not hold the caller's stdout pipes indefinitely.
+  const timer=setTimeout(()=>{child.stdout?.destroy();child.stderr?.destroy();},5000);timer.unref();
+  child.once('close',()=>clearTimeout(timer));
 }
 export function csv(rows) {
   if (!rows.length) return '';

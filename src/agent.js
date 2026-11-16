@@ -9,6 +9,7 @@ import {chromium} from 'playwright';
 import {Measurement} from './metrics.js';
 import {endpoint,requestHeaders,measureResponse} from './transport.js';
 import {piPath} from './pi-path.js';
+import {cleanupWorkspaceProcesses} from './process-cleanup.js';
 import {appendJSON,ensureDir,now,terminate,writeJSON,JSONLWriter} from './util.js';
 
 export const DEFAULT_TOOL_TIMEOUT_SECONDS=180;
@@ -101,6 +102,8 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   let code=null,exitSignal=null,error=null;
   try {await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',(c,s)=>{code=c;exitSignal=s;resolve();});});buffer+=decoder.end();if(buffer.trim())processLine(buffer);}
   catch(e){error=e.message;}finally{clearTimeout(timeout);signal?.removeEventListener('abort',abort);await proxy.close();await eventWriter.close();}
+  const processCleanup=await cleanupWorkspaceProcesses(workspace);
+  writeJSON(path.join(dir,'process-cleanup.json'),processCleanup);
   if(fallback){fallback.error=error||'Agent stopped before assistant completion';fallbackRecords.push(fallback.finish());}
   for(const [id,tool] of toolStarts)tools.push({id,name:tool.name,args:tool.args,duration_ms:now()-tool.start,is_error:true,incomplete:true,termination_reason:terminationReason||exitSignal||'agent_exit',result:null});
   toolStarts.clear();
@@ -111,5 +114,6 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   error=error||lastMessageError||(terminationReason?`Agent stopped: ${terminationReason} (step limit ${defaults.agent_max_steps}, timeout ${defaults.agent_timeout_seconds}s)`:null);
   const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,terminal_reason:lastStopReason,termination_reason:terminationReason,pi_version:pi.version,content:finalMessage,records,recovered_request_errors:recoveredErrors.length,success:!terminationReason&&code===0&&records.some(record=>record.status==='ok')&&(ended||settled)&&!['error','aborted'].includes(lastStopReason)&&!lastMessageError};
   result.tool_timeout_seconds=!agent.command&&!noTools?toolTimeout:null;
+  result.process_cleanup=processCleanup;
   writeJSON(path.join(dir,'agent-result.json'),result);return result;
 }
