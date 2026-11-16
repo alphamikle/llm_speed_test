@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 42/192 cases. Quality passes: 34. Active wall time: 9571.43 s.
+Profile: **full**. Finished 48/192 cases. Quality passes: 38. Active wall time: 10685.35 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -24,6 +24,12 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | ru | 04-prose-summary-long | pass | 10163.76 | 10163.76 | 10163.76 | 10163.76 | 196.06 | 196.06 | 196.06 | 196.06 | 3367.68 | 9.54 | 0.00 |
 | flash-next | ru | 05-sql-generation | fail | 764.98 | 779.38 | 730.23 | 785.32 | 288.65 | 324.43 | 206.28 | 335.23 | 624.06 | 9.82 | 0.00 |
 | flash-next | ru | 06-json-generation | pass | 587.95 | 587.95 | 576.89 | 599.02 | 463.02 | 463.02 | 431.29 | 494.75 | 629.37 | 60.22 | 0.00 |
+| flash-next | ru | 07-json-prefill | fail | 10016.79 | 10016.79 | 10016.79 | 10016.79 | 103.79 | 103.79 | 103.79 | 103.79 | 18996.57 | 20.57 | 0.00 |
+| flash-next | ru | 08-code-generation | pass | 906.04 | 906.04 | 740.51 | 1071.57 | 229.38 | 229.38 | 226.54 | 232.23 | 738.64 | 18.31 | 0.00 |
+| flash-next | ru | 09-code-prefill | pass | 10482.71 | 10482.71 | 10482.71 | 10482.71 | 195.17 | 195.17 | 195.17 | 195.17 | 9892.95 | 12.97 | 0.00 |
+| flash-next | ru | 10-agent-battleship | fail | 1109.30 | 492.28 | 139.29 | 10509.06 | 180.30 | 173.68 | 101.86 | 317.80 | 788.20 | 929.62 | 200.00 |
+| flash-next | ru | 11-agent-repair | pass | 607.19 | 391.52 | 129.24 | 1591.14 | 186.35 | 194.66 | 88.04 | 271.62 | 560.84 | 63.05 | 10.00 |
+| flash-next | ru | 12-mixed-iterations | pass | 1975.58 | 367.46 | 341.09 | 10038.88 | 177.31 | 181.32 | 156.53 | 188.44 | 1079.06 | 69.05 | 0.00 |
 | flash-next | ste | 01-prose-short | pass | 4033.17 | 4421.12 | 464.84 | 4623.93 | 300.58 | 296.23 | 272.15 | 337.96 | 936.94 | 110.04 | 0.00 |
 | flash-next | ste | 02-prose-long | pass | 4542.03 | 4700.19 | 2728.69 | 4917.41 | 339.52 | 320.03 | 277.17 | 527.42 | 1388.99 | 132.04 | 0.00 |
 | flash-next | ste | 03-prose-summary-short | pass | 10603.60 | 10603.60 | 10603.60 | 10603.60 | 210.53 | 210.53 | 210.53 | 210.53 | 2921.49 | 8.69 | 0.00 |
