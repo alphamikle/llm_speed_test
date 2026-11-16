@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+*.tgz
+.DS_Store
+research/
+artifacts/
+!results/
+results/**/workspaces/
+results/**/pi-home/
+*.log
+.env
