@@ -9,3 +9,4 @@ results/**/workspaces/
 results/**/pi-home/
 *.log
 .env
+results/**/run.json
