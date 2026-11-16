@@ -2,11 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 const [kind,file,minimum='0']=process.argv.slice(2);
 if(kind==='sql') {
-  const {DatabaseSync}=await import('node:sqlite');
+  const {DatabaseSync,constants}=await import('node:sqlite');
   const sql=fs.readFileSync(file,'utf8');
-  if(/\b(?:ATTACH|DETACH|load_extension|VACUUM|PRAGMA)\b/i.test(sql)) throw new Error('SQL changes external storage or database policy');
   const db=new DatabaseSync(':memory:',{enableForeignKeyConstraints:true,allowExtension:false});
-  db.exec('PRAGMA foreign_keys=ON');db.exec(sql);
+  db.exec('PRAGMA foreign_keys=ON');
+  db.setAuthorizer((action,arg1,arg2)=>{
+    if([constants.SQLITE_ATTACH,constants.SQLITE_DETACH,constants.SQLITE_PRAGMA].includes(action))return constants.SQLITE_DENY;
+    if(action===constants.SQLITE_FUNCTION&&String(arg2||arg1).toLowerCase()==='load_extension')return constants.SQLITE_DENY;
+    return constants.SQLITE_OK;
+  });
+  db.exec(sql);db.setAuthorizer(null);
   if(db.prepare('PRAGMA foreign_keys').get().foreign_keys!==1)throw new Error('Foreign keys were disabled');
   const tables=db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").all();
   for(const table of ['cities','streets','users','organizations','memberships']) if(!tables.some(row=>row.name===table)) throw new Error(`Missing table: ${table}`);

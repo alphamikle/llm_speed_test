@@ -9,7 +9,7 @@ A cross-platform CLI for reproducible LLM inference and coding-agent benchmarks.
 Install Node.js 24 or newer on Linux, Windows or macOS, then:
 
 ```sh
-npm install -g git+https://github.com/alphamikle/llm_speed_test.git
+npm install -g --allow-scripts=sllm git+https://github.com/alphamikle/llm_speed_test.git
 sllm --help
 sllm doctor --offline
 ```

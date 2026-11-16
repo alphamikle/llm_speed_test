@@ -8,7 +8,7 @@ export function stats(values) {
   return {count: data.length, mean, median: quantile(0.5), min: data[0], max: data.at(-1), p90: quantile(0.9), p95: quantile(0.95), stddev: Math.sqrt(data.reduce((sum, value) => sum + (value - mean) ** 2, 0) / data.length)};
 }
 const finite = value => Number.isFinite(Number(value)) && value !== null && value !== undefined ? Number(value) : null;
-const rate = (tokens, ms) => tokens !== null && ms > 0 ? tokens * 1000 / ms : null;
+const rate = (tokens, ms) => tokens > 0 && ms > 0 ? tokens * 1000 / ms : null;
 export class Measurement {
   constructor(metadata = {}, start = now()) {
     this.start = start; this.metadata = metadata; this.first = null; this.firstAnswer = null; this.last = null;

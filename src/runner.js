@@ -85,20 +85,20 @@ async function executeKit(context) {
     output=JSON.stringify(parts,null,2);validation.passed=!validation.errors.length;
   }else if(kit.kind==='agent'){
     const workspace=path.join(dir,'workspace');ensureDir(workspace);
-    if(kit.id.startsWith('11'))repairWorkspace(workspace);else{fs.writeFileSync(path.join(workspace,'BENCHMARK_CONTRACT.md'),GAME_CONTRACT);fs.writeFileSync(path.join(workspace,'browser-check.mjs'),browserHelperSource());}
+    if(kit.id.startsWith('11')){repairWorkspace(workspace);fs.writeFileSync(path.join(workspace,'REQUIREMENTS.md'),l.repairRequirements);}else{fs.writeFileSync(path.join(workspace,'BENCHMARK_CONTRACT.md'),l.gameContract);fs.writeFileSync(path.join(workspace,'browser-check.mjs'),browserHelperSource());}
     fs.writeFileSync(path.join(workspace,'AGENTS.md'),l.agentSystem);
     let prompt=kit.id.startsWith('10')?l.battleship:l.repair;
-    if(kit.id.startsWith('10'))prompt+='\n\n'+GAME_CONTRACT;
+    if(kit.id.startsWith('10'))prompt+='\n\n'+l.gameContract;
     agentInfo={agent_steps:0,agent_turns:0,tool_calls:0,tool_errors:0};
     for(let attempt=0;attempt<=Math.min(defaults.repair_attempts,1);attempt++){
-      const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+render(l.fix,{errors:validation.errors.join('; ')}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord});
+      const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord});
       records.push(...result.records);agentInfo.agent_steps+=result.steps;agentInfo.agent_turns+=result.turns;agentInfo.tool_calls+=result.tool_count;agentInfo.tool_errors+=result.tool_errors;output=result.content;
       if(!result.success){validation={passed:false,errors:[result.error||result.stderr||`Agent exited with ${result.code}`]};if(signal?.aborted)throw signal.reason;continue;}
       const test=await runCommand(process.execPath,['--run','test'],{cwd:workspace,timeoutMs:120000,signal});writeJSON(path.join(dir,`agent-tests-${attempt}.json`),test);
       if(kit.id.startsWith('11'))validation=await validateRepair(workspace,path.join(dir,`external-validation-${attempt}`),signal);
       else{
         const rules=await runCommand(process.execPath,[fileURLToPath(new URL('./battleship-child.js',import.meta.url)),path.join(workspace,'engine.js')],{cwd:workspace,timeoutMs:60000,signal});
-        const browser=await inspectGame(workspace,path.join(dir,`browser-${attempt}`));validation={passed:rules.code===0&&browser.passed,errors:[...(rules.code===0?[]:[rules.stderr||rules.stdout]),...browser.errors],rules,browser};
+        const browser=await inspectGame(workspace,path.join(dir,`browser-${attempt}`));const reviewed=result.tools.some(tool=>tool.name==='read'&&/\.(png|jpe?g|webp)$/i.test(tool.args?.path||''));validation={passed:rules.code===0&&browser.passed,errors:[...(rules.code===0?[]:[rules.stderr||rules.stdout]),...browser.errors],rules,browser,model_image_review:reviewed};
       }
       if(test.code!==0){validation.passed=false;validation.errors.push(`Project tests failed: ${test.stderr||test.stdout}`);}
       if(validation.passed)break;
