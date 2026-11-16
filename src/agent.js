@@ -65,7 +65,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const substitutions={base_url:proxy.baseUrl,model:slot.model,prompt_file:promptFile,workspace};
   const args=agent.command?(agent.args||[]).map(value=>String(value).replace(/\{(base_url|model|prompt_file|workspace)\}/g,(_,key)=>substitutions[key])):[pi.cli,'--mode','json','--provider',agent.native_provider||'sllm','--model',agent.native_model||slot.model,'--thinking',agent.thinking,'--no-session','--no-extensions','--no-skills','--no-prompt-templates','--no-approve','--append-system-prompt',systemFile,...(noTools?['--no-tools']:['--tools','read,write,edit,bash']),`@${promptFile}`];
   const command=agent.command||process.execPath;
-  const start=now();let buffer='',stderr='',finalMessage='',turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];const eventWriter=new JSONLWriter(path.join(dir,'agent-events.jsonl'));
+  const start=now();let buffer='',stderr='',finalMessage='',lastStopReason=null,lastMessageError=null,turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];const eventWriter=new JSONLWriter(path.join(dir,'agent-events.jsonl'));
   const child=spawn(command,args,{cwd:workspace,env:isolatedEnv(home,extraEnv),windowsHide:true,detached:process.platform!=='win32',stdio:['ignore','pipe','pipe']});
   const decoder=new StringDecoder('utf8');
   const timeout=setTimeout(()=>terminate(child),defaults.agent_timeout_seconds*1000);
@@ -78,7 +78,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
     if(event.type==='message_start'&&event.message?.role==='assistant')fallback=new Measurement({...metadata,agent_step:turns,request_id:`native-pi-${turns}`,timing_scope:'pi_message_events'},time);
     if(event.type==='message_update'&&fallback){const e=event.assistantMessageEvent;const delta=e?.type==='text_delta'?{content:e.delta}:e?.type==='thinking_delta'?{reasoning_content:e.delta}:e?.type==='toolcall_delta'?{tool_calls:[{index:e.contentIndex,function:{arguments:e.delta}}]}:{};fallback.ingest({choices:[{delta}]},time);}
     if(event.type==='message_end'&&event.message?.role==='assistant'){
-      const m=event.message;finalMessage=(m.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\n');
+      const m=event.message;lastStopReason=m.stopReason;lastMessageError=m.errorMessage;finalMessage=(m.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\n');
       if(fallback){fallback.metadata={...fallback.metadata,actual_model:m.model,provider:m.provider};fallback.usage={prompt_tokens:typeof m.usage?.input==='number'?m.usage.input+(m.usage.cacheRead||0)+(m.usage.cacheWrite||0):undefined,completion_tokens:m.usage?.output,prompt_tokens_details:{cached_tokens:m.usage?.cacheRead}};fallback.finishReason=m.stopReason;const record=fallback.finish(time);if(m.stopReason==='error'||m.errorMessage){record.status='error';record.error=m.errorMessage;}fallbackRecords.push(record);fallback=null;}
     }
     if(event.type==='tool_execution_start'){toolStarts.set(event.toolCallId,{name:event.toolName,args:event.args,start:time});onProgress?.({type:'tool_start',tool:event.toolName,turn:turns});}
@@ -97,8 +97,9 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   catch(e){error=e.message;}finally{clearTimeout(timeout);signal?.removeEventListener('abort',abort);await proxy.close();await eventWriter.close();}
   if(fallback){fallback.error=error||'Agent stopped before assistant completion';fallbackRecords.push(fallback.finish());}
   const useFallback=!proxy.records.length;
-  const records=useFallback?fallbackRecords:proxy.records;
+  const records=(useFallback?fallbackRecords:proxy.records).toSorted((a,b)=>(a.agent_step||0)-(b.agent_step||0));
   if(useFallback)for(const record of records){appendJSON(path.join(dir,'requests.jsonl'),record);onRecord?.(record);}
-  const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,pi_version:pi.version,content:finalMessage,records,success:code===0&&records.length>0&&records.every(r=>r.status==='ok')};
+  const recoveredErrors=records.filter(record=>record.status!=='ok');
+  const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,terminal_reason:lastStopReason,pi_version:pi.version,content:finalMessage,records,recovered_request_errors:recoveredErrors.length,success:code===0&&records.some(record=>record.status==='ok')&&(ended||settled)&&!['error','aborted'].includes(lastStopReason)&&!lastMessageError};
   writeJSON(path.join(dir,'agent-result.json'),result);return result;
 }

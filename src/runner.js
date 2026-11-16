@@ -99,7 +99,7 @@ async function executeKit(context) {
     for(let attempt=0;attempt<=Math.min(defaults.repair_attempts,1);attempt++){
       const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord,onProgress:event=>log(`${event.type} ${event.tool||event.turn}`)});
       records.push(...result.records);agentInfo.agent_steps+=result.steps;agentInfo.agent_turns+=result.turns;agentInfo.tool_calls+=result.tool_count;agentInfo.tool_errors+=result.tool_errors;output=result.content;
-      if(!result.success){validation={passed:false,errors:[result.error||result.stderr||`Agent exited with ${result.code}`]};if(signal?.aborted)throw signal.reason;continue;}
+      if(!result.success){validation={passed:false,errors:[result.error||result.stderr||result.records.filter(record=>record.status==='error').at(-1)?.error||`Agent did not complete successfully (exit ${result.code})`]};writeJSON(path.join(dir,`agent-validation-${attempt}.json`),validation);if(signal?.aborted)throw signal.reason;continue;}
       const test=await runCommand(process.execPath,['--run','test'],{cwd:workspace,timeoutMs:120000,signal});writeJSON(path.join(dir,`agent-tests-${attempt}.json`),test);
       if(kit.id.startsWith('11'))validation=await validateRepair(workspace,path.join(dir,`external-validation-${attempt}`),signal);
       else{
@@ -107,6 +107,7 @@ async function executeKit(context) {
         const browser=await inspectGame(workspace,path.join(dir,`browser-${attempt}`));const reviewed=result.tools.some(tool=>tool.name==='read'&&/\.(png|jpe?g|webp)$/i.test(tool.args?.path||''));validation={passed:rules.code===0&&browser.passed,errors:[...(rules.code===0?[]:[rules.stderr||rules.stdout]),...browser.errors],rules,browser,model_image_review:reviewed};
       }
       if(test.code!==0){validation.passed=false;validation.errors.push(`Project tests failed: ${test.stderr||test.stdout}`);}
+      writeJSON(path.join(dir,`agent-validation-${attempt}.json`),validation);
       if(validation.passed)break;
     }
   }else throw new Error(`Unknown kit kind: ${kit.kind}`);
@@ -127,14 +128,16 @@ export async function runSuite(options) {
   const lockFile=path.join(dir,'run.lock');let lock;
   try{lock=fs.openSync(lockFile,'wx');fs.writeFileSync(lock,JSON.stringify({pid:process.pid,host:os.hostname()}));}
   catch(error){if(error.code!=='EEXIST')throw error;const owner=readJSON(lockFile);if(owner.host!==os.hostname())throw new Error('Run is locked by another host');let alive=true;try{process.kill(owner.pid,0);}catch(e){if(e.code==='ESRCH')alive=false;}if(alive)throw new Error(`Run is locked by PID ${owner.pid}`);fs.unlinkSync(lockFile);return runSuite(options);}
-  const start=now();let state;const file=path.join(dir,'run.json');
+  const start=now();let state,segment;const file=path.join(dir,'run.json');
   const log=message=>options.log?.(message);
   try{
     if(fs.existsSync(file)){
       if(!options.resume)throw new Error('Output directory already contains a run. Use --resume or choose a new --output directory.');
       const existing=readJSON(file);if(existing.fingerprint!==fingerprint)throw new Error('Resume configuration, prompts or workload differ from the original run');state=existing;
     }else state={schema_version:1,id:path.basename(dir),fingerprint,profile:profileName,started_at:new Date().toISOString(),status:'running',active_ms:0,planned_cases:selected.length*languages.length*kits.length*repetitions,cases:{},models:selected.map(value=>({slot:value.slotName,...redact(value.slot),agent:redact(value.agent)})),environment:await environmentInfo()};
-    state.status='running';delete state.finished_at;writeJSON(file,state);
+    const executionEnvironment=await environmentInfo();
+    segment={started_at:new Date().toISOString(),source_revision:executionEnvironment.source_revision};state.execution_segments=state.execution_segments||[];state.execution_segments.push(segment);
+    state.status='running';delete state.finished_at;delete state.error;writeJSON(file,state);
     for(const selectedSlot of selected){
       const {slot,slotName,agent,config}=selectedSlot;const defaults={...config.defaults,...options.overrides};const profile={...PROFILES[profileName],...options.dimensions};
       const pending=languages.some(language=>kits.some(kit=>Array.from({length:repetitions},(_,i)=>`${slotName}/${language}/${kit.id}/${i+1}`).some(key=>!state.cases[key]||state.cases[key].status==='interrupted'||(options.retryFailed&&(!state.cases[key].validation?.passed)))));
@@ -155,7 +158,7 @@ export async function runSuite(options) {
         const key=`${slotName}/${language}/${kit.id}/${repetition}`;const previous=state.cases[key];
         if(previous&&previous.status!=='interrupted'&&!(options.retryFailed&&!previous.validation?.passed))continue;
         options.signal?.throwIfAborted();const attempt=(previous?.attempt||0)+1;const caseDir=path.join(dir,'cases',slotName,language,kit.id,String(repetition),`attempt-${attempt}`);ensureDir(caseDir);
-        const metadata={slot:slotName,model:slot.model,language,kit:kit.id,repetition,profile:profileName};const caseStart=now();
+        const metadata={slot:slotName,model:slot.model,language,kit:kit.id,repetition,profile:profileName,source_revision:executionEnvironment.source_revision};const caseStart=now();
         const client=new Client({slot,defaults,dir:caseDir,signal:options.signal,onProgress:event=>log(`${slotName}/${language}/${kit.id}: receiving ${event.phase} · ${event.elapsed_seconds.toFixed(0)} s · ${event.characters} characters`),onRecord:record=>log(`${slotName}/${language}/${kit.id}: ${record.phase||`agent step ${record.agent_step}`} · TTFT ${record.ttft_ms?.toFixed(0)??'?'} ms · PP ${record.pp_tps?.toFixed(1)??'?'} · TG ${record.tg_tps?.toFixed(1)??'?'} tok/s`)});
         const dependency=id=>{const test=state.cases[`${slotName}/${language}/${id}/${repetition}`];if(!test?.output_file||!fs.existsSync(test.output_file))throw new Error(`Dependency artifact unavailable: ${id}`);return fs.readFileSync(test.output_file,'utf8');};
         log(`CASE ${Object.keys(state.cases).length+1}/${state.planned_cases}: ${key}`);let result;
@@ -168,6 +171,6 @@ export async function runSuite(options) {
     }
     state.status='completed';state.finished_at=new Date().toISOString();
   }catch(error){if(state){state.status=options.signal?.aborted?'interrupted':'error';state.error=error.message;}throw error;}
-  finally{if(state){state.active_ms+=now()-start;state.updated_at=new Date().toISOString();writeJSON(file,state);createReport(dir);}if(lock!==undefined)fs.closeSync(lock);fs.rmSync(lockFile,{force:true});}
+  finally{if(state){state.active_ms+=now()-start;state.updated_at=new Date().toISOString();if(segment){segment.finished_at=state.updated_at;segment.duration_ms=now()-start;segment.status=state.status;}writeJSON(file,state);createReport(dir);}if(lock!==undefined)fs.closeSync(lock);fs.rmSync(lockFile,{force:true});}
   return {dir,report:createReport(dir)};
 }

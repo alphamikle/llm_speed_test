@@ -41,7 +41,8 @@ def main():
         previous = json.loads(owner.read_text()) if owner.exists() else {'status': 'released'}
         if previous.get('status') == 'reserved':
             raise RuntimeError('Another task owns the local compute reservation')
-        write(args.output / 'gateway-owner-before.json', previous)
+        if not (args.output / 'gateway-owner-before.json').exists():
+            write(args.output / 'gateway-owner-before.json', previous)
         reservation = {'status': 'reserved', 'owner': 'sllm-local-matrix', 'task': 'User-requested four-model multilingual inference benchmark', 'phase': 'full 192-case matrix', 'updated_epoch': time.time(), 'progress_record': str(args.output / 'run.json')}
         write(owner, reservation)
         child = None
