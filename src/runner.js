@@ -53,6 +53,7 @@ async function executeKit(context) {
     }
     return {result,check};
   }
+  try {
   if(kit.kind==='prose'){
     const base=render(kit.id.startsWith('01')?l.short:l.long,promptValues)+(kit.id.startsWith('02')?`\n\n${JSON.stringify(l.dossier,null,2)}`:'');
     const batch=defaults.page_batch||profile.pageBatch;const parts=[];const batchChecks=[];
@@ -99,6 +100,8 @@ async function executeKit(context) {
     for(let attempt=0;attempt<=Math.min(defaults.repair_attempts,1);attempt++){
       const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord,onProgress:event=>log(`${event.type} ${event.tool||event.turn}`)});
       records.push(...result.records);agentInfo.agent_steps+=result.steps;agentInfo.agent_turns+=result.turns;agentInfo.tool_calls+=result.tool_count;agentInfo.tool_errors+=result.tool_errors;output=result.content;
+      if(!result.records.length&&!signal?.aborted)throw new Error(`Agent harness produced no measured inference requests: ${result.error||result.stderr||'invalid JSON event protocol'}`);
+      if(result.records.length&&!result.records.some(record=>record.status==='ok')&&!signal?.aborted)throw new Error(`Agent inference requests failed: ${result.error||result.records.at(-1).error||'upstream request error'}`);
       if(!result.success){validation={passed:false,errors:[result.error||result.stderr||result.records.filter(record=>record.status==='error').at(-1)?.error||`Agent did not complete successfully (exit ${result.code})`]};writeJSON(path.join(dir,`agent-validation-${attempt}.json`),validation);if(signal?.aborted)throw signal.reason;continue;}
       const test=await runCommand(process.execPath,['--run','test'],{cwd:workspace,timeoutMs:120000,signal});writeJSON(path.join(dir,`agent-tests-${attempt}.json`),test);
       if(kit.id.startsWith('11'))validation=await validateRepair(workspace,path.join(dir,`external-validation-${attempt}`),signal);
@@ -113,6 +116,7 @@ async function executeKit(context) {
   }else throw new Error(`Unknown kit kind: ${kit.kind}`);
   fs.writeFileSync(path.join(dir,'output.txt'),output);writeJSON(path.join(dir,'validation.json'),validation);
   return {output,validation,records,...agentInfo,language_audit:languageAudit(output,language)};
+  } catch(error) {error.records=records;error.agentInfo=agentInfo;throw error;}
 }
 
 export async function runSuite(options) {
@@ -162,9 +166,10 @@ export async function runSuite(options) {
         const metadata={slot:slotName,model:slot.model,language,kit:kit.id,repetition,profile:profileName,source_revision:executionEnvironment.source_revision};const caseStart=now();
         const client=new Client({slot,defaults,dir:caseDir,signal:options.signal,onProgress:event=>log(`${slotName}/${language}/${kit.id}: receiving ${event.phase} · ${event.elapsed_seconds.toFixed(0)} s · ${event.characters} characters`),onRecord:record=>log(`${slotName}/${language}/${kit.id}: ${record.phase||`agent step ${record.agent_step}`} · TTFT ${record.ttft_ms?.toFixed(0)??'?'} ms · PP ${record.pp_tps?.toFixed(1)??'?'} · TG ${record.tg_tps?.toFixed(1)??'?'} tok/s`)});
         const dependency=id=>{const test=state.cases[`${slotName}/${language}/${id}/${repetition}`];if(!test?.output_file||!fs.existsSync(test.output_file))throw new Error(`Dependency artifact unavailable: ${id}`);return fs.readFileSync(test.output_file,'utf8');};
-        log(`CASE ${Object.keys(state.cases).length+1}/${state.planned_cases}: ${key}`);let result;
+        const finishedBefore=Object.values(state.cases).filter(test=>test.status!=='interrupted').length-(previous&&previous.status!=='interrupted'?1:0);
+        log(`CASE ${finishedBefore+1}/${state.planned_cases}: ${key}${previous?' (retry)':''}`);let result;
         try{result=await executeKit({kit,language,profile,dir:caseDir,dependency,client,defaults,slot,agent,signal:options.signal,log:message=>log(`${key}: ${message}`),metadata,via:options.via||'api'});result.status='completed';}
-        catch(error){result={status:options.signal?.aborted?'interrupted':'error',error:error.message,validation:{passed:false,errors:[error.message]},records:client.records};log(`ERROR ${key}: ${error.message}`);}
+        catch(error){result={status:options.signal?.aborted?'interrupted':'error',error:error.message,validation:{passed:false,errors:[error.message]},records:error.records||client.records,...error.agentInfo};log(`ERROR ${key}: ${error.message}`);}
         delete result.output;result={...metadata,...result,attempt,duration_ms:now()-caseStart,output_file:fs.existsSync(path.join(caseDir,'output.txt'))?path.join(caseDir,'output.txt'):null,artifact_dir:caseDir};result.statistics=aggregate(result.records||[]);
         writeJSON(path.join(caseDir,'case.json'),result);state.cases[key]=result;state.updated_at=new Date().toISOString();writeJSON(file,{...state,active_ms:state.active_ms+now()-start});createReport(dir);
         if(options.signal?.aborted)throw options.signal.reason;
