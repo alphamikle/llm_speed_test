@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 108/192 cases. Quality passes: 78. Active wall time: 31458.08 s.
+Profile: **full**. Finished 117/192 cases. Quality passes: 85. Active wall time: 33541.02 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -18,6 +18,15 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek | en | 10-agent-battleship | pass | 265.21 | 163.59 | 60.15 | 3088.20 | 54.87 | 56.91 | 35.66 | 70.16 | 1382.25 | 3499.89 | 149.00 |
 | deepseek | en | 11-agent-repair | pass | 224.73 | 213.91 | 89.63 | 565.73 | 54.98 | 56.23 | 39.76 | 63.27 | 1366.14 | 310.78 | 21.00 |
 | deepseek | en | 12-mixed-iterations | pass | 780.47 | 112.57 | 102.85 | 4128.87 | 56.19 | 62.47 | 33.75 | 68.52 | 2606.69 | 133.58 | 0.00 |
+| deepseek | ste | 01-prose-short | pass | 1092.16 | 1142.13 | 144.26 | 1492.52 | 76.07 | 86.62 | 41.56 | 87.38 | 3149.60 | 664.69 | 0.00 |
+| deepseek | ste | 02-prose-long | pass | 1181.00 | 1251.14 | 638.45 | 1286.59 | 69.44 | 73.18 | 44.41 | 85.54 | 3186.90 | 741.26 | 0.00 |
+| deepseek | ste | 03-prose-summary-short | pass | 4365.54 | 4365.54 | 4365.54 | 4365.54 | 36.94 | 36.94 | 36.94 | 36.94 | 10507.32 | 46.54 | 0.00 |
+| deepseek | ste | 04-prose-summary-long | pass | 4346.22 | 4346.22 | 4346.22 | 4346.22 | 40.81 | 40.81 | 40.81 | 40.81 | 10802.68 | 50.03 | 0.00 |
+| deepseek | ste | 05-sql-generation | fail | 121.93 | 156.75 | 12.89 | 196.16 | 64.18 | 47.86 | 39.23 | 105.44 | 1291.46 | 188.67 | 0.00 |
+| deepseek | ste | 06-json-generation | pass | 150.98 | 150.98 | 150.98 | 150.98 | 65.86 | 65.86 | 65.86 | 65.86 | 1603.32 | 142.93 | 0.00 |
+| deepseek | ste | 07-json-prefill | fail | 4491.91 | 4491.91 | 4491.91 | 4491.91 | 33.48 | 33.48 | 33.48 | 33.48 | 38629.98 | 42.04 | 0.00 |
+| deepseek | ste | 08-code-generation | pass | 228.19 | 228.19 | 181.23 | 275.14 | 44.66 | 44.66 | 41.28 | 48.05 | 2341.20 | 89.49 | 0.00 |
+| deepseek | ste | 09-code-prefill | pass | 4626.13 | 4626.13 | 4626.13 | 4626.13 | 40.50 | 40.50 | 40.50 | 40.50 | 19624.20 | 29.55 | 0.00 |
 | flash-next | en | 01-prose-short | pass | 3838.20 | 4255.66 | 557.22 | 4423.56 | 276.42 | 280.60 | 248.10 | 307.59 | 908.21 | 117.38 | 0.00 |
 | flash-next | en | 02-prose-long | pass | 4598.95 | 4888.42 | 2652.83 | 4960.82 | 296.38 | 297.79 | 281.15 | 311.12 | 1173.80 | 115.98 | 0.00 |
 | flash-next | en | 03-prose-summary-short | pass | 10694.46 | 10694.46 | 10694.46 | 10694.46 | 264.34 | 264.34 | 264.34 | 264.34 | 2869.63 | 10.82 | 0.00 |
@@ -114,3 +123,5 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next-uncensored | zh | 10-agent-battleship | fail | 5921.34 | 6714.61 | 1027.47 | 8545.94 | 162.78 | 164.90 | 82.37 | 215.18 | 1487.33 | 936.46 | 200.00 |
 | flash-next-uncensored | zh | 11-agent-repair | fail | 5900.62 | 6640.07 | 856.45 | 8537.11 | 163.52 | 166.26 | 90.94 | 228.68 | 1444.88 | 775.42 | 200.00 |
 | flash-next-uncensored | zh | 12-mixed-iterations | pass | 7523.53 | 8062.93 | 5448.10 | 8477.65 | 150.47 | 150.19 | 122.95 | 170.46 | 2422.87 | 93.31 | 0.00 |
+
+[Independent prose repetition audit](PROSE-AUDIT.md) · [Audit JSON](PROSE-AUDIT.json)

@@ -1,0 +1,326 @@
+{
+  "time_utc": "2026-11-16T17:58:52Z",
+  "scope": "Completed benchmark agent workspaces only",
+  "processes": [
+    {
+      "pid": 126519,
+      "start_ticks": "2590672",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 126521,
+      "start_ticks": "2590672",
+      "state": "S",
+      "cpu_ticks": 47,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 126747,
+      "start_ticks": "2608883",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 126751,
+      "start_ticks": "2608883",
+      "state": "S",
+      "cpu_ticks": 47,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 126981,
+      "start_ticks": "2627090",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "bash"
+    },
+    {
+      "pid": 126983,
+      "start_ticks": "2627090",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "bash"
+    },
+    {
+      "pid": 126984,
+      "start_ticks": "2627090",
+      "state": "S",
+      "cpu_ticks": 46,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 127001,
+      "start_ticks": "2627105",
+      "state": "S",
+      "cpu_ticks": 90,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127003,
+      "start_ticks": "2627106",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127004,
+      "start_ticks": "2627106",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127027,
+      "start_ticks": "2627107",
+      "state": "S",
+      "cpu_ticks": 60,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127029,
+      "start_ticks": "2627107",
+      "state": "S",
+      "cpu_ticks": 51,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127056,
+      "start_ticks": "2627108",
+      "state": "S",
+      "cpu_ticks": 232,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127369,
+      "start_ticks": "2644014",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "bash"
+    },
+    {
+      "pid": 127380,
+      "start_ticks": "2644016",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "bash"
+    },
+    {
+      "pid": 127381,
+      "start_ticks": "2644016",
+      "state": "S",
+      "cpu_ticks": 39,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 127393,
+      "start_ticks": "2644032",
+      "state": "S",
+      "cpu_ticks": 83,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127395,
+      "start_ticks": "2644033",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127396,
+      "start_ticks": "2644033",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127420,
+      "start_ticks": "2644033",
+      "state": "S",
+      "cpu_ticks": 44,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127422,
+      "start_ticks": "2644034",
+      "state": "S",
+      "cpu_ticks": 49,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 127441,
+      "start_ticks": "2644034",
+      "state": "S",
+      "cpu_ticks": 20,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": 128095,
+      "start_ticks": "2656436",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 128097,
+      "start_ticks": "2656436",
+      "state": "S",
+      "cpu_ticks": 37,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 128317,
+      "start_ticks": "2674843",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 128318,
+      "start_ticks": "2674843",
+      "state": "S",
+      "cpu_ticks": 39,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 131031,
+      "start_ticks": "2712543",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 131035,
+      "start_ticks": "2712543",
+      "state": "S",
+      "cpu_ticks": 42,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 131288,
+      "start_ticks": "2730821",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 131289,
+      "start_ticks": "2730821",
+      "state": "S",
+      "cpu_ticks": 45,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 131531,
+      "start_ticks": "2749409",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 131532,
+      "start_ticks": "2749409",
+      "state": "S",
+      "cpu_ticks": 46,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 132138,
+      "start_ticks": "2772188",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 132139,
+      "start_ticks": "2772189",
+      "state": "S",
+      "cpu_ticks": 45,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 132401,
+      "start_ticks": "2790741",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 132402,
+      "start_ticks": "2790741",
+      "state": "S",
+      "cpu_ticks": 45,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 132711,
+      "start_ticks": "2810720",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 132712,
+      "start_ticks": "2810721",
+      "state": "S",
+      "cpu_ticks": 46,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    },
+    {
+      "pid": 132985,
+      "start_ticks": "2829545",
+      "state": "S",
+      "cpu_ticks": 0,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "timeout"
+    },
+    {
+      "pid": 132986,
+      "start_ticks": "2829545",
+      "state": "S",
+      "cpu_ticks": 56,
+      "workspace": "/home/alfa/Documents/LocalAI/artifacts/sllm/full-local-20261116/cases/flash-next-uncensored/ste/10-agent-battleship/1/attempt-1/workspace",
+      "command": "MainThread"
+    }
+  ]
+}

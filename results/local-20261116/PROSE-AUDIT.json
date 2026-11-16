@@ -1,0 +1,6669 @@
+{
+  "schema_version": 1,
+  "run_id": "full-local-20261116",
+  "created_at": "2026-11-16T18:07:50.001Z",
+  "scope": "Post-run diagnostic only. Original validation and timing records are unchanged. A flag requests review; it is not a semantic quality verdict.",
+  "method": {
+    "version": 1,
+    "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+    "shingle_tokens": 5,
+    "min_page_tokens": 100,
+    "near_duplicate_dice": 0.9,
+    "internal_repetition_fraction": 0.65,
+    "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+  },
+  "cases": 20,
+  "audited_cases": 20,
+  "flagged_cases": 14,
+  "unavailable_cases": 0,
+  "rows": [
+    {
+      "slot": "deepseek",
+      "language": "en",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 39,
+          "similar_to": 37,
+          "similarity": 0.9433032046014791
+        },
+        {
+          "page": 40,
+          "similar_to": 38,
+          "similarity": 0.9308260577568838
+        }
+      ],
+      "near_duplicate_page_fraction": 0.04,
+      "near_duplicate_pair_count": 2,
+      "most_similar_pairs": [
+        {
+          "page": 39,
+          "similar_to": 37,
+          "similarity": 0.9433032046014791
+        },
+        {
+          "page": 40,
+          "similar_to": 38,
+          "similarity": 0.9308260577568838
+        }
+      ],
+      "maximum_page_similarity": 0.9433032046014791,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 450,
+          "internal_repetition": 0.004484304932735439
+        },
+        {
+          "page": 2,
+          "tokens": 535,
+          "internal_repetition": 0.0018832391713747842
+        },
+        {
+          "page": 3,
+          "tokens": 613,
+          "internal_repetition": 0.0049261083743842304
+        },
+        {
+          "page": 4,
+          "tokens": 409,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 721,
+          "internal_repetition": 0.02092050209205021
+        },
+        {
+          "page": 6,
+          "tokens": 444,
+          "internal_repetition": 0.004545454545454519
+        },
+        {
+          "page": 7,
+          "tokens": 527,
+          "internal_repetition": 0.01147227533460804
+        },
+        {
+          "page": 8,
+          "tokens": 551,
+          "internal_repetition": 0.001828153564899404
+        },
+        {
+          "page": 9,
+          "tokens": 578,
+          "internal_repetition": 0.013937282229965153
+        },
+        {
+          "page": 10,
+          "tokens": 564,
+          "internal_repetition": 0.008928571428571397
+        },
+        {
+          "page": 11,
+          "tokens": 427,
+          "internal_repetition": 0.0023640661938534313
+        },
+        {
+          "page": 12,
+          "tokens": 571,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 436,
+          "internal_repetition": 0.00694444444444442
+        },
+        {
+          "page": 14,
+          "tokens": 601,
+          "internal_repetition": 0.01675041876046901
+        },
+        {
+          "page": 15,
+          "tokens": 581,
+          "internal_repetition": 0.010398613518197597
+        },
+        {
+          "page": 16,
+          "tokens": 370,
+          "internal_repetition": 0.010928961748633892
+        },
+        {
+          "page": 17,
+          "tokens": 365,
+          "internal_repetition": 0.005540166204986097
+        },
+        {
+          "page": 18,
+          "tokens": 424,
+          "internal_repetition": 0.004761904761904745
+        },
+        {
+          "page": 19,
+          "tokens": 380,
+          "internal_repetition": 0.007978723404255317
+        },
+        {
+          "page": 20,
+          "tokens": 464,
+          "internal_repetition": 0.004347826086956497
+        },
+        {
+          "page": 21,
+          "tokens": 430,
+          "internal_repetition": 0.0046948356807511304
+        },
+        {
+          "page": 22,
+          "tokens": 344,
+          "internal_repetition": 0.044117647058823484
+        },
+        {
+          "page": 23,
+          "tokens": 388,
+          "internal_repetition": 0.0234375
+        },
+        {
+          "page": 24,
+          "tokens": 325,
+          "internal_repetition": 0.015576323987538943
+        },
+        {
+          "page": 25,
+          "tokens": 556,
+          "internal_repetition": 0.02898550724637683
+        },
+        {
+          "page": 26,
+          "tokens": 541,
+          "internal_repetition": 0.003724394785847296
+        },
+        {
+          "page": 27,
+          "tokens": 481,
+          "internal_repetition": 0.06498951781970652
+        },
+        {
+          "page": 28,
+          "tokens": 397,
+          "internal_repetition": 0.043256997455470736
+        },
+        {
+          "page": 29,
+          "tokens": 448,
+          "internal_repetition": 0.015765765765765716
+        },
+        {
+          "page": 30,
+          "tokens": 364,
+          "internal_repetition": 0.01388888888888884
+        },
+        {
+          "page": 31,
+          "tokens": 459,
+          "internal_repetition": 0.02637362637362639
+        },
+        {
+          "page": 32,
+          "tokens": 402,
+          "internal_repetition": 0.04020100502512558
+        },
+        {
+          "page": 33,
+          "tokens": 425,
+          "internal_repetition": 0.04275534441805229
+        },
+        {
+          "page": 34,
+          "tokens": 536,
+          "internal_repetition": 0.041353383458646586
+        },
+        {
+          "page": 35,
+          "tokens": 600,
+          "internal_repetition": 0.18288590604026844
+        },
+        {
+          "page": 36,
+          "tokens": 647,
+          "internal_repetition": 0.0637636080870918
+        },
+        {
+          "page": 37,
+          "tokens": 615,
+          "internal_repetition": 0.18494271685761043
+        },
+        {
+          "page": 38,
+          "tokens": 751,
+          "internal_repetition": 0.05488621151271755
+        },
+        {
+          "page": 39,
+          "tokens": 610,
+          "internal_repetition": 0.1897689768976898
+        },
+        {
+          "page": 40,
+          "tokens": 746,
+          "internal_repetition": 0.0539083557951483
+        },
+        {
+          "page": 41,
+          "tokens": 422,
+          "internal_repetition": 0.014354066985645897
+        },
+        {
+          "page": 42,
+          "tokens": 532,
+          "internal_repetition": 0.21969696969696972
+        },
+        {
+          "page": 43,
+          "tokens": 469,
+          "internal_repetition": 0.17419354838709677
+        },
+        {
+          "page": 44,
+          "tokens": 485,
+          "internal_repetition": 0.20374220374220375
+        },
+        {
+          "page": 45,
+          "tokens": 660,
+          "internal_repetition": 0.27591463414634143
+        },
+        {
+          "page": 46,
+          "tokens": 500,
+          "internal_repetition": 0.03427419354838712
+        },
+        {
+          "page": 47,
+          "tokens": 519,
+          "internal_repetition": 0.3242718446601942
+        },
+        {
+          "page": 48,
+          "tokens": 396,
+          "internal_repetition": 0.0714285714285714
+        },
+        {
+          "page": 49,
+          "tokens": 367,
+          "internal_repetition": 0.15426997245179064
+        },
+        {
+          "page": 50,
+          "tokens": 529,
+          "internal_repetition": 0.1980952380952381
+        }
+      ]
+    },
+    {
+      "slot": "deepseek",
+      "language": "en",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 20,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 25,
+          "similar_to": 15,
+          "similarity": 0.9036885245901639
+        },
+        {
+          "page": 29,
+          "similar_to": 25,
+          "similarity": 0.9579487179487179
+        },
+        {
+          "page": 34,
+          "similar_to": 30,
+          "similarity": 0.9348958333333334
+        },
+        {
+          "page": 38,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 39,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 40,
+          "similar_to": 35,
+          "similarity": 1
+        },
+        {
+          "page": 41,
+          "similar_to": 36,
+          "similarity": 1
+        },
+        {
+          "page": 42,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 35,
+          "similarity": 1
+        },
+        {
+          "page": 46,
+          "similar_to": 36,
+          "similarity": 1
+        },
+        {
+          "page": 47,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 48,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 49,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 35,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.34,
+      "near_duplicate_pair_count": 31,
+      "most_similar_pairs": [
+        {
+          "page": 20,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 38,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 39,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 40,
+          "similar_to": 35,
+          "similarity": 1
+        },
+        {
+          "page": 41,
+          "similar_to": 36,
+          "similarity": 1
+        },
+        {
+          "page": 42,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 38,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 39,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 390,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 443,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 531,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 315,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 381,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 439,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 361,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 305,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 417,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 446,
+          "internal_repetition": 0.002262443438914019
+        },
+        {
+          "page": 11,
+          "tokens": 362,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 302,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 396,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 237,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 493,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 401,
+          "internal_repetition": 0.015113350125944613
+        },
+        {
+          "page": 17,
+          "tokens": 357,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 249,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 368,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 396,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 363,
+          "internal_repetition": 0.0027855153203342198
+        },
+        {
+          "page": 22,
+          "tokens": 311,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 342,
+          "internal_repetition": 0.011834319526627168
+        },
+        {
+          "page": 24,
+          "tokens": 385,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 491,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 331,
+          "internal_repetition": 0.003058103975535187
+        },
+        {
+          "page": 27,
+          "tokens": 322,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 382,
+          "internal_repetition": 0.007936507936507908
+        },
+        {
+          "page": 29,
+          "tokens": 492,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 387,
+          "internal_repetition": 0.031331592689295085
+        },
+        {
+          "page": 31,
+          "tokens": 501,
+          "internal_repetition": 0.002012072434607659
+        },
+        {
+          "page": 32,
+          "tokens": 457,
+          "internal_repetition": 0.004415011037527616
+        },
+        {
+          "page": 33,
+          "tokens": 505,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 389,
+          "internal_repetition": 0.03116883116883118
+        },
+        {
+          "page": 35,
+          "tokens": 456,
+          "internal_repetition": 0.06858407079646023
+        },
+        {
+          "page": 36,
+          "tokens": 315,
+          "internal_repetition": 0.006430868167202619
+        },
+        {
+          "page": 37,
+          "tokens": 506,
+          "internal_repetition": 0.13745019920318724
+        },
+        {
+          "page": 38,
+          "tokens": 505,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 389,
+          "internal_repetition": 0.03116883116883118
+        },
+        {
+          "page": 40,
+          "tokens": 456,
+          "internal_repetition": 0.06858407079646023
+        },
+        {
+          "page": 41,
+          "tokens": 315,
+          "internal_repetition": 0.006430868167202619
+        },
+        {
+          "page": 42,
+          "tokens": 506,
+          "internal_repetition": 0.13745019920318724
+        },
+        {
+          "page": 43,
+          "tokens": 505,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 389,
+          "internal_repetition": 0.03116883116883118
+        },
+        {
+          "page": 45,
+          "tokens": 456,
+          "internal_repetition": 0.06858407079646023
+        },
+        {
+          "page": 46,
+          "tokens": 315,
+          "internal_repetition": 0.006430868167202619
+        },
+        {
+          "page": 47,
+          "tokens": 506,
+          "internal_repetition": 0.13745019920318724
+        },
+        {
+          "page": 48,
+          "tokens": 505,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 389,
+          "internal_repetition": 0.03116883116883118
+        },
+        {
+          "page": 50,
+          "tokens": 456,
+          "internal_repetition": 0.06858407079646023
+        }
+      ]
+    },
+    {
+      "slot": "deepseek",
+      "language": "ste",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 18,
+          "similar_to": 17,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 19,
+          "similar_to": 18,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 20,
+          "similar_to": 19,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 21,
+          "similar_to": 20,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 22,
+          "similar_to": 21,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 23,
+          "similar_to": 22,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 24,
+          "similar_to": 23,
+          "similarity": 0.9396825396825397
+        },
+        {
+          "page": 25,
+          "similar_to": 24,
+          "similarity": 0.9381933438985737
+        },
+        {
+          "page": 26,
+          "similar_to": 25,
+          "similarity": 0.940991345397325
+        },
+        {
+          "page": 27,
+          "similar_to": 26,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 28,
+          "similar_to": 27,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 29,
+          "similar_to": 28,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 30,
+          "similar_to": 29,
+          "similarity": 0.9340659340659341
+        },
+        {
+          "page": 31,
+          "similar_to": 30,
+          "similarity": 0.9387755102040817
+        },
+        {
+          "page": 32,
+          "similar_to": 31,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 33,
+          "similar_to": 32,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 34,
+          "similar_to": 33,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 35,
+          "similar_to": 34,
+          "similarity": 0.9340659340659341
+        },
+        {
+          "page": 36,
+          "similar_to": 35,
+          "similarity": 0.9387755102040817
+        },
+        {
+          "page": 37,
+          "similar_to": 36,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 38,
+          "similar_to": 37,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 39,
+          "similar_to": 38,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 40,
+          "similar_to": 39,
+          "similarity": 0.9340659340659341
+        },
+        {
+          "page": 41,
+          "similar_to": 40,
+          "similarity": 0.9387755102040817
+        },
+        {
+          "page": 42,
+          "similar_to": 41,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 43,
+          "similar_to": 42,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 44,
+          "similar_to": 43,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 45,
+          "similar_to": 44,
+          "similarity": 0.9340659340659341
+        },
+        {
+          "page": 46,
+          "similar_to": 45,
+          "similarity": 0.9387755102040817
+        },
+        {
+          "page": 47,
+          "similar_to": 46,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 48,
+          "similar_to": 47,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 49,
+          "similar_to": 48,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 50,
+          "similar_to": 49,
+          "similarity": 0.9340659340659341
+        }
+      ],
+      "near_duplicate_page_fraction": 0.66,
+      "near_duplicate_pair_count": 561,
+      "most_similar_pairs": [
+        {
+          "page": 26,
+          "similar_to": 25,
+          "similarity": 0.940991345397325
+        },
+        {
+          "page": 27,
+          "similar_to": 26,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 28,
+          "similar_to": 27,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 29,
+          "similar_to": 28,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 32,
+          "similar_to": 31,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 33,
+          "similar_to": 32,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 34,
+          "similar_to": 33,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 37,
+          "similar_to": 36,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 38,
+          "similar_to": 37,
+          "similarity": 0.9405320813771518
+        },
+        {
+          "page": 39,
+          "similar_to": 38,
+          "similarity": 0.9405320813771518
+        }
+      ],
+      "maximum_page_similarity": 0.940991345397325,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 407,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 480,
+          "internal_repetition": 0.004201680672268893
+        },
+        {
+          "page": 3,
+          "tokens": 421,
+          "internal_repetition": 0.0023980815347721673
+        },
+        {
+          "page": 4,
+          "tokens": 567,
+          "internal_repetition": 0.008880994671403242
+        },
+        {
+          "page": 5,
+          "tokens": 763,
+          "internal_repetition": 0.007905138339920903
+        },
+        {
+          "page": 6,
+          "tokens": 604,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 442,
+          "internal_repetition": 0.047945205479452024
+        },
+        {
+          "page": 8,
+          "tokens": 369,
+          "internal_repetition": 0.0328767123287671
+        },
+        {
+          "page": 9,
+          "tokens": 443,
+          "internal_repetition": 0.056947608200455635
+        },
+        {
+          "page": 10,
+          "tokens": 749,
+          "internal_repetition": 0.0442953020134228
+        },
+        {
+          "page": 11,
+          "tokens": 823,
+          "internal_repetition": 0.06959706959706957
+        },
+        {
+          "page": 12,
+          "tokens": 834,
+          "internal_repetition": 0.08072289156626511
+        },
+        {
+          "page": 13,
+          "tokens": 686,
+          "internal_repetition": 0.18035190615835772
+        },
+        {
+          "page": 14,
+          "tokens": 737,
+          "internal_repetition": 0.35334242837653473
+        },
+        {
+          "page": 15,
+          "tokens": 808,
+          "internal_repetition": 0.38681592039800994
+        },
+        {
+          "page": 16,
+          "tokens": 470,
+          "internal_repetition": 0.2939914163090128
+        },
+        {
+          "page": 17,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 18,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 19,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 20,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 21,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 22,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 23,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 24,
+          "tokens": 634,
+          "internal_repetition": 0.5809523809523809
+        },
+        {
+          "page": 25,
+          "tokens": 636,
+          "internal_repetition": 0.5822784810126582
+        },
+        {
+          "page": 26,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 27,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 28,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 29,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 30,
+          "tokens": 639,
+          "internal_repetition": 0.584251968503937
+        },
+        {
+          "page": 31,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 32,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 33,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 34,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 35,
+          "tokens": 639,
+          "internal_repetition": 0.5811023622047244
+        },
+        {
+          "page": 36,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 37,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 38,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 39,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 40,
+          "tokens": 639,
+          "internal_repetition": 0.5811023622047244
+        },
+        {
+          "page": 41,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 42,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 43,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 44,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 45,
+          "tokens": 639,
+          "internal_repetition": 0.5811023622047244
+        },
+        {
+          "page": 46,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 47,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 48,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 49,
+          "tokens": 643,
+          "internal_repetition": 0.5837245696400626
+        },
+        {
+          "page": 50,
+          "tokens": 639,
+          "internal_repetition": 0.5811023622047244
+        }
+      ]
+    },
+    {
+      "slot": "deepseek",
+      "language": "ste",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 12,
+          "similar_to": 11,
+          "similarity": 0.9513274336283186
+        },
+        {
+          "page": 13,
+          "similar_to": 12,
+          "similarity": 1
+        },
+        {
+          "page": 14,
+          "similar_to": 12,
+          "similarity": 1
+        },
+        {
+          "page": 15,
+          "similar_to": 12,
+          "similarity": 1
+        },
+        {
+          "page": 17,
+          "similar_to": 16,
+          "similarity": 0.9382716049382716
+        },
+        {
+          "page": 18,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 19,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 20,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 21,
+          "similar_to": 17,
+          "similarity": 0.9240862230552952
+        },
+        {
+          "page": 22,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 23,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 24,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 25,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 26,
+          "similar_to": 21,
+          "similarity": 0.975925925925926
+        },
+        {
+          "page": 27,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 28,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 29,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 30,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 37,
+          "similarity": 0.9211956521739131
+        },
+        {
+          "page": 46,
+          "similar_to": 41,
+          "similarity": 0.9620253164556962
+        },
+        {
+          "page": 47,
+          "similar_to": 42,
+          "similarity": 0.9887387387387387
+        },
+        {
+          "page": 48,
+          "similar_to": 43,
+          "similarity": 0.9850746268656716
+        },
+        {
+          "page": 49,
+          "similar_to": 44,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 45,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.48,
+      "near_duplicate_pair_count": 120,
+      "most_similar_pairs": [
+        {
+          "page": 13,
+          "similar_to": 12,
+          "similarity": 1
+        },
+        {
+          "page": 14,
+          "similar_to": 12,
+          "similarity": 1
+        },
+        {
+          "page": 14,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 15,
+          "similar_to": 12,
+          "similarity": 1
+        },
+        {
+          "page": 15,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 15,
+          "similar_to": 14,
+          "similarity": 1
+        },
+        {
+          "page": 18,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 19,
+          "similar_to": 17,
+          "similarity": 1
+        },
+        {
+          "page": 19,
+          "similar_to": 18,
+          "similarity": 1
+        },
+        {
+          "page": 20,
+          "similar_to": 17,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 889,
+          "internal_repetition": 0.004519774011299438
+        },
+        {
+          "page": 2,
+          "tokens": 1213,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 3134,
+          "internal_repetition": 0.5926517571884984
+        },
+        {
+          "page": 4,
+          "tokens": 1662,
+          "internal_repetition": 0.06513872135102539
+        },
+        {
+          "page": 5,
+          "tokens": 1532,
+          "internal_repetition": 0.4234293193717278
+        },
+        {
+          "page": 6,
+          "tokens": 797,
+          "internal_repetition": 0.13745271122320302
+        },
+        {
+          "page": 7,
+          "tokens": 940,
+          "internal_repetition": 0.1709401709401709
+        },
+        {
+          "page": 8,
+          "tokens": 766,
+          "internal_repetition": 0.11286089238845143
+        },
+        {
+          "page": 9,
+          "tokens": 901,
+          "internal_repetition": 0.14381270903010035
+        },
+        {
+          "page": 10,
+          "tokens": 778,
+          "internal_repetition": 0.20542635658914732
+        },
+        {
+          "page": 11,
+          "tokens": 900,
+          "internal_repetition": 0.3113839285714286
+        },
+        {
+          "page": 12,
+          "tokens": 916,
+          "internal_repetition": 0.2883771929824561
+        },
+        {
+          "page": 13,
+          "tokens": 916,
+          "internal_repetition": 0.2883771929824561
+        },
+        {
+          "page": 14,
+          "tokens": 916,
+          "internal_repetition": 0.2883771929824561
+        },
+        {
+          "page": 15,
+          "tokens": 916,
+          "internal_repetition": 0.2883771929824561
+        },
+        {
+          "page": 16,
+          "tokens": 533,
+          "internal_repetition": 0.17958412098298682
+        },
+        {
+          "page": 17,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 18,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 19,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 20,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 21,
+          "tokens": 547,
+          "internal_repetition": 0.17495395948434622
+        },
+        {
+          "page": 22,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 23,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 24,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 25,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 26,
+          "tokens": 541,
+          "internal_repetition": 0.17690875232774672
+        },
+        {
+          "page": 27,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 28,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 29,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 30,
+          "tokens": 528,
+          "internal_repetition": 0.18129770992366412
+        },
+        {
+          "page": 31,
+          "tokens": 431,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 450,
+          "internal_repetition": 0.013452914798206317
+        },
+        {
+          "page": 33,
+          "tokens": 297,
+          "internal_repetition": 0.0068259385665528916
+        },
+        {
+          "page": 34,
+          "tokens": 357,
+          "internal_repetition": 0.031161473087818692
+        },
+        {
+          "page": 35,
+          "tokens": 430,
+          "internal_repetition": 0.096244131455399
+        },
+        {
+          "page": 36,
+          "tokens": 483,
+          "internal_repetition": 0.01043841336116913
+        },
+        {
+          "page": 37,
+          "tokens": 348,
+          "internal_repetition": 0.046511627906976716
+        },
+        {
+          "page": 38,
+          "tokens": 363,
+          "internal_repetition": 0.00835654596100277
+        },
+        {
+          "page": 39,
+          "tokens": 300,
+          "internal_repetition": 0.125
+        },
+        {
+          "page": 40,
+          "tokens": 313,
+          "internal_repetition": 0.11650485436893199
+        },
+        {
+          "page": 41,
+          "tokens": 400,
+          "internal_repetition": 0.08333333333333337
+        },
+        {
+          "page": 42,
+          "tokens": 448,
+          "internal_repetition": 0.0427927927927928
+        },
+        {
+          "page": 43,
+          "tokens": 339,
+          "internal_repetition": 0.16119402985074627
+        },
+        {
+          "page": 44,
+          "tokens": 396,
+          "internal_repetition": 0.11224489795918369
+        },
+        {
+          "page": 45,
+          "tokens": 384,
+          "internal_repetition": 0.09999999999999998
+        },
+        {
+          "page": 46,
+          "tokens": 398,
+          "internal_repetition": 0.08375634517766495
+        },
+        {
+          "page": 47,
+          "tokens": 448,
+          "internal_repetition": 0.0427927927927928
+        },
+        {
+          "page": 48,
+          "tokens": 339,
+          "internal_repetition": 0.16119402985074627
+        },
+        {
+          "page": 49,
+          "tokens": 396,
+          "internal_repetition": 0.11224489795918369
+        },
+        {
+          "page": 50,
+          "tokens": 384,
+          "internal_repetition": 0.09999999999999998
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "en",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": false,
+      "near_duplicate_pages": [],
+      "near_duplicate_page_fraction": 0,
+      "near_duplicate_pair_count": 0,
+      "most_similar_pairs": [],
+      "maximum_page_similarity": 0.10922787193973635,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 414,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 356,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 292,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 313,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 405,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 413,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 387,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 358,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 326,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 368,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 423,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 402,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 380,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 426,
+          "internal_repetition": 0.004739336492891044
+        },
+        {
+          "page": 16,
+          "tokens": 395,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 390,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 386,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 366,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 405,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 398,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 431,
+          "internal_repetition": 0.007025761124121788
+        },
+        {
+          "page": 23,
+          "tokens": 442,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 506,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 440,
+          "internal_repetition": 0.006880733944954143
+        },
+        {
+          "page": 26,
+          "tokens": 415,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 412,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 487,
+          "internal_repetition": 0.0020703933747412417
+        },
+        {
+          "page": 29,
+          "tokens": 405,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 395,
+          "internal_repetition": 0.002557544757033292
+        },
+        {
+          "page": 31,
+          "tokens": 339,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 413,
+          "internal_repetition": 0.004889975550122272
+        },
+        {
+          "page": 33,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 396,
+          "internal_repetition": 0.005102040816326481
+        },
+        {
+          "page": 35,
+          "tokens": 393,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 444,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 432,
+          "internal_repetition": 0
+        },
+        {
+          "page": 38,
+          "tokens": 415,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 356,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 322,
+          "internal_repetition": 0.0031446540880503138
+        },
+        {
+          "page": 41,
+          "tokens": 358,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 372,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 408,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 397,
+          "internal_repetition": 0
+        },
+        {
+          "page": 45,
+          "tokens": 302,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 519,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 453,
+          "internal_repetition": 0.0044543429844098315
+        },
+        {
+          "page": 48,
+          "tokens": 506,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 390,
+          "internal_repetition": 0.015544041450777257
+        },
+        {
+          "page": 50,
+          "tokens": 237,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "en",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 24,
+          "similar_to": 15,
+          "similarity": 1
+        },
+        {
+          "page": 25,
+          "similar_to": 16,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.04,
+      "near_duplicate_pair_count": 2,
+      "most_similar_pairs": [
+        {
+          "page": 24,
+          "similar_to": 15,
+          "similarity": 1
+        },
+        {
+          "page": 25,
+          "similar_to": 16,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 499,
+          "internal_repetition": 0.004040404040404066
+        },
+        {
+          "page": 2,
+          "tokens": 563,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 665,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 633,
+          "internal_repetition": 0.0015898251192368873
+        },
+        {
+          "page": 5,
+          "tokens": 647,
+          "internal_repetition": 0.004665629860031051
+        },
+        {
+          "page": 6,
+          "tokens": 462,
+          "internal_repetition": 0.0065502183406113135
+        },
+        {
+          "page": 7,
+          "tokens": 463,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 459,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 348,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 421,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 467,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 575,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 629,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 513,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 411,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 360,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 410,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 397,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 353,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 290,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 376,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 357,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 397,
+          "internal_repetition": 0.012722646310432517
+        },
+        {
+          "page": 24,
+          "tokens": 411,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 360,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 400,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 428,
+          "internal_repetition": 0.007075471698113178
+        },
+        {
+          "page": 28,
+          "tokens": 376,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 348,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 396,
+          "internal_repetition": 0.005102040816326481
+        },
+        {
+          "page": 31,
+          "tokens": 423,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 411,
+          "internal_repetition": 0
+        },
+        {
+          "page": 33,
+          "tokens": 444,
+          "internal_repetition": 0.002272727272727315
+        },
+        {
+          "page": 34,
+          "tokens": 423,
+          "internal_repetition": 0
+        },
+        {
+          "page": 35,
+          "tokens": 458,
+          "internal_repetition": 0.004405286343612369
+        },
+        {
+          "page": 36,
+          "tokens": 434,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 466,
+          "internal_repetition": 0
+        },
+        {
+          "page": 38,
+          "tokens": 554,
+          "internal_repetition": 0.0072727272727273196
+        },
+        {
+          "page": 39,
+          "tokens": 508,
+          "internal_repetition": 0.015873015873015928
+        },
+        {
+          "page": 40,
+          "tokens": 454,
+          "internal_repetition": 0.0022222222222222365
+        },
+        {
+          "page": 41,
+          "tokens": 514,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 605,
+          "internal_repetition": 0.02329450915141429
+        },
+        {
+          "page": 43,
+          "tokens": 647,
+          "internal_repetition": 0.004665629860031051
+        },
+        {
+          "page": 44,
+          "tokens": 499,
+          "internal_repetition": 0.016161616161616155
+        },
+        {
+          "page": 45,
+          "tokens": 420,
+          "internal_repetition": 0.004807692307692291
+        },
+        {
+          "page": 46,
+          "tokens": 478,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 511,
+          "internal_repetition": 0.0019723865877712132
+        },
+        {
+          "page": 48,
+          "tokens": 492,
+          "internal_repetition": 0.004098360655737654
+        },
+        {
+          "page": 49,
+          "tokens": 484,
+          "internal_repetition": 0.004166666666666652
+        },
+        {
+          "page": 50,
+          "tokens": 576,
+          "internal_repetition": 0.034965034965035
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "ru",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": false,
+      "near_duplicate_pages": [],
+      "near_duplicate_page_fraction": 0,
+      "near_duplicate_pair_count": 0,
+      "most_similar_pairs": [],
+      "maximum_page_similarity": 0.012219959266802444,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 245,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 251,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 242,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 229,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 225,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 238,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 237,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 217,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 202,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 214,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 278,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 300,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 288,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 261,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 256,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 207,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 195,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 195,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 180,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 212,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 386,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 385,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 364,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 340,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 307,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 382,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 373,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 346,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 357,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 333,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 339,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 333,
+          "internal_repetition": 0
+        },
+        {
+          "page": 33,
+          "tokens": 308,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 274,
+          "internal_repetition": 0
+        },
+        {
+          "page": 35,
+          "tokens": 322,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 279,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 308,
+          "internal_repetition": 0
+        },
+        {
+          "page": 38,
+          "tokens": 269,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 286,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 241,
+          "internal_repetition": 0
+        },
+        {
+          "page": 41,
+          "tokens": 294,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 270,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 248,
+          "internal_repetition": 0.008196721311475419
+        },
+        {
+          "page": 44,
+          "tokens": 203,
+          "internal_repetition": 0
+        },
+        {
+          "page": 45,
+          "tokens": 270,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 253,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 257,
+          "internal_repetition": 0
+        },
+        {
+          "page": 48,
+          "tokens": 273,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 258,
+          "internal_repetition": 0
+        },
+        {
+          "page": 50,
+          "tokens": 263,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "ru",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 44,
+          "similar_to": 35,
+          "similarity": 0.9212328767123288
+        },
+        {
+          "page": 45,
+          "similar_to": 36,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.04,
+      "near_duplicate_pair_count": 2,
+      "most_similar_pairs": [
+        {
+          "page": 45,
+          "similar_to": 36,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 35,
+          "similarity": 0.9212328767123288
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 320,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 417,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 531,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 410,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 337,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 328,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 323,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 290,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 288,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 293,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 336,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 396,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 403,
+          "internal_repetition": 0.0025062656641604564
+        },
+        {
+          "page": 14,
+          "tokens": 382,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 335,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 242,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 239,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 253,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 235,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 262,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 359,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 334,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 254,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 243,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 259,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 296,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 290,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 272,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 269,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 338,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 326,
+          "internal_repetition": 0
+        },
+        {
+          "page": 33,
+          "tokens": 372,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 313,
+          "internal_repetition": 0
+        },
+        {
+          "page": 35,
+          "tokens": 299,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 393,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 390,
+          "internal_repetition": 0
+        },
+        {
+          "page": 38,
+          "tokens": 402,
+          "internal_repetition": 0.005025125628140725
+        },
+        {
+          "page": 39,
+          "tokens": 329,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 278,
+          "internal_repetition": 0
+        },
+        {
+          "page": 41,
+          "tokens": 387,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 327,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 369,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 293,
+          "internal_repetition": 0
+        },
+        {
+          "page": 45,
+          "tokens": 393,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 330,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 48,
+          "tokens": 290,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 252,
+          "internal_repetition": 0
+        },
+        {
+          "page": 50,
+          "tokens": 289,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "ste",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": false,
+      "near_duplicate_pages": [],
+      "near_duplicate_page_fraction": 0,
+      "near_duplicate_pair_count": 0,
+      "most_similar_pairs": [],
+      "maximum_page_similarity": 0.08559201141226819,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 456,
+          "internal_repetition": 0.004424778761061954
+        },
+        {
+          "page": 2,
+          "tokens": 483,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 601,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 508,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 411,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 397,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 352,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 275,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 282,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 324,
+          "internal_repetition": 0.0031250000000000444
+        },
+        {
+          "page": 11,
+          "tokens": 376,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 431,
+          "internal_repetition": 0.004683840749414525
+        },
+        {
+          "page": 13,
+          "tokens": 395,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 431,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 298,
+          "internal_repetition": 0.003401360544217691
+        },
+        {
+          "page": 16,
+          "tokens": 345,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 438,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 441,
+          "internal_repetition": 0.004576659038901587
+        },
+        {
+          "page": 19,
+          "tokens": 447,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 497,
+          "internal_repetition": 0.0040567951318458695
+        },
+        {
+          "page": 21,
+          "tokens": 426,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 468,
+          "internal_repetition": 0.010775862068965525
+        },
+        {
+          "page": 23,
+          "tokens": 473,
+          "internal_repetition": 0.002132196162046962
+        },
+        {
+          "page": 24,
+          "tokens": 367,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 381,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 486,
+          "internal_repetition": 0.0020746887966804906
+        },
+        {
+          "page": 27,
+          "tokens": 568,
+          "internal_repetition": 0.0017730496453900457
+        },
+        {
+          "page": 28,
+          "tokens": 668,
+          "internal_repetition": 0.02108433734939763
+        },
+        {
+          "page": 29,
+          "tokens": 318,
+          "internal_repetition": 0.0031847133757961776
+        },
+        {
+          "page": 30,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 623,
+          "internal_repetition": 0.008077544426494332
+        },
+        {
+          "page": 32,
+          "tokens": 461,
+          "internal_repetition": 0.004376367614879695
+        },
+        {
+          "page": 33,
+          "tokens": 321,
+          "internal_repetition": 0.012618296529968487
+        },
+        {
+          "page": 34,
+          "tokens": 457,
+          "internal_repetition": 0.004415011037527616
+        },
+        {
+          "page": 35,
+          "tokens": 325,
+          "internal_repetition": 0.01869158878504673
+        },
+        {
+          "page": 36,
+          "tokens": 381,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 372,
+          "internal_repetition": 0.005434782608695676
+        },
+        {
+          "page": 38,
+          "tokens": 377,
+          "internal_repetition": 0.002680965147453085
+        },
+        {
+          "page": 39,
+          "tokens": 315,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 279,
+          "internal_repetition": 0.0036363636363636598
+        },
+        {
+          "page": 41,
+          "tokens": 368,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 430,
+          "internal_repetition": 0.0023474178403756207
+        },
+        {
+          "page": 43,
+          "tokens": 397,
+          "internal_repetition": 0.0025445292620864812
+        },
+        {
+          "page": 44,
+          "tokens": 375,
+          "internal_repetition": 0.016172506738544423
+        },
+        {
+          "page": 45,
+          "tokens": 379,
+          "internal_repetition": 0.002666666666666706
+        },
+        {
+          "page": 46,
+          "tokens": 439,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 351,
+          "internal_repetition": 0
+        },
+        {
+          "page": 48,
+          "tokens": 344,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 222,
+          "internal_repetition": 0.004587155963302725
+        },
+        {
+          "page": 50,
+          "tokens": 233,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "ste",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 22,
+          "similar_to": 20,
+          "similarity": 0.947103274559194
+        },
+        {
+          "page": 25,
+          "similar_to": 18,
+          "similarity": 1
+        },
+        {
+          "page": 30,
+          "similar_to": 19,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 29,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 19,
+          "similarity": 1
+        },
+        {
+          "page": 36,
+          "similar_to": 31,
+          "similarity": 1
+        },
+        {
+          "page": 37,
+          "similar_to": 32,
+          "similarity": 1
+        },
+        {
+          "page": 38,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 39,
+          "similar_to": 29,
+          "similarity": 1
+        },
+        {
+          "page": 40,
+          "similar_to": 19,
+          "similarity": 1
+        },
+        {
+          "page": 46,
+          "similar_to": 31,
+          "similarity": 0.987220447284345
+        },
+        {
+          "page": 47,
+          "similar_to": 32,
+          "similarity": 1
+        },
+        {
+          "page": 48,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 49,
+          "similar_to": 29,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 19,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.3,
+      "near_duplicate_pair_count": 27,
+      "most_similar_pairs": [
+        {
+          "page": 25,
+          "similar_to": 18,
+          "similarity": 1
+        },
+        {
+          "page": 30,
+          "similar_to": 19,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 29,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 19,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 30,
+          "similarity": 1
+        },
+        {
+          "page": 36,
+          "similar_to": 31,
+          "similarity": 1
+        },
+        {
+          "page": 37,
+          "similar_to": 32,
+          "similarity": 1
+        },
+        {
+          "page": 38,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 39,
+          "similar_to": 29,
+          "similarity": 1
+        },
+        {
+          "page": 39,
+          "similar_to": 34,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 428,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 458,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 403,
+          "internal_repetition": 0.005012531328320802
+        },
+        {
+          "page": 4,
+          "tokens": 465,
+          "internal_repetition": 0.002169197396963085
+        },
+        {
+          "page": 5,
+          "tokens": 419,
+          "internal_repetition": 0.002409638554216831
+        },
+        {
+          "page": 6,
+          "tokens": 345,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 402,
+          "internal_repetition": 0.002512562814070307
+        },
+        {
+          "page": 8,
+          "tokens": 385,
+          "internal_repetition": 0.01049868766404205
+        },
+        {
+          "page": 9,
+          "tokens": 343,
+          "internal_repetition": 0.008849557522123908
+        },
+        {
+          "page": 10,
+          "tokens": 374,
+          "internal_repetition": 0.00540540540540535
+        },
+        {
+          "page": 11,
+          "tokens": 346,
+          "internal_repetition": 0.0029239766081871066
+        },
+        {
+          "page": 12,
+          "tokens": 299,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 261,
+          "internal_repetition": 0.01945525291828798
+        },
+        {
+          "page": 14,
+          "tokens": 281,
+          "internal_repetition": 0.010830324909747335
+        },
+        {
+          "page": 15,
+          "tokens": 338,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 411,
+          "internal_repetition": 0.012285012285012331
+        },
+        {
+          "page": 17,
+          "tokens": 420,
+          "internal_repetition": 0.012019230769230727
+        },
+        {
+          "page": 18,
+          "tokens": 389,
+          "internal_repetition": 0.04155844155844157
+        },
+        {
+          "page": 19,
+          "tokens": 335,
+          "internal_repetition": 0.012084592145015116
+        },
+        {
+          "page": 20,
+          "tokens": 407,
+          "internal_repetition": 0.032258064516129004
+        },
+        {
+          "page": 21,
+          "tokens": 327,
+          "internal_repetition": 0.006191950464396245
+        },
+        {
+          "page": 22,
+          "tokens": 395,
+          "internal_repetition": 0.03324808184143224
+        },
+        {
+          "page": 23,
+          "tokens": 334,
+          "internal_repetition": 0.045454545454545414
+        },
+        {
+          "page": 24,
+          "tokens": 395,
+          "internal_repetition": 0.005115089514066473
+        },
+        {
+          "page": 25,
+          "tokens": 389,
+          "internal_repetition": 0.04155844155844157
+        },
+        {
+          "page": 26,
+          "tokens": 368,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 411,
+          "internal_repetition": 0.004914004914004955
+        },
+        {
+          "page": 28,
+          "tokens": 358,
+          "internal_repetition": 0.016949152542372836
+        },
+        {
+          "page": 29,
+          "tokens": 354,
+          "internal_repetition": 0.04571428571428571
+        },
+        {
+          "page": 30,
+          "tokens": 335,
+          "internal_repetition": 0.012084592145015116
+        },
+        {
+          "page": 31,
+          "tokens": 317,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 336,
+          "internal_repetition": 0.012048192771084376
+        },
+        {
+          "page": 33,
+          "tokens": 306,
+          "internal_repetition": 0.009933774834437137
+        },
+        {
+          "page": 34,
+          "tokens": 354,
+          "internal_repetition": 0.04571428571428571
+        },
+        {
+          "page": 35,
+          "tokens": 335,
+          "internal_repetition": 0.012084592145015116
+        },
+        {
+          "page": 36,
+          "tokens": 317,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 336,
+          "internal_repetition": 0.012048192771084376
+        },
+        {
+          "page": 38,
+          "tokens": 306,
+          "internal_repetition": 0.009933774834437137
+        },
+        {
+          "page": 39,
+          "tokens": 354,
+          "internal_repetition": 0.04571428571428571
+        },
+        {
+          "page": 40,
+          "tokens": 335,
+          "internal_repetition": 0.012084592145015116
+        },
+        {
+          "page": 41,
+          "tokens": 227,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 228,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 219,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 232,
+          "internal_repetition": 0.021929824561403466
+        },
+        {
+          "page": 45,
+          "tokens": 195,
+          "internal_repetition": 0.010471204188481686
+        },
+        {
+          "page": 46,
+          "tokens": 317,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 336,
+          "internal_repetition": 0.012048192771084376
+        },
+        {
+          "page": 48,
+          "tokens": 306,
+          "internal_repetition": 0.009933774834437137
+        },
+        {
+          "page": 49,
+          "tokens": 354,
+          "internal_repetition": 0.04571428571428571
+        },
+        {
+          "page": 50,
+          "tokens": 335,
+          "internal_repetition": 0.012084592145015116
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "zh",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": false,
+      "near_duplicate_pages": [],
+      "near_duplicate_page_fraction": 0,
+      "near_duplicate_pair_count": 0,
+      "most_similar_pairs": [],
+      "maximum_page_similarity": 0.7870797626895187,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 685,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 764,
+          "internal_repetition": 0.0026315789473684292
+        },
+        {
+          "page": 3,
+          "tokens": 753,
+          "internal_repetition": 0.001335113484646211
+        },
+        {
+          "page": 4,
+          "tokens": 710,
+          "internal_repetition": 0.0014164305949008194
+        },
+        {
+          "page": 5,
+          "tokens": 624,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 749,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 759,
+          "internal_repetition": 0.005298013245033095
+        },
+        {
+          "page": 8,
+          "tokens": 797,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 865,
+          "internal_repetition": 0.0011614401858304202
+        },
+        {
+          "page": 10,
+          "tokens": 669,
+          "internal_repetition": 0.0015037593984962294
+        },
+        {
+          "page": 11,
+          "tokens": 977,
+          "internal_repetition": 0.0030832476875641834
+        },
+        {
+          "page": 12,
+          "tokens": 853,
+          "internal_repetition": 0.00824499411071844
+        },
+        {
+          "page": 13,
+          "tokens": 924,
+          "internal_repetition": 0.0010869565217391797
+        },
+        {
+          "page": 14,
+          "tokens": 992,
+          "internal_repetition": 0.002024291497975672
+        },
+        {
+          "page": 15,
+          "tokens": 777,
+          "internal_repetition": 0.002587322121604174
+        },
+        {
+          "page": 16,
+          "tokens": 965,
+          "internal_repetition": 0.004162330905306932
+        },
+        {
+          "page": 17,
+          "tokens": 870,
+          "internal_repetition": 0.002309468822170868
+        },
+        {
+          "page": 18,
+          "tokens": 856,
+          "internal_repetition": 0.0011737089201877549
+        },
+        {
+          "page": 19,
+          "tokens": 773,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 838,
+          "internal_repetition": 0.0011990407673860837
+        },
+        {
+          "page": 21,
+          "tokens": 969,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 940,
+          "internal_repetition": 0.0010683760683760646
+        },
+        {
+          "page": 23,
+          "tokens": 932,
+          "internal_repetition": 0.007543103448275912
+        },
+        {
+          "page": 24,
+          "tokens": 831,
+          "internal_repetition": 0.010882708585247869
+        },
+        {
+          "page": 25,
+          "tokens": 606,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 908,
+          "internal_repetition": 0.0011061946902655162
+        },
+        {
+          "page": 27,
+          "tokens": 1000,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 853,
+          "internal_repetition": 0.007067137809187329
+        },
+        {
+          "page": 29,
+          "tokens": 724,
+          "internal_repetition": 0.002777777777777768
+        },
+        {
+          "page": 30,
+          "tokens": 790,
+          "internal_repetition": 0.006361323155216314
+        },
+        {
+          "page": 31,
+          "tokens": 789,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 810,
+          "internal_repetition": 0.00496277915632759
+        },
+        {
+          "page": 33,
+          "tokens": 917,
+          "internal_repetition": 0.003285870755750264
+        },
+        {
+          "page": 34,
+          "tokens": 766,
+          "internal_repetition": 0.003937007874015741
+        },
+        {
+          "page": 35,
+          "tokens": 794,
+          "internal_repetition": 0.0025316455696202667
+        },
+        {
+          "page": 36,
+          "tokens": 1045,
+          "internal_repetition": 0.00672430355427478
+        },
+        {
+          "page": 37,
+          "tokens": 870,
+          "internal_repetition": 0.0011547344110854896
+        },
+        {
+          "page": 38,
+          "tokens": 871,
+          "internal_repetition": 0.0034602076124568004
+        },
+        {
+          "page": 39,
+          "tokens": 796,
+          "internal_repetition": 0.0012626262626262985
+        },
+        {
+          "page": 40,
+          "tokens": 712,
+          "internal_repetition": 0.015536723163841804
+        },
+        {
+          "page": 41,
+          "tokens": 709,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 755,
+          "internal_repetition": 0.003994673768308976
+        },
+        {
+          "page": 43,
+          "tokens": 784,
+          "internal_repetition": 0.011538461538461497
+        },
+        {
+          "page": 44,
+          "tokens": 656,
+          "internal_repetition": 0.0015337423312883347
+        },
+        {
+          "page": 45,
+          "tokens": 735,
+          "internal_repetition": 0.009575923392612817
+        },
+        {
+          "page": 46,
+          "tokens": 941,
+          "internal_repetition": 0.0010672358591248265
+        },
+        {
+          "page": 47,
+          "tokens": 1095,
+          "internal_repetition": 0.0036663611365719273
+        },
+        {
+          "page": 48,
+          "tokens": 941,
+          "internal_repetition": 0.004268943436499417
+        },
+        {
+          "page": 49,
+          "tokens": 1024,
+          "internal_repetition": 0.0117647058823529
+        },
+        {
+          "page": 50,
+          "tokens": 757,
+          "internal_repetition": 0.005312084993359889
+        }
+      ]
+    },
+    {
+      "slot": "flash-next",
+      "language": "zh",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 11,
+          "similar_to": 10,
+          "similarity": 1
+        },
+        {
+          "page": 36,
+          "similar_to": 35,
+          "similarity": 0.9862834748530372
+        },
+        {
+          "page": 44,
+          "similar_to": 30,
+          "similarity": 0.9444918872758327
+        },
+        {
+          "page": 45,
+          "similar_to": 31,
+          "similarity": 0.942450914014895
+        },
+        {
+          "page": 46,
+          "similar_to": 31,
+          "similarity": 1
+        },
+        {
+          "page": 47,
+          "similar_to": 32,
+          "similarity": 1
+        },
+        {
+          "page": 48,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 49,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 35,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.18,
+      "near_duplicate_pair_count": 11,
+      "most_similar_pairs": [
+        {
+          "page": 11,
+          "similar_to": 10,
+          "similarity": 1
+        },
+        {
+          "page": 46,
+          "similar_to": 31,
+          "similarity": 1
+        },
+        {
+          "page": 47,
+          "similar_to": 32,
+          "similarity": 1
+        },
+        {
+          "page": 48,
+          "similar_to": 33,
+          "similarity": 1
+        },
+        {
+          "page": 49,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 35,
+          "similarity": 1
+        },
+        {
+          "page": 36,
+          "similar_to": 35,
+          "similarity": 0.9862834748530372
+        },
+        {
+          "page": 50,
+          "similar_to": 36,
+          "similarity": 0.9862834748530372
+        },
+        {
+          "page": 44,
+          "similar_to": 30,
+          "similarity": 0.9444918872758327
+        },
+        {
+          "page": 45,
+          "similar_to": 31,
+          "similarity": 0.942450914014895
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 902,
+          "internal_repetition": 0.00222717149220486
+        },
+        {
+          "page": 2,
+          "tokens": 1090,
+          "internal_repetition": 0.004604051565377576
+        },
+        {
+          "page": 3,
+          "tokens": 966,
+          "internal_repetition": 0.004158004158004158
+        },
+        {
+          "page": 4,
+          "tokens": 970,
+          "internal_repetition": 0.0020703933747412417
+        },
+        {
+          "page": 5,
+          "tokens": 891,
+          "internal_repetition": 0.0022547914317925244
+        },
+        {
+          "page": 6,
+          "tokens": 1138,
+          "internal_repetition": 0.0017636684303351524
+        },
+        {
+          "page": 7,
+          "tokens": 939,
+          "internal_repetition": 0.004278074866310155
+        },
+        {
+          "page": 8,
+          "tokens": 798,
+          "internal_repetition": 0.007556675062972307
+        },
+        {
+          "page": 9,
+          "tokens": 850,
+          "internal_repetition": 0.05437352245862881
+        },
+        {
+          "page": 10,
+          "tokens": 677,
+          "internal_repetition": 0.017830609212481474
+        },
+        {
+          "page": 11,
+          "tokens": 677,
+          "internal_repetition": 0.017830609212481474
+        },
+        {
+          "page": 12,
+          "tokens": 736,
+          "internal_repetition": 0.005464480874316946
+        },
+        {
+          "page": 13,
+          "tokens": 704,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 696,
+          "internal_repetition": 0.0014450867052022698
+        },
+        {
+          "page": 15,
+          "tokens": 537,
+          "internal_repetition": 0.0018761726078799779
+        },
+        {
+          "page": 16,
+          "tokens": 940,
+          "internal_repetition": 0.004273504273504258
+        },
+        {
+          "page": 17,
+          "tokens": 996,
+          "internal_repetition": 0.01008064516129037
+        },
+        {
+          "page": 18,
+          "tokens": 971,
+          "internal_repetition": 0.007238883143743546
+        },
+        {
+          "page": 19,
+          "tokens": 1074,
+          "internal_repetition": 0.008411214953271018
+        },
+        {
+          "page": 20,
+          "tokens": 908,
+          "internal_repetition": 0.0011061946902655162
+        },
+        {
+          "page": 21,
+          "tokens": 977,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 957,
+          "internal_repetition": 0.0031479538300105414
+        },
+        {
+          "page": 23,
+          "tokens": 973,
+          "internal_repetition": 0.00515995872033026
+        },
+        {
+          "page": 24,
+          "tokens": 844,
+          "internal_repetition": 0.008333333333333304
+        },
+        {
+          "page": 25,
+          "tokens": 610,
+          "internal_repetition": 0.0033003300330033403
+        },
+        {
+          "page": 26,
+          "tokens": 829,
+          "internal_repetition": 0.00242424242424244
+        },
+        {
+          "page": 27,
+          "tokens": 981,
+          "internal_repetition": 0.0030706243602866
+        },
+        {
+          "page": 28,
+          "tokens": 765,
+          "internal_repetition": 0.013140604467805517
+        },
+        {
+          "page": 29,
+          "tokens": 729,
+          "internal_repetition": 0.011034482758620734
+        },
+        {
+          "page": 30,
+          "tokens": 602,
+          "internal_repetition": 0.0016722408026755842
+        },
+        {
+          "page": 31,
+          "tokens": 753,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 837,
+          "internal_repetition": 0.01800720288115243
+        },
+        {
+          "page": 33,
+          "tokens": 756,
+          "internal_repetition": 0.005319148936170248
+        },
+        {
+          "page": 34,
+          "tokens": 679,
+          "internal_repetition": 0.002962962962962945
+        },
+        {
+          "page": 35,
+          "tokens": 769,
+          "internal_repetition": 0.0039215686274509665
+        },
+        {
+          "page": 36,
+          "tokens": 770,
+          "internal_repetition": 0.003916449086161844
+        },
+        {
+          "page": 37,
+          "tokens": 738,
+          "internal_repetition": 0.0027247956403270157
+        },
+        {
+          "page": 38,
+          "tokens": 781,
+          "internal_repetition": 0.009009009009009028
+        },
+        {
+          "page": 39,
+          "tokens": 731,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 773,
+          "internal_repetition": 0.0039011703511053764
+        },
+        {
+          "page": 41,
+          "tokens": 627,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 668,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 737,
+          "internal_repetition": 0.010914051841746208
+        },
+        {
+          "page": 44,
+          "tokens": 577,
+          "internal_repetition": 0.0017452006980802626
+        },
+        {
+          "page": 45,
+          "tokens": 732,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 753,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 837,
+          "internal_repetition": 0.01800720288115243
+        },
+        {
+          "page": 48,
+          "tokens": 756,
+          "internal_repetition": 0.005319148936170248
+        },
+        {
+          "page": 49,
+          "tokens": 679,
+          "internal_repetition": 0.002962962962962945
+        },
+        {
+          "page": 50,
+          "tokens": 769,
+          "internal_repetition": 0.0039215686274509665
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "en",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 44,
+          "similar_to": 39,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 40,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.04,
+      "near_duplicate_pair_count": 2,
+      "most_similar_pairs": [
+        {
+          "page": 44,
+          "similar_to": 39,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 40,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 293,
+          "internal_repetition": 0.0034602076124568004
+        },
+        {
+          "page": 2,
+          "tokens": 327,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 347,
+          "internal_repetition": 0.002915451895043719
+        },
+        {
+          "page": 4,
+          "tokens": 347,
+          "internal_repetition": 0.008746355685131157
+        },
+        {
+          "page": 5,
+          "tokens": 332,
+          "internal_repetition": 0.0060975609756097615
+        },
+        {
+          "page": 6,
+          "tokens": 343,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 375,
+          "internal_repetition": 0.005390835579514808
+        },
+        {
+          "page": 8,
+          "tokens": 288,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 283,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 298,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 354,
+          "internal_repetition": 0.0028571428571428914
+        },
+        {
+          "page": 12,
+          "tokens": 370,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 354,
+          "internal_repetition": 0.0028571428571428914
+        },
+        {
+          "page": 14,
+          "tokens": 376,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 358,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 390,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 404,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 367,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 406,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 374,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 345,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 352,
+          "internal_repetition": 0.005747126436781658
+        },
+        {
+          "page": 23,
+          "tokens": 319,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 425,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 351,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 308,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 343,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 356,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 295,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 324,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 409,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 435,
+          "internal_repetition": 0.002320185614849146
+        },
+        {
+          "page": 33,
+          "tokens": 393,
+          "internal_repetition": 0.007712082262210762
+        },
+        {
+          "page": 34,
+          "tokens": 328,
+          "internal_repetition": 0.006172839506172867
+        },
+        {
+          "page": 35,
+          "tokens": 304,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 508,
+          "internal_repetition": 0.001984126984126977
+        },
+        {
+          "page": 37,
+          "tokens": 536,
+          "internal_repetition": 0.001879699248120259
+        },
+        {
+          "page": 38,
+          "tokens": 521,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 449,
+          "internal_repetition": 0.0022471910112359383
+        },
+        {
+          "page": 40,
+          "tokens": 277,
+          "internal_repetition": 0
+        },
+        {
+          "page": 41,
+          "tokens": 455,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 508,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 548,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 449,
+          "internal_repetition": 0.0022471910112359383
+        },
+        {
+          "page": 45,
+          "tokens": 277,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 410,
+          "internal_repetition": 0
+        },
+        {
+          "page": 48,
+          "tokens": 361,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 358,
+          "internal_repetition": 0
+        },
+        {
+          "page": 50,
+          "tokens": 359,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "en",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 29,
+          "similar_to": 20,
+          "similarity": 0.9026798307475318
+        },
+        {
+          "page": 30,
+          "similar_to": 21,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.04,
+      "near_duplicate_pair_count": 2,
+      "most_similar_pairs": [
+        {
+          "page": 30,
+          "similar_to": 21,
+          "similarity": 1
+        },
+        {
+          "page": 29,
+          "similar_to": 20,
+          "similarity": 0.9026798307475318
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 281,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 304,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 295,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 306,
+          "internal_repetition": 0.0066225165562914245
+        },
+        {
+          "page": 5,
+          "tokens": 365,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 305,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 301,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 314,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 285,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 308,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 480,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 492,
+          "internal_repetition": 0.004098360655737654
+        },
+        {
+          "page": 13,
+          "tokens": 576,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 508,
+          "internal_repetition": 0.009920634920634885
+        },
+        {
+          "page": 15,
+          "tokens": 495,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 455,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 437,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 433,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 448,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 353,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 367,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 361,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 350,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 405,
+          "internal_repetition": 0.004987531172069848
+        },
+        {
+          "page": 25,
+          "tokens": 375,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 376,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 436,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 403,
+          "internal_repetition": 0.0025062656641604564
+        },
+        {
+          "page": 29,
+          "tokens": 364,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 367,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 479,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 461,
+          "internal_repetition": 0.004376367614879695
+        },
+        {
+          "page": 33,
+          "tokens": 494,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 533,
+          "internal_repetition": 0.001890359168241984
+        },
+        {
+          "page": 35,
+          "tokens": 361,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 409,
+          "internal_repetition": 0.0024691358024691024
+        },
+        {
+          "page": 37,
+          "tokens": 418,
+          "internal_repetition": 0.0024154589371980784
+        },
+        {
+          "page": 38,
+          "tokens": 359,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 385,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 345,
+          "internal_repetition": 0.0058651026392961825
+        },
+        {
+          "page": 41,
+          "tokens": 326,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 365,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 332,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 332,
+          "internal_repetition": 0.0030487804878048808
+        },
+        {
+          "page": 45,
+          "tokens": 261,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 372,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 323,
+          "internal_repetition": 0.009404388714733591
+        },
+        {
+          "page": 48,
+          "tokens": 298,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 283,
+          "internal_repetition": 0.007168458781361964
+        },
+        {
+          "page": 50,
+          "tokens": 247,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "ru",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": false,
+      "near_duplicate_pages": [],
+      "near_duplicate_page_fraction": 0,
+      "near_duplicate_pair_count": 0,
+      "most_similar_pairs": [],
+      "maximum_page_similarity": 0.055299539170506916,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 230,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 240,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 232,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 224,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 188,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 235,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 239,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 238,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 210,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 233,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 236,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 208,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 204,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 208,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 185,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 228,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 216,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 219,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 205,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 219,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 202,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 187,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 190,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 190,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 197,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 266,
+          "internal_repetition": 0.003816793893129722
+        },
+        {
+          "page": 27,
+          "tokens": 306,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 312,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 317,
+          "internal_repetition": 0.0031948881789137795
+        },
+        {
+          "page": 30,
+          "tokens": 312,
+          "internal_repetition": 0.016233766233766267
+        },
+        {
+          "page": 31,
+          "tokens": 304,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 299,
+          "internal_repetition": 0
+        },
+        {
+          "page": 33,
+          "tokens": 325,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 289,
+          "internal_repetition": 0
+        },
+        {
+          "page": 35,
+          "tokens": 335,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 241,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 275,
+          "internal_repetition": 0
+        },
+        {
+          "page": 38,
+          "tokens": 256,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 215,
+          "internal_repetition": 0.004739336492891044
+        },
+        {
+          "page": 40,
+          "tokens": 203,
+          "internal_repetition": 0
+        },
+        {
+          "page": 41,
+          "tokens": 239,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 239,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 251,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 212,
+          "internal_repetition": 0
+        },
+        {
+          "page": 45,
+          "tokens": 195,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 222,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 226,
+          "internal_repetition": 0
+        },
+        {
+          "page": 48,
+          "tokens": 250,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 236,
+          "internal_repetition": 0
+        },
+        {
+          "page": 50,
+          "tokens": 217,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "ru",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 32,
+          "similar_to": 23,
+          "similarity": 1
+        },
+        {
+          "page": 33,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 26,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.08,
+      "near_duplicate_pair_count": 4,
+      "most_similar_pairs": [
+        {
+          "page": 32,
+          "similar_to": 23,
+          "similarity": 1
+        },
+        {
+          "page": 33,
+          "similar_to": 24,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 25,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 26,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 255,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 300,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 299,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 300,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 380,
+          "internal_repetition": 0
+        },
+        {
+          "page": 6,
+          "tokens": 309,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 361,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 305,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 330,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 310,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 309,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 273,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 279,
+          "internal_repetition": 0
+        },
+        {
+          "page": 14,
+          "tokens": 259,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 187,
+          "internal_repetition": 0
+        },
+        {
+          "page": 16,
+          "tokens": 272,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 277,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 271,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 283,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 301,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 291,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 281,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 253,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 236,
+          "internal_repetition": 0
+        },
+        {
+          "page": 25,
+          "tokens": 256,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 245,
+          "internal_repetition": 0.004149377593360981
+        },
+        {
+          "page": 27,
+          "tokens": 228,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 225,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 194,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 205,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 327,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 253,
+          "internal_repetition": 0
+        },
+        {
+          "page": 33,
+          "tokens": 236,
+          "internal_repetition": 0
+        },
+        {
+          "page": 34,
+          "tokens": 256,
+          "internal_repetition": 0
+        },
+        {
+          "page": 35,
+          "tokens": 245,
+          "internal_repetition": 0.004149377593360981
+        },
+        {
+          "page": 36,
+          "tokens": 228,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 232,
+          "internal_repetition": 0
+        },
+        {
+          "page": 38,
+          "tokens": 220,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 208,
+          "internal_repetition": 0
+        },
+        {
+          "page": 40,
+          "tokens": 187,
+          "internal_repetition": 0
+        },
+        {
+          "page": 41,
+          "tokens": 261,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 230,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 235,
+          "internal_repetition": 0
+        },
+        {
+          "page": 44,
+          "tokens": 225,
+          "internal_repetition": 0
+        },
+        {
+          "page": 45,
+          "tokens": 226,
+          "internal_repetition": 0
+        },
+        {
+          "page": 46,
+          "tokens": 286,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 271,
+          "internal_repetition": 0
+        },
+        {
+          "page": 48,
+          "tokens": 252,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 215,
+          "internal_repetition": 0
+        },
+        {
+          "page": 50,
+          "tokens": 201,
+          "internal_repetition": 0
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "ste",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": false,
+      "near_duplicate_pages": [],
+      "near_duplicate_page_fraction": 0,
+      "near_duplicate_pair_count": 0,
+      "most_similar_pairs": [],
+      "maximum_page_similarity": 0.6706114398422091,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 320,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 344,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 330,
+          "internal_repetition": 0
+        },
+        {
+          "page": 4,
+          "tokens": 316,
+          "internal_repetition": 0
+        },
+        {
+          "page": 5,
+          "tokens": 357,
+          "internal_repetition": 0.0028328611898017497
+        },
+        {
+          "page": 6,
+          "tokens": 313,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 320,
+          "internal_repetition": 0
+        },
+        {
+          "page": 8,
+          "tokens": 287,
+          "internal_repetition": 0
+        },
+        {
+          "page": 9,
+          "tokens": 247,
+          "internal_repetition": 0
+        },
+        {
+          "page": 10,
+          "tokens": 241,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 349,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 397,
+          "internal_repetition": 0
+        },
+        {
+          "page": 13,
+          "tokens": 320,
+          "internal_repetition": 0.0031645569620253333
+        },
+        {
+          "page": 14,
+          "tokens": 334,
+          "internal_repetition": 0
+        },
+        {
+          "page": 15,
+          "tokens": 343,
+          "internal_repetition": 0.002949852507374673
+        },
+        {
+          "page": 16,
+          "tokens": 397,
+          "internal_repetition": 0
+        },
+        {
+          "page": 17,
+          "tokens": 461,
+          "internal_repetition": 0
+        },
+        {
+          "page": 18,
+          "tokens": 376,
+          "internal_repetition": 0
+        },
+        {
+          "page": 19,
+          "tokens": 401,
+          "internal_repetition": 0
+        },
+        {
+          "page": 20,
+          "tokens": 351,
+          "internal_repetition": 0
+        },
+        {
+          "page": 21,
+          "tokens": 300,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 295,
+          "internal_repetition": 0
+        },
+        {
+          "page": 23,
+          "tokens": 322,
+          "internal_repetition": 0
+        },
+        {
+          "page": 24,
+          "tokens": 306,
+          "internal_repetition": 0.009933774834437137
+        },
+        {
+          "page": 25,
+          "tokens": 277,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 296,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 273,
+          "internal_repetition": 0
+        },
+        {
+          "page": 28,
+          "tokens": 283,
+          "internal_repetition": 0
+        },
+        {
+          "page": 29,
+          "tokens": 280,
+          "internal_repetition": 0.0036231884057971175
+        },
+        {
+          "page": 30,
+          "tokens": 291,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 296,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 294,
+          "internal_repetition": 0
+        },
+        {
+          "page": 33,
+          "tokens": 251,
+          "internal_repetition": 0.028340080971659964
+        },
+        {
+          "page": 34,
+          "tokens": 261,
+          "internal_repetition": 0
+        },
+        {
+          "page": 35,
+          "tokens": 244,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 332,
+          "internal_repetition": 0
+        },
+        {
+          "page": 37,
+          "tokens": 287,
+          "internal_repetition": 0.0035335689045936647
+        },
+        {
+          "page": 38,
+          "tokens": 275,
+          "internal_repetition": 0
+        },
+        {
+          "page": 39,
+          "tokens": 257,
+          "internal_repetition": 0.03952569169960474
+        },
+        {
+          "page": 40,
+          "tokens": 271,
+          "internal_repetition": 0
+        },
+        {
+          "page": 41,
+          "tokens": 310,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 322,
+          "internal_repetition": 0.0031446540880503138
+        },
+        {
+          "page": 43,
+          "tokens": 272,
+          "internal_repetition": 0.003731343283582045
+        },
+        {
+          "page": 44,
+          "tokens": 267,
+          "internal_repetition": 0.0038022813688213253
+        },
+        {
+          "page": 45,
+          "tokens": 258,
+          "internal_repetition": 0.051181102362204745
+        },
+        {
+          "page": 46,
+          "tokens": 335,
+          "internal_repetition": 0
+        },
+        {
+          "page": 47,
+          "tokens": 318,
+          "internal_repetition": 0.006369426751592355
+        },
+        {
+          "page": 48,
+          "tokens": 284,
+          "internal_repetition": 0.0035714285714285587
+        },
+        {
+          "page": 49,
+          "tokens": 262,
+          "internal_repetition": 0
+        },
+        {
+          "page": 50,
+          "tokens": 276,
+          "internal_repetition": 0.003676470588235281
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "ste",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 35,
+          "similar_to": 29,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.02,
+      "near_duplicate_pair_count": 1,
+      "most_similar_pairs": [
+        {
+          "page": 35,
+          "similar_to": 29,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [
+        {
+          "page": 50,
+          "repetition_fraction": 0.9566880113838492
+        }
+      ],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 431,
+          "internal_repetition": 0.0023419203747072626
+        },
+        {
+          "page": 2,
+          "tokens": 409,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 481,
+          "internal_repetition": 0.010482180293501009
+        },
+        {
+          "page": 4,
+          "tokens": 482,
+          "internal_repetition": 0.01673640167364021
+        },
+        {
+          "page": 5,
+          "tokens": 466,
+          "internal_repetition": 0.010822510822510845
+        },
+        {
+          "page": 6,
+          "tokens": 369,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 384,
+          "internal_repetition": 0.010526315789473717
+        },
+        {
+          "page": 8,
+          "tokens": 403,
+          "internal_repetition": 0.0025062656641604564
+        },
+        {
+          "page": 9,
+          "tokens": 438,
+          "internal_repetition": 0.01382488479262678
+        },
+        {
+          "page": 10,
+          "tokens": 376,
+          "internal_repetition": 0.056451612903225756
+        },
+        {
+          "page": 11,
+          "tokens": 373,
+          "internal_repetition": 0.016260162601625994
+        },
+        {
+          "page": 12,
+          "tokens": 382,
+          "internal_repetition": 0.02910052910052907
+        },
+        {
+          "page": 13,
+          "tokens": 430,
+          "internal_repetition": 0.025821596244131495
+        },
+        {
+          "page": 14,
+          "tokens": 420,
+          "internal_repetition": 0.04807692307692313
+        },
+        {
+          "page": 15,
+          "tokens": 305,
+          "internal_repetition": 0.019933554817275767
+        },
+        {
+          "page": 16,
+          "tokens": 634,
+          "internal_repetition": 0.014285714285714235
+        },
+        {
+          "page": 17,
+          "tokens": 635,
+          "internal_repetition": 0.03486529318541998
+        },
+        {
+          "page": 18,
+          "tokens": 500,
+          "internal_repetition": 0.040322580645161255
+        },
+        {
+          "page": 19,
+          "tokens": 618,
+          "internal_repetition": 0.1579804560260586
+        },
+        {
+          "page": 20,
+          "tokens": 358,
+          "internal_repetition": 0.10451977401129942
+        },
+        {
+          "page": 21,
+          "tokens": 458,
+          "internal_repetition": 0.008810572687224627
+        },
+        {
+          "page": 22,
+          "tokens": 487,
+          "internal_repetition": 0.0041407867494823725
+        },
+        {
+          "page": 23,
+          "tokens": 511,
+          "internal_repetition": 0.017751479289940808
+        },
+        {
+          "page": 24,
+          "tokens": 577,
+          "internal_repetition": 0.027923211169284423
+        },
+        {
+          "page": 25,
+          "tokens": 518,
+          "internal_repetition": 0
+        },
+        {
+          "page": 26,
+          "tokens": 367,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 340,
+          "internal_repetition": 0.011904761904761862
+        },
+        {
+          "page": 28,
+          "tokens": 325,
+          "internal_repetition": 0.03738317757009346
+        },
+        {
+          "page": 29,
+          "tokens": 250,
+          "internal_repetition": 0
+        },
+        {
+          "page": 30,
+          "tokens": 341,
+          "internal_repetition": 0
+        },
+        {
+          "page": 31,
+          "tokens": 360,
+          "internal_repetition": 0.005617977528089901
+        },
+        {
+          "page": 32,
+          "tokens": 392,
+          "internal_repetition": 0.002577319587628857
+        },
+        {
+          "page": 33,
+          "tokens": 335,
+          "internal_repetition": 0.0060422960725075026
+        },
+        {
+          "page": 34,
+          "tokens": 311,
+          "internal_repetition": 0.039087947882736174
+        },
+        {
+          "page": 35,
+          "tokens": 250,
+          "internal_repetition": 0
+        },
+        {
+          "page": 36,
+          "tokens": 391,
+          "internal_repetition": 0.0051679586563307955
+        },
+        {
+          "page": 37,
+          "tokens": 391,
+          "internal_repetition": 0.012919896640826822
+        },
+        {
+          "page": 38,
+          "tokens": 337,
+          "internal_repetition": 0.009009009009009028
+        },
+        {
+          "page": 39,
+          "tokens": 420,
+          "internal_repetition": 0.028846153846153855
+        },
+        {
+          "page": 40,
+          "tokens": 508,
+          "internal_repetition": 0.023809523809523836
+        },
+        {
+          "page": 41,
+          "tokens": 305,
+          "internal_repetition": 0
+        },
+        {
+          "page": 42,
+          "tokens": 460,
+          "internal_repetition": 0.06140350877192979
+        },
+        {
+          "page": 43,
+          "tokens": 420,
+          "internal_repetition": 0.0625
+        },
+        {
+          "page": 44,
+          "tokens": 430,
+          "internal_repetition": 0.10328638497652587
+        },
+        {
+          "page": 45,
+          "tokens": 599,
+          "internal_repetition": 0.001680672268907557
+        },
+        {
+          "page": 46,
+          "tokens": 325,
+          "internal_repetition": 0.006230529595015577
+        },
+        {
+          "page": 47,
+          "tokens": 458,
+          "internal_repetition": 0.0022026431718061845
+        },
+        {
+          "page": 48,
+          "tokens": 428,
+          "internal_repetition": 0
+        },
+        {
+          "page": 49,
+          "tokens": 540,
+          "internal_repetition": 0.12126865671641796
+        },
+        {
+          "page": 50,
+          "tokens": 11248,
+          "internal_repetition": 0.9566880113838492
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "zh",
+      "kit": "01-prose-short",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 18,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 19,
+          "similar_to": 14,
+          "similarity": 1
+        },
+        {
+          "page": 20,
+          "similar_to": 15,
+          "similarity": 1
+        },
+        {
+          "page": 23,
+          "similar_to": 13,
+          "similarity": 0.912987012987013
+        },
+        {
+          "page": 33,
+          "similar_to": 29,
+          "similarity": 0.940359477124183
+        },
+        {
+          "page": 34,
+          "similar_to": 30,
+          "similarity": 1
+        },
+        {
+          "page": 35,
+          "similar_to": 13,
+          "similarity": 0.9441624365482234
+        },
+        {
+          "page": 40,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 41,
+          "similar_to": 38,
+          "similarity": 1
+        },
+        {
+          "page": 42,
+          "similar_to": 39,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 38,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 39,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 14,
+          "similarity": 1
+        }
+      ],
+      "near_duplicate_page_fraction": 0.28,
+      "near_duplicate_pair_count": 20,
+      "most_similar_pairs": [
+        {
+          "page": 18,
+          "similar_to": 13,
+          "similarity": 1
+        },
+        {
+          "page": 19,
+          "similar_to": 14,
+          "similarity": 1
+        },
+        {
+          "page": 20,
+          "similar_to": 15,
+          "similarity": 1
+        },
+        {
+          "page": 34,
+          "similar_to": 30,
+          "similarity": 1
+        },
+        {
+          "page": 40,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 41,
+          "similar_to": 38,
+          "similarity": 1
+        },
+        {
+          "page": 42,
+          "similar_to": 39,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 37,
+          "similarity": 1
+        },
+        {
+          "page": 43,
+          "similar_to": 40,
+          "similarity": 1
+        },
+        {
+          "page": 44,
+          "similar_to": 38,
+          "similarity": 1
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 620,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 672,
+          "internal_repetition": 0
+        },
+        {
+          "page": 3,
+          "tokens": 678,
+          "internal_repetition": 0.0029673590504450953
+        },
+        {
+          "page": 4,
+          "tokens": 659,
+          "internal_repetition": 0.006106870229007688
+        },
+        {
+          "page": 5,
+          "tokens": 626,
+          "internal_repetition": 0.003215434083601254
+        },
+        {
+          "page": 6,
+          "tokens": 610,
+          "internal_repetition": 0.0016501650165016146
+        },
+        {
+          "page": 7,
+          "tokens": 662,
+          "internal_repetition": 0.00455927051671734
+        },
+        {
+          "page": 8,
+          "tokens": 628,
+          "internal_repetition": 0.0016025641025640969
+        },
+        {
+          "page": 9,
+          "tokens": 574,
+          "internal_repetition": 0.010526315789473717
+        },
+        {
+          "page": 10,
+          "tokens": 658,
+          "internal_repetition": 0.001529051987767538
+        },
+        {
+          "page": 11,
+          "tokens": 949,
+          "internal_repetition": 0
+        },
+        {
+          "page": 12,
+          "tokens": 823,
+          "internal_repetition": 0.0012210012210012167
+        },
+        {
+          "page": 13,
+          "tokens": 841,
+          "internal_repetition": 0.0035842293906810374
+        },
+        {
+          "page": 14,
+          "tokens": 902,
+          "internal_repetition": 0.007795100222717122
+        },
+        {
+          "page": 15,
+          "tokens": 910,
+          "internal_repetition": 0.007726269315673329
+        },
+        {
+          "page": 16,
+          "tokens": 782,
+          "internal_repetition": 0.00899742930591263
+        },
+        {
+          "page": 17,
+          "tokens": 711,
+          "internal_repetition": 0.032531824611032545
+        },
+        {
+          "page": 18,
+          "tokens": 841,
+          "internal_repetition": 0.0035842293906810374
+        },
+        {
+          "page": 19,
+          "tokens": 902,
+          "internal_repetition": 0.007795100222717122
+        },
+        {
+          "page": 20,
+          "tokens": 910,
+          "internal_repetition": 0.007726269315673329
+        },
+        {
+          "page": 21,
+          "tokens": 553,
+          "internal_repetition": 0
+        },
+        {
+          "page": 22,
+          "tokens": 671,
+          "internal_repetition": 0.07796101949025491
+        },
+        {
+          "page": 23,
+          "tokens": 707,
+          "internal_repetition": 0.004267425320056861
+        },
+        {
+          "page": 24,
+          "tokens": 645,
+          "internal_repetition": 0.007800312012480548
+        },
+        {
+          "page": 25,
+          "tokens": 614,
+          "internal_repetition": 0.006557377049180357
+        },
+        {
+          "page": 26,
+          "tokens": 1236,
+          "internal_repetition": 0.008116883116883078
+        },
+        {
+          "page": 27,
+          "tokens": 1441,
+          "internal_repetition": 0.039665970772442605
+        },
+        {
+          "page": 28,
+          "tokens": 1352,
+          "internal_repetition": 0.013353115727002929
+        },
+        {
+          "page": 29,
+          "tokens": 1301,
+          "internal_repetition": 0.01156515034695449
+        },
+        {
+          "page": 30,
+          "tokens": 1224,
+          "internal_repetition": 0.04508196721311475
+        },
+        {
+          "page": 31,
+          "tokens": 810,
+          "internal_repetition": 0.003722084367245637
+        },
+        {
+          "page": 32,
+          "tokens": 839,
+          "internal_repetition": 0.007185628742514938
+        },
+        {
+          "page": 33,
+          "tokens": 1155,
+          "internal_repetition": 0.012163336229365718
+        },
+        {
+          "page": 34,
+          "tokens": 1224,
+          "internal_repetition": 0.04508196721311475
+        },
+        {
+          "page": 35,
+          "tokens": 940,
+          "internal_repetition": 0.007478632478632452
+        },
+        {
+          "page": 36,
+          "tokens": 1026,
+          "internal_repetition": 0.008806262230919737
+        },
+        {
+          "page": 37,
+          "tokens": 1240,
+          "internal_repetition": 0.006472491909385147
+        },
+        {
+          "page": 38,
+          "tokens": 1229,
+          "internal_repetition": 0.050612244897959235
+        },
+        {
+          "page": 39,
+          "tokens": 1408,
+          "internal_repetition": 0.012820512820512775
+        },
+        {
+          "page": 40,
+          "tokens": 1240,
+          "internal_repetition": 0.006472491909385147
+        },
+        {
+          "page": 41,
+          "tokens": 1229,
+          "internal_repetition": 0.050612244897959235
+        },
+        {
+          "page": 42,
+          "tokens": 1408,
+          "internal_repetition": 0.012820512820512775
+        },
+        {
+          "page": 43,
+          "tokens": 1240,
+          "internal_repetition": 0.006472491909385147
+        },
+        {
+          "page": 44,
+          "tokens": 1229,
+          "internal_repetition": 0.050612244897959235
+        },
+        {
+          "page": 45,
+          "tokens": 1408,
+          "internal_repetition": 0.012820512820512775
+        },
+        {
+          "page": 46,
+          "tokens": 864,
+          "internal_repetition": 0.006976744186046546
+        },
+        {
+          "page": 47,
+          "tokens": 839,
+          "internal_repetition": 0.004790419161676662
+        },
+        {
+          "page": 48,
+          "tokens": 846,
+          "internal_repetition": 0.061757719714964354
+        },
+        {
+          "page": 49,
+          "tokens": 729,
+          "internal_repetition": 0.004137931034482789
+        },
+        {
+          "page": 50,
+          "tokens": 902,
+          "internal_repetition": 0.007795100222717122
+        }
+      ]
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "language": "zh",
+      "kit": "02-prose-long",
+      "repetition": 1,
+      "as_run_structural_passed": true,
+      "status": "audited",
+      "method": {
+        "version": 1,
+        "similarity": "Multiset Sorensen-Dice; repeated shingles retain their frequency",
+        "shingle_tokens": 5,
+        "min_page_tokens": 100,
+        "near_duplicate_dice": 0.9,
+        "internal_repetition_fraction": 0.65,
+        "normalization": "NFKC, lowercase, numeric runs replaced; Han characters are individual tokens"
+      },
+      "pages": 50,
+      "flagged": true,
+      "near_duplicate_pages": [
+        {
+          "page": 34,
+          "similar_to": 20,
+          "similarity": 0.9850574712643678
+        },
+        {
+          "page": 35,
+          "similar_to": 21,
+          "similarity": 0.9673286354900704
+        },
+        {
+          "page": 40,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 44,
+          "similarity": 0.989801395598497
+        }
+      ],
+      "near_duplicate_page_fraction": 0.1,
+      "near_duplicate_pair_count": 8,
+      "most_similar_pairs": [
+        {
+          "page": 40,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 34,
+          "similarity": 1
+        },
+        {
+          "page": 45,
+          "similar_to": 40,
+          "similarity": 1
+        },
+        {
+          "page": 50,
+          "similar_to": 44,
+          "similarity": 0.989801395598497
+        },
+        {
+          "page": 34,
+          "similar_to": 20,
+          "similarity": 0.9850574712643678
+        },
+        {
+          "page": 40,
+          "similar_to": 20,
+          "similarity": 0.9850574712643678
+        },
+        {
+          "page": 45,
+          "similar_to": 20,
+          "similarity": 0.9850574712643678
+        },
+        {
+          "page": 35,
+          "similar_to": 21,
+          "similarity": 0.9673286354900704
+        }
+      ],
+      "maximum_page_similarity": 1,
+      "internally_repetitive_pages": [],
+      "page_statistics": [
+        {
+          "page": 1,
+          "tokens": 672,
+          "internal_repetition": 0
+        },
+        {
+          "page": 2,
+          "tokens": 779,
+          "internal_repetition": 0.001290322580645209
+        },
+        {
+          "page": 3,
+          "tokens": 663,
+          "internal_repetition": 0.0015174506828528056
+        },
+        {
+          "page": 4,
+          "tokens": 706,
+          "internal_repetition": 0.002849002849002802
+        },
+        {
+          "page": 5,
+          "tokens": 594,
+          "internal_repetition": 0.003389830508474523
+        },
+        {
+          "page": 6,
+          "tokens": 664,
+          "internal_repetition": 0
+        },
+        {
+          "page": 7,
+          "tokens": 610,
+          "internal_repetition": 0.0016501650165016146
+        },
+        {
+          "page": 8,
+          "tokens": 713,
+          "internal_repetition": 0.008462623413258097
+        },
+        {
+          "page": 9,
+          "tokens": 641,
+          "internal_repetition": 0.006279434850863463
+        },
+        {
+          "page": 10,
+          "tokens": 609,
+          "internal_repetition": 0
+        },
+        {
+          "page": 11,
+          "tokens": 870,
+          "internal_repetition": 0.006928406466512715
+        },
+        {
+          "page": 12,
+          "tokens": 869,
+          "internal_repetition": 0.008092485549133
+        },
+        {
+          "page": 13,
+          "tokens": 766,
+          "internal_repetition": 0.006561679790026198
+        },
+        {
+          "page": 14,
+          "tokens": 712,
+          "internal_repetition": 0.011299435028248594
+        },
+        {
+          "page": 15,
+          "tokens": 764,
+          "internal_repetition": 0.013157894736842146
+        },
+        {
+          "page": 16,
+          "tokens": 1014,
+          "internal_repetition": 0.002970297029702973
+        },
+        {
+          "page": 17,
+          "tokens": 951,
+          "internal_repetition": 0.001055966209081327
+        },
+        {
+          "page": 18,
+          "tokens": 921,
+          "internal_repetition": 0.004362050163576936
+        },
+        {
+          "page": 19,
+          "tokens": 878,
+          "internal_repetition": 0.0011441647597254523
+        },
+        {
+          "page": 20,
+          "tokens": 874,
+          "internal_repetition": 0.006896551724137945
+        },
+        {
+          "page": 21,
+          "tokens": 780,
+          "internal_repetition": 0.002577319587628857
+        },
+        {
+          "page": 22,
+          "tokens": 821,
+          "internal_repetition": 0.004895960832313362
+        },
+        {
+          "page": 23,
+          "tokens": 895,
+          "internal_repetition": 0.010101010101010055
+        },
+        {
+          "page": 24,
+          "tokens": 787,
+          "internal_repetition": 0.019157088122605415
+        },
+        {
+          "page": 25,
+          "tokens": 932,
+          "internal_repetition": 0.006465517241379337
+        },
+        {
+          "page": 26,
+          "tokens": 784,
+          "internal_repetition": 0
+        },
+        {
+          "page": 27,
+          "tokens": 776,
+          "internal_repetition": 0.016839378238341918
+        },
+        {
+          "page": 28,
+          "tokens": 747,
+          "internal_repetition": 0.016150740242261152
+        },
+        {
+          "page": 29,
+          "tokens": 660,
+          "internal_repetition": 0.009146341463414642
+        },
+        {
+          "page": 30,
+          "tokens": 603,
+          "internal_repetition": 0.016694490818030094
+        },
+        {
+          "page": 31,
+          "tokens": 665,
+          "internal_repetition": 0
+        },
+        {
+          "page": 32,
+          "tokens": 681,
+          "internal_repetition": 0.008862629246676468
+        },
+        {
+          "page": 33,
+          "tokens": 646,
+          "internal_repetition": 0.015576323987538943
+        },
+        {
+          "page": 34,
+          "tokens": 874,
+          "internal_repetition": 0.006896551724137945
+        },
+        {
+          "page": 35,
+          "tokens": 789,
+          "internal_repetition": 0.002547770700636942
+        },
+        {
+          "page": 36,
+          "tokens": 1483,
+          "internal_repetition": 0.013522650439486195
+        },
+        {
+          "page": 37,
+          "tokens": 1407,
+          "internal_repetition": 0.017106200997861754
+        },
+        {
+          "page": 38,
+          "tokens": 1268,
+          "internal_repetition": 0.01661392405063289
+        },
+        {
+          "page": 39,
+          "tokens": 1327,
+          "internal_repetition": 0.028722600151171562
+        },
+        {
+          "page": 40,
+          "tokens": 874,
+          "internal_repetition": 0.006896551724137945
+        },
+        {
+          "page": 41,
+          "tokens": 1042,
+          "internal_repetition": 0.0019267822736031004
+        },
+        {
+          "page": 42,
+          "tokens": 884,
+          "internal_repetition": 0
+        },
+        {
+          "page": 43,
+          "tokens": 894,
+          "internal_repetition": 0.017977528089887618
+        },
+        {
+          "page": 44,
+          "tokens": 936,
+          "internal_repetition": 0.0311158798283262
+        },
+        {
+          "page": 45,
+          "tokens": 874,
+          "internal_repetition": 0.006896551724137945
+        },
+        {
+          "page": 46,
+          "tokens": 698,
+          "internal_repetition": 0.004322766570605152
+        },
+        {
+          "page": 47,
+          "tokens": 752,
+          "internal_repetition": 0.002673796791443861
+        },
+        {
+          "page": 48,
+          "tokens": 723,
+          "internal_repetition": 0.009735744089012566
+        },
+        {
+          "page": 49,
+          "tokens": 722,
+          "internal_repetition": 0.004178272980501441
+        },
+        {
+          "page": 50,
+          "tokens": 935,
+          "internal_repetition": 0.031149301825993514
+        }
+      ]
+    }
+  ]
+}
