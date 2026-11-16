@@ -27,7 +27,7 @@ export async function inspectGame(root,dir) {
   try{
     browser=await chromium.launch({headless:true});
     for(const [name,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
-      const page=await browser.newPage({viewport:{width,height}});const pageErrors=[];page.on('pageerror',error=>pageErrors.push(error.message));
+      const page=await browser.newPage({viewport:{width,height}});const pageErrors=[];const remote=[];page.on('pageerror',error=>pageErrors.push(error.message));page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith(server.url+'/'))remote.push(request.url());});
       await page.goto(server.url,{waitUntil:'networkidle',timeout:20000});
       await page.getByTestId('auto-place').click({timeout:5000});
       await page.getByTestId('start-game').click({timeout:5000});
@@ -37,7 +37,8 @@ export async function inspectGame(root,dir) {
       await page.screenshot({path:path.join(dir,`${name}.png`),fullPage:true});
       await page.getByTestId('restart').click({timeout:5000});
       if(pageErrors.length)errors.push(...pageErrors.map(error=>`${name}: ${error}`));
-      details.push({name,width,height,cells,overflow,page_errors:pageErrors,screenshot:`${name}.png`});await page.close();
+      if(remote.length)errors.push(`${name}: remote runtime assets requested: ${remote.join(', ')}`);
+      details.push({name,width,height,cells,overflow,page_errors:pageErrors,remote_requests:remote,screenshot:`${name}.png`});await page.close();
     }
     const svg=fs.readdirSync(root,{recursive:true}).filter(file=>file.endsWith('.svg')&&!file.includes('node_modules'));
     if(!svg.length)errors.push('No locally generated SVG assets');

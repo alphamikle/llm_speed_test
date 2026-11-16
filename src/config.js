@@ -47,12 +47,13 @@ export function resolveConfig(config,file,slotName) {
   const slot = {...common.slots.default, ...config.slots[name]};
   let url;
   try {url = new URL(slot.base_url);} catch {throw new Error(`Invalid base_url for slot '${name}'`);}
-  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('base_url must be an HTTP(S) URL without embedded credentials');
+  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw new Error('base_url must be an HTTP(S) URL without embedded credentials, query or fragment');
   if (typeof slot.model !== 'string' || !slot.model.trim()) throw new Error('The slot model must be a nonempty string');
   if (slot.api_key_env && !/^[A-Za-z_][A-Za-z0-9_]*$/.test(slot.api_key_env)) throw new Error('Invalid api_key_env name');
   if (!slot.headers || typeof slot.headers !== 'object' || Array.isArray(slot.headers)) throw new Error('Slot headers must be a mapping');
   if (!slot.request || typeof slot.request !== 'object' || Array.isArray(slot.request)) throw new Error('Slot request must be a mapping');
   if (['model', 'messages', 'stream'].some(key => key in slot.request)) throw new Error('Slot request must not override model, messages, or stream');
+  if(slot.request.n!==undefined&&slot.request.n!==1)throw new Error('The benchmark measures one completion per request; request.n must be 1');
   const agent = {...config.agent, ...slot.agent, compat: {...config.agent.compat, ...slot.agent?.compat}, env: {...config.agent.env, ...slot.agent?.env}};
   for(const key of ['context_window','max_tokens'])if(!Number.isSafeInteger(agent[key])||agent[key]<1)throw new Error(`agent.${key} must be a positive integer`);
   for(const [key,value] of Object.entries(slot.headers))if(typeof value!=='string'||/[\r\n]/.test(key+value))throw new Error('Header names and values must be strings without newlines');

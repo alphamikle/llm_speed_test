@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {Measurement} from './metrics.js';
-import {appendJSON, ensureDir, hash, now, sleep, writeJSON} from './util.js';
+import {appendJSON, ensureDir, hash, now, sleep, writeJSON,JSONLWriter} from './util.js';
 
 export class SSEParser {
   constructor(onEvent) {this.buffer = ''; this.decoder = new TextDecoder(); this.onEvent = onEvent; this.done = false;}
@@ -40,10 +40,12 @@ export async function measureResponse(response, meter, options = {}) {
     const error = new Error(`HTTP ${response.status}: ${text}`); error.httpStatus = response.status; throw error;
   }
   if (!response.body) throw new Error('Server returned no response body');
+  const writer=eventsFile?new JSONLWriter(eventsFile):null;
+  try {
   if (contentType.includes('text/event-stream')) {
     const parser = new SSEParser(event => {
       const t = now(); meter.ingest(event, t);
-      if (eventsFile) appendJSON(eventsFile, {elapsed_ms: t - meter.start, event});
+      writer?.write({elapsed_ms: t - meter.start, event});
     });
     for await (const chunk of response.body) {parser.push(chunk); if (forward) await forward(chunk);}
     parser.finish();
@@ -55,12 +57,13 @@ export async function measureResponse(response, meter, options = {}) {
     meter.ingest(data);
     // A nonstreaming response cannot reveal TTFT or decode intervals.
     meter.first = meter.firstAnswer = meter.last = null;
-    if (eventsFile) appendJSON(eventsFile, {elapsed_ms: now() - meter.start, event: data});
+    writer?.write({elapsed_ms: now() - meter.start, event: data});
     if (forward) await forward(Buffer.from(text));
   }
+  } finally {await writer?.close();}
 }
 export class Client {
-  constructor({slot, defaults, dir, signal, onRecord}) {Object.assign(this, {slot, defaults, dir, signal, onRecord}); this.sequence = 0; this.records = [];}
+  constructor({slot, defaults, dir, signal, onRecord, onProgress}) {Object.assign(this, {slot, defaults, dir, signal, onRecord, onProgress}); this.sequence = 0; this.records = [];}
   async chat(messages, metadata = {}, overrides = {}) {
     const id = `${String(++this.sequence).padStart(5, '0')}-${hash(metadata).slice(0, 6)}`;
     const requestDir = path.join(this.dir, 'requests', id); ensureDir(requestDir);
@@ -71,6 +74,7 @@ export class Client {
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       this.signal?.throwIfAborted();
       const meter = new Measurement({...metadata, request_id: id, attempt, timestamp: new Date().toISOString()});
+      const heartbeat=this.onProgress?setInterval(()=>this.onProgress({...metadata,elapsed_seconds:(now()-meter.start)/1000,characters:meter.content.length+meter.reasoning.length}),15000):null;
       const timeout = AbortSignal.timeout(this.defaults.timeout_seconds * 1000);
       const signal = this.signal ? AbortSignal.any([this.signal, timeout]) : timeout;
       let failure;
@@ -80,6 +84,7 @@ export class Client {
         if (meter.error) throw new Error(meter.error);
         if (!meter.content && !meter.reasoning && !meter.toolCalls.size) throw new Error('The model returned no content, reasoning, or tool calls');
       } catch (error) {failure = error; meter.error = error.message;}
+      if(heartbeat)clearInterval(heartbeat);
       const record = meter.finish();
       this.records.push(record); appendJSON(path.join(this.dir, 'requests.jsonl'), record); writeJSON(path.join(requestDir, `result-${attempt}.json`), record); this.onRecord?.(record);
       if (!failure) return record;

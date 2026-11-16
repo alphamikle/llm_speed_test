@@ -91,7 +91,7 @@ async function executeKit(context) {
     if(kit.id.startsWith('10'))prompt+='\n\n'+l.gameContract;
     agentInfo={agent_steps:0,agent_turns:0,tool_calls:0,tool_errors:0};
     for(let attempt=0;attempt<=Math.min(defaults.repair_attempts,1);attempt++){
-      const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord});
+      const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord,onProgress:event=>log(`${event.type} ${event.tool||event.turn}`)});
       records.push(...result.records);agentInfo.agent_steps+=result.steps;agentInfo.agent_turns+=result.turns;agentInfo.tool_calls+=result.tool_count;agentInfo.tool_errors+=result.tool_errors;output=result.content;
       if(!result.success){validation={passed:false,errors:[result.error||result.stderr||`Agent exited with ${result.code}`]};if(signal?.aborted)throw signal.reason;continue;}
       const test=await runCommand(process.execPath,['--run','test'],{cwd:workspace,timeoutMs:120000,signal});writeJSON(path.join(dir,`agent-tests-${attempt}.json`),test);
@@ -112,19 +112,21 @@ export async function runSuite(options) {
   const initial=loadConfig(options.config,options.slots[0]);const profileName=options.profile||initial.config.defaults.profile;
   if(!PROFILES[profileName])throw new Error(`Unknown profile: ${profileName}`);
   const languages=options.languages||initial.config.defaults.languages;for(const value of languages)if(!LANGUAGES.includes(value))throw new Error(`Unknown language: ${value}`);
+  if(!languages.length||new Set(languages).size!==languages.length)throw new Error('Languages must be a nonempty unique list');
   const kits=selectKits(options.kits||'all');const repetitions=options.repetitions||initial.config.defaults.repetitions;
+  if(!Number.isSafeInteger(repetitions)||repetitions<1||repetitions>100)throw new Error('Repetitions must be an integer from 1 to 100');
   const dir=path.resolve(options.output||path.join(initial.config.defaults.output_dir,new Date().toISOString().replace(/[:.]/g,'-')));ensureDir(dir);
+  const selected=options.slots.map(name=>loadConfig(options.config,name));
+  const fingerprint=hash({profile:profileName,languages,kits:kits.map(k=>k.id),repetitions,via:options.via||'api',dimensions:options.dimensions,overrides:options.overrides,models:selected.map(value=>redact({name:value.slotName,slot:value.slot,agent:value.agent,defaults:value.config.defaults})),prompts:languages.map(language=>hash(locale(language)))});
   const lockFile=path.join(dir,'run.lock');let lock;
   try{lock=fs.openSync(lockFile,'wx');fs.writeFileSync(lock,JSON.stringify({pid:process.pid,host:os.hostname()}));}
   catch(error){if(error.code!=='EEXIST')throw error;const owner=readJSON(lockFile);if(owner.host!==os.hostname())throw new Error('Run is locked by another host');let alive=true;try{process.kill(owner.pid,0);}catch(e){if(e.code==='ESRCH')alive=false;}if(alive)throw new Error(`Run is locked by PID ${owner.pid}`);fs.unlinkSync(lockFile);return runSuite(options);}
   const start=now();let state;const file=path.join(dir,'run.json');
-  const selected=options.slots.map(name=>loadConfig(options.config,name));
-  const fingerprint=hash({profile:profileName,languages,kits:kits.map(k=>k.id),repetitions,via:options.via||'api',dimensions:options.dimensions,overrides:options.overrides,models:selected.map(value=>redact({name:value.slotName,slot:value.slot,agent:value.agent,defaults:value.config.defaults})),prompts:languages.map(language=>hash(locale(language)))});
   const log=message=>options.log?.(message);
   try{
     if(fs.existsSync(file)){
       if(!options.resume)throw new Error('Output directory already contains a run. Use --resume or choose a new --output directory.');
-      state=readJSON(file);if(state.fingerprint!==fingerprint)throw new Error('Resume configuration, prompts or workload differ from the original run');
+      const existing=readJSON(file);if(existing.fingerprint!==fingerprint)throw new Error('Resume configuration, prompts or workload differ from the original run');state=existing;
     }else state={schema_version:1,id:path.basename(dir),fingerprint,profile:profileName,started_at:new Date().toISOString(),status:'running',active_ms:0,planned_cases:selected.length*languages.length*kits.length*repetitions,cases:{},models:selected.map(value=>({slot:value.slotName,...redact(value.slot),agent:redact(value.agent)})),environment:{node:process.version,platform:process.platform,arch:process.arch,os:os.release(),cpu:os.cpus()[0]?.model,logical_cpus:os.cpus().length,total_ram_bytes:os.totalmem(),sllm_version:'0.1.0'}};
     state.status='running';delete state.finished_at;writeJSON(file,state);
     for(const selectedSlot of selected){
@@ -142,7 +144,7 @@ export async function runSuite(options) {
         if(previous&&previous.status!=='interrupted'&&!(options.retryFailed&&!previous.validation?.passed))continue;
         options.signal?.throwIfAborted();const attempt=(previous?.attempt||0)+1;const caseDir=path.join(dir,'cases',slotName,language,kit.id,String(repetition),`attempt-${attempt}`);ensureDir(caseDir);
         const metadata={slot:slotName,model:slot.model,language,kit:kit.id,repetition,profile:profileName};const caseStart=now();
-        const client=new Client({slot,defaults,dir:caseDir,signal:options.signal,onRecord:record=>log(`${slotName}/${language}/${kit.id}: ${record.phase||`agent step ${record.agent_step}`} · TTFT ${record.ttft_ms?.toFixed(0)??'?'} ms · PP ${record.pp_tps?.toFixed(1)??'?'} · TG ${record.tg_tps?.toFixed(1)??'?'} tok/s`)});
+        const client=new Client({slot,defaults,dir:caseDir,signal:options.signal,onProgress:event=>log(`${slotName}/${language}/${kit.id}: receiving ${event.phase} · ${event.elapsed_seconds.toFixed(0)} s · ${event.characters} characters`),onRecord:record=>log(`${slotName}/${language}/${kit.id}: ${record.phase||`agent step ${record.agent_step}`} · TTFT ${record.ttft_ms?.toFixed(0)??'?'} ms · PP ${record.pp_tps?.toFixed(1)??'?'} · TG ${record.tg_tps?.toFixed(1)??'?'} tok/s`)});
         const dependency=id=>{const test=state.cases[`${slotName}/${language}/${id}/${repetition}`];if(!test?.output_file||!fs.existsSync(test.output_file))throw new Error(`Dependency artifact unavailable: ${id}`);return fs.readFileSync(test.output_file,'utf8');};
         log(`CASE ${Object.keys(state.cases).length+1}/${state.planned_cases}: ${key}`);let result;
         try{result=await executeKit({kit,language,profile,dir:caseDir,dependency,client,defaults,slot,agent,signal:options.signal,log:message=>log(`${key}: ${message}`),metadata,via:options.via||'api'});result.status='completed';}

@@ -4,10 +4,11 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {StringDecoder} from 'node:string_decoder';
+import {chromium} from 'playwright';
 import {Measurement} from './metrics.js';
 import {endpoint,requestHeaders,measureResponse} from './transport.js';
 import {piPath} from './pi-path.js';
-import {appendJSON,ensureDir,now,terminate,writeJSON} from './util.js';
+import {appendJSON,ensureDir,now,terminate,writeJSON,JSONLWriter} from './util.js';
 
 export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxSteps=100,onRecord}) {
   let sequence=0;const records=[];const controllers=new Set();
@@ -29,7 +30,7 @@ export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxS
       if(!response.ok){const text=await response.text();meter.error=`HTTP ${response.status}: ${text.slice(0,3000)}`;res.writeHead(response.status,{'content-type':'application/json'});res.end(text);}
       else{
         res.writeHead(200,{'content-type':response.headers.get('content-type')||'text/event-stream','cache-control':'no-cache'});
-        await measureResponse(response,meter,{eventsFile:path.join(recordDir,'events.jsonl'),forward:async chunk=>{if(!res.write(chunk))await once(res,'drain');}});
+        await measureResponse(response,meter,{eventsFile:path.join(recordDir,'events.jsonl'),forward:async chunk=>{if(!res.write(chunk))await new Promise((resolve,reject)=>{const cleanup=()=>{res.removeListener('drain',drain);res.removeListener('close',close);res.removeListener('error',fail);};const drain=()=>{cleanup();resolve();};const close=()=>{cleanup();reject(new Error('Agent disconnected during response streaming'));};const fail=error=>{cleanup();reject(error);};res.once('drain',drain);res.once('close',close);res.once('error',fail);});}});
         res.end();
       }
     }catch(error){meter.error=error.message;if(!res.headersSent)res.writeHead(502,{'content-type':'application/json'});if(!res.destroyed)res.end(JSON.stringify({error:{message:error.message}}));}
@@ -40,10 +41,16 @@ export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxS
 }
 function isolatedEnv(home,extra={}) {
   const env={};for(const name of ['PATH','Path','SystemRoot','WINDIR','COMSPEC','PATHEXT','TEMP','TMP','TMPDIR','LANG','LC_ALL','TERM'])if(process.env[name])env[name]=process.env[name];
-  return {...env,HOME:home,USERPROFILE:home,PI_CODING_AGENT_DIR:home,PI_SKIP_VERSION_CHECK:'1',...extra};
+  let browserDir=path.dirname(chromium.executablePath());
+  for(let level=0;level<10;level++){
+    if(/^chromium(?:_headless_shell|-headless-shell)?-\d+$/.test(path.basename(browserDir))){browserDir=path.dirname(browserDir);break;}
+    browserDir=path.dirname(browserDir);
+  }
+  return {...env,HOME:home,USERPROFILE:home,PI_CODING_AGENT_DIR:home,PI_SKIP_VERSION_CHECK:'1',PLAYWRIGHT_BROWSERS_PATH:process.env.PLAYWRIGHT_BROWSERS_PATH||browserDir,...extra};
 }
-export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,metadata,signal,noTools=false,onRecord}) {
+export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,metadata,signal,noTools=false,onRecord,onProgress}) {
   ensureDir(dir);ensureDir(workspace);const home=path.join(dir,'pi-home');ensureDir(home);
+  const extraEnv=Object.fromEntries(Object.entries(agent.env||{}).map(([key,value])=>[key,String(value).replace(/\$\{([A-Za-z_][A-Za-z0-9_]*)\}/g,(_,name)=>{if(process.env[name]===undefined)throw new Error(`Missing agent environment variable: ${name}`);return process.env[name];})]));
   const proxy=await startMeteringProxy({slot,defaults,dir,metadata,signal,maxSteps:agent.native_model?10000:defaults.agent_max_steps,onRecord});
   const model={id:slot.model,name:'sllm benchmark model',api:'openai-completions',reasoning:true,input:agent.input||['text'],contextWindow:agent.context_window,maxTokens:agent.max_tokens,cost:{input:0,output:0,cacheRead:0,cacheWrite:0},compat:agent.compat};
   writeJSON(path.join(home,'models.json'),{providers:{sllm:{baseUrl:proxy.baseUrl,api:'openai-completions',apiKey:'local-benchmark',models:[model]}}});
@@ -51,10 +58,10 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const promptFile=path.join(dir,'agent-prompt.txt');fs.writeFileSync(promptFile,prompt);
   const systemFile=path.join(dir,'agent-system.txt');fs.writeFileSync(systemFile,system);
   const pi=piPath();
-  const args=agent.command?[...(agent.args||[])]:[pi.cli,'--mode','json','--provider',agent.native_provider||'sllm','--model',agent.native_model||slot.model,'--thinking',agent.thinking,'--no-session','--no-extensions','--no-skills','--no-prompt-templates','--no-approve','--append-system-prompt',systemFile,...(noTools?['--no-tools']:['--tools','read,write,edit,bash']),`@${promptFile}`];
+  const substitutions={base_url:proxy.baseUrl,model:slot.model,prompt_file:promptFile,workspace};
+  const args=agent.command?(agent.args||[]).map(value=>String(value).replace(/\{(base_url|model|prompt_file|workspace)\}/g,(_,key)=>substitutions[key])):[pi.cli,'--mode','json','--provider',agent.native_provider||'sllm','--model',agent.native_model||slot.model,'--thinking',agent.thinking,'--no-session','--no-extensions','--no-skills','--no-prompt-templates','--no-approve','--append-system-prompt',systemFile,...(noTools?['--no-tools']:['--tools','read,write,edit,bash']),`@${promptFile}`];
   const command=agent.command||process.execPath;
-  const start=now();let buffer='',stderr='',finalMessage='',turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];
-  const extraEnv=Object.fromEntries(Object.entries(agent.env||{}).map(([key,value])=>[key,String(value).replace(/\$\{([A-Za-z_][A-Za-z0-9_]*)\}/g,(_,name)=>{if(process.env[name]===undefined)throw new Error(`Missing agent environment variable: ${name}`);return process.env[name];})]));
+  const start=now();let buffer='',stderr='',finalMessage='',turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];const eventWriter=new JSONLWriter(path.join(dir,'agent-events.jsonl'));
   const child=spawn(command,args,{cwd:workspace,env:isolatedEnv(home,extraEnv),windowsHide:true,detached:process.platform!=='win32',stdio:['ignore','pipe','pipe']});
   const decoder=new StringDecoder('utf8');
   const timeout=setTimeout(()=>terminate(child),defaults.agent_timeout_seconds*1000);
@@ -62,18 +69,19 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const processLine=line=>{
     if(!line.trim())return;
     let event;try{event=JSON.parse(line);}catch{appendJSON(path.join(dir,'agent-unparsed.jsonl'),{line});return;}
-    const time=now();events++;appendJSON(path.join(dir,'agent-events.jsonl'),{elapsed_ms:time-start,event});
-    if(event.type==='turn_start')turns++;
+    const time=now();events++;eventWriter.write({elapsed_ms:time-start,event});
+    if(event.type==='turn_start'){turns++;onProgress?.({type:'agent_turn',turn:turns});}
     if(event.type==='message_start'&&event.message?.role==='assistant')fallback=new Measurement({...metadata,agent_step:turns,request_id:`native-pi-${turns}`,timing_scope:'pi_message_events'},time);
     if(event.type==='message_update'&&fallback){const e=event.assistantMessageEvent;const delta=e?.type==='text_delta'?{content:e.delta}:e?.type==='thinking_delta'?{reasoning_content:e.delta}:e?.type==='toolcall_delta'?{tool_calls:[{index:e.contentIndex,function:{arguments:e.delta}}]}:{};fallback.ingest({choices:[{delta}]},time);}
     if(event.type==='message_end'&&event.message?.role==='assistant'){
       const m=event.message;finalMessage=(m.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\n');
-      if(fallback){fallback.usage={prompt_tokens:m.usage?.input,completion_tokens:m.usage?.output,prompt_tokens_details:{cached_tokens:m.usage?.cacheRead}};fallback.finishReason=m.stopReason;const record=fallback.finish(time);if(m.stopReason==='error'||m.errorMessage){record.status='error';record.error=m.errorMessage;}fallbackRecords.push(record);fallback=null;}
+      if(fallback){fallback.usage={prompt_tokens:typeof m.usage?.input==='number'?m.usage.input+(m.usage.cacheRead||0)+(m.usage.cacheWrite||0):undefined,completion_tokens:m.usage?.output,prompt_tokens_details:{cached_tokens:m.usage?.cacheRead}};fallback.finishReason=m.stopReason;const record=fallback.finish(time);if(m.stopReason==='error'||m.errorMessage){record.status='error';record.error=m.errorMessage;}fallbackRecords.push(record);fallback=null;}
     }
-    if(event.type==='tool_execution_start')toolStarts.set(event.toolCallId,{name:event.toolName,args:event.args,start:time});
+    if(event.type==='tool_execution_start'){toolStarts.set(event.toolCallId,{name:event.toolName,args:event.args,start:time});onProgress?.({type:'tool_start',tool:event.toolName,turn:turns});}
     if(event.type==='tool_execution_end'){
       const first=toolStarts.get(event.toolCallId)||{name:event.toolName,start:time};
-      tools.push({id:event.toolCallId,name:first.name,args:first.args,duration_ms:time-first.start,is_error:event.isError,result:event.result});toolStarts.delete(event.toolCallId);
+      const exitCode=event.result?.structuredContent?.exit_code??event.result?.details?.exitCode??event.result?.details?.exit_code;
+      tools.push({id:event.toolCallId,name:first.name,args:first.args,duration_ms:time-first.start,is_error:Boolean(event.isError||(typeof exitCode==='number'&&exitCode!==0)),exit_code:exitCode,result:event.result});toolStarts.delete(event.toolCallId);
     }
     if(event.type==='agent_end')ended=true;if(event.type==='agent_settled')settled=!event.aborted;
     if(turns>defaults.agent_max_steps)terminate(child);
@@ -82,9 +90,11 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   child.stderr.on('data',chunk=>{fs.appendFileSync(path.join(dir,'agent-stderr.txt'),chunk);stderr=(stderr+chunk).slice(-20000);});
   let code=null,exitSignal=null,error=null;
   try {await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',(c,s)=>{code=c;exitSignal=s;resolve();});});buffer+=decoder.end();if(buffer.trim())processLine(buffer);}
-  catch(e){error=e.message;}finally{clearTimeout(timeout);signal?.removeEventListener('abort',abort);await proxy.close();}
-  const records=agent.native_model?fallbackRecords:proxy.records;
-  if(agent.native_model)for(const record of records){appendJSON(path.join(dir,'requests.jsonl'),record);onRecord?.(record);}
+  catch(e){error=e.message;}finally{clearTimeout(timeout);signal?.removeEventListener('abort',abort);await proxy.close();await eventWriter.close();}
+  if(fallback){fallback.error=error||'Agent stopped before assistant completion';fallbackRecords.push(fallback.finish());}
+  const useFallback=agent.native_model||!proxy.records.length;
+  const records=useFallback?fallbackRecords:proxy.records;
+  if(useFallback)for(const record of records){appendJSON(path.join(dir,'requests.jsonl'),record);onRecord?.(record);}
   const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,pi_version:pi.version,content:finalMessage,records,success:code===0&&records.length>0&&records.every(r=>r.status==='ok')};
   writeJSON(path.join(dir,'agent-result.json'),result);return result;
 }

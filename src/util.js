@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawn} from 'node:child_process';
+import {finished} from 'node:stream/promises';
 
 export const now = () => performance.now();
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -17,6 +18,15 @@ export function writeJSON(file, value) {
 export function appendJSON(file, value) {
   ensureDir(path.dirname(file));
   fs.appendFileSync(file, `${JSON.stringify(value)}\n`);
+}
+export class JSONLWriter {
+  constructor(file) {
+    ensureDir(path.dirname(file));this.error=null;
+    this.stream=fs.createWriteStream(file,{flags:'a',highWaterMark:262144,mode:0o600});
+    this.stream.on('error',error=>{this.error=error;});
+  }
+  write(value) {if(this.error)throw this.error;this.stream.write(`${JSON.stringify(value)}\n`);}
+  async close() {this.stream.end();await finished(this.stream);if(this.error)throw this.error;}
 }
 export function safeName(value) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$/.test(value) || value.includes('..')) throw new Error(`Invalid name: ${value}`);
@@ -35,7 +45,7 @@ export function redact(value) {
 export async function runCommand(command, args = [], options = {}) {
   const {cwd, env, timeoutMs = 60000, signal, onOutput} = options;
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {cwd, env: {...process.env, ...env}, windowsHide: true, signal, stdio: ['ignore', 'pipe', 'pipe']});
+    const child = spawn(command, args, {cwd, env: {...process.env, ...env}, windowsHide: true, detached: process.platform!=='win32', signal, stdio: ['ignore', 'pipe', 'pipe']});
     let stdout = '', stderr = '', timedOut = false;
     const timer = setTimeout(() => { timedOut = true; terminate(child); }, timeoutMs);
     child.stdout.on('data', data => { stdout += data; onOutput?.('stdout', data.toString()); if (stdout.length > 8000000) stdout = stdout.slice(-8000000); });

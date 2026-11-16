@@ -12,5 +12,5 @@ test('complete case execution checkpoints, reports, resumes without duplicate ca
   const options={config:file,slots:['default'],languages:['en'],kits:'03',profile:'smoke',output:path.join(dir,'run')};
   const result=await runSuite(options);assert.equal(result.report.completed_cases,2);assert.equal(result.report.quality_passes,2);assert.ok(fs.existsSync(path.join(result.dir,'report.html')));assert.ok(fs.existsSync(path.join(result.dir,'steps.csv')));const before=calls;
   await runSuite({...options,resume:true});assert.equal(calls,before);assert.equal(readJSON(path.join(result.dir,'run.json')).status,'completed');
-  await assert.rejects(runSuite({...options,resume:true,dimensions:{pages:3}}),/differ/);assert.ok(!fs.existsSync(path.join(result.dir,'run.lock')));
+  const checkpoint=fs.readFileSync(path.join(result.dir,'run.json'),'utf8');await assert.rejects(runSuite({...options,resume:true,dimensions:{pages:3}}),/differ/);assert.ok(!fs.existsSync(path.join(result.dir,'run.lock')));assert.equal(fs.readFileSync(path.join(result.dir,'run.json'),'utf8'),checkpoint);
 });
