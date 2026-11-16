@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 9/192 cases. Quality passes: 8. Active wall time: 389.73 s.
+Profile: **full**. Finished 12/192 cases. Quality passes: 11. Active wall time: 2352.31 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -15,3 +15,6 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | en | 07-json-prefill | fail | 10022.44 | 10022.44 | 10022.44 | 10022.44 | 105.26 | 105.26 | 105.26 | 105.26 | 18959.21 | 20.39 | 0.00 |
 | flash-next | en | 08-code-generation | pass | 585.43 | 585.43 | 585.43 | 585.43 | 220.89 | 220.89 | 220.89 | 220.89 | 695.73 | 10.44 | 0.00 |
 | flash-next | en | 09-code-prefill | pass | 10478.18 | 10478.18 | 10478.18 | 10478.18 | 187.64 | 187.64 | 187.64 | 187.64 | 9908.52 | 13.12 | 0.00 |
+| flash-next | en | 10-agent-battleship | pass | 662.91 | 372.15 | 115.58 | 4322.99 | 180.55 | 173.68 | 101.55 | 349.83 | 537.35 | 1045.18 | 149.00 |
+| flash-next | en | 11-agent-repair | pass | 524.12 | 247.62 | 117.29 | 1688.26 | 172.75 | 167.52 | 102.93 | 246.13 | 467.64 | 87.85 | 21.00 |
+| flash-next | en | 12-mixed-iterations | pass | 1953.65 | 327.50 | 317.82 | 10067.64 | 179.22 | 179.59 | 165.77 | 193.55 | 1010.08 | 52.00 | 0.00 |
