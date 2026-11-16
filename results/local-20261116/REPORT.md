@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 48/192 cases. Quality passes: 38. Active wall time: 10685.35 s.
+Profile: **full**. Finished 60/192 cases. Quality passes: 46. Active wall time: 16268.16 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -54,3 +54,15 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | zh | 10-agent-battleship | fail | 1073.17 | 553.41 | 120.13 | 10520.13 | 180.82 | 177.63 | 77.05 | 312.97 | 731.31 | 826.91 | 200.00 |
 | flash-next | zh | 11-agent-repair | pass | 507.72 | 250.98 | 116.17 | 1512.20 | 192.18 | 184.72 | 96.64 | 329.53 | 453.04 | 54.37 | 11.00 |
 | flash-next | zh | 12-mixed-iterations | pass | 1891.62 | 304.98 | 272.73 | 9854.87 | 174.02 | 180.43 | 152.08 | 190.88 | 1109.39 | 58.77 | 0.00 |
+| flash-next-uncensored | en | 01-prose-short | pass | 2974.46 | 3308.16 | 495.48 | 3500.31 | 214.77 | 212.23 | 201.11 | 233.71 | 1102.34 | 140.03 | 0.00 |
+| flash-next-uncensored | en | 02-prose-long | pass | 4345.72 | 4673.85 | 2659.79 | 4707.85 | 207.80 | 209.46 | 191.73 | 218.65 | 1151.80 | 131.83 | 0.00 |
+| flash-next-uncensored | en | 03-prose-summary-short | pass | 8283.52 | 8283.52 | 8283.52 | 8283.52 | 206.35 | 206.35 | 206.35 | 206.35 | 3382.38 | 13.75 | 0.00 |
+| flash-next-uncensored | en | 04-prose-summary-long | pass | 8415.34 | 8415.34 | 8415.34 | 8415.34 | 185.33 | 185.33 | 185.33 | 185.33 | 3001.01 | 9.97 | 0.00 |
+| flash-next-uncensored | en | 05-sql-generation | fail | 718.36 | 762.25 | 626.41 | 766.43 | 281.96 | 322.12 | 185.39 | 338.39 | 496.85 | 10.07 | 0.00 |
+| flash-next-uncensored | en | 06-json-generation | fail | 576.46 | 564.50 | 560.47 | 604.42 | 344.22 | 345.69 | 309.70 | 377.27 | 492.82 | 145.25 | 0.00 |
+| flash-next-uncensored | en | 07-json-prefill | fail | 8082.83 | 8082.83 | 8082.83 | 8082.83 | 112.04 | 112.04 | 112.04 | 112.04 | 24221.68 | 25.76 | 0.00 |
+| flash-next-uncensored | en | 08-code-generation | pass | 652.35 | 652.35 | 652.35 | 652.35 | 175.92 | 175.92 | 175.92 | 175.92 | 586.13 | 17.44 | 0.00 |
+| flash-next-uncensored | en | 09-code-prefill | pass | 8391.80 | 8391.80 | 8391.80 | 8391.80 | 187.87 | 187.87 | 187.87 | 187.87 | 12417.41 | 15.71 | 0.00 |
+| flash-next-uncensored | en | 10-agent-battleship | fail | 5735.27 | 6137.02 | 1019.47 | 8600.66 | 162.22 | 160.97 | 100.06 | 220.05 | 1461.26 | 4612.95 | 198.00 |
+| flash-next-uncensored | en | 11-agent-repair | pass | 6066.93 | 7188.33 | 927.79 | 8496.39 | 154.40 | 151.07 | 96.41 | 220.43 | 1478.42 | 343.68 | 74.00 |
+| flash-next-uncensored | en | 12-mixed-iterations | pass | 6234.97 | 7157.99 | 2336.68 | 8351.13 | 154.87 | 152.72 | 142.78 | 169.37 | 2233.46 | 91.60 | 0.00 |
