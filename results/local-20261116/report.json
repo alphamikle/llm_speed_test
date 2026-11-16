@@ -9,7 +9,7 @@
   "quality_failures": 39,
   "harness_errors": 0,
   "total_active_seconds": 46747.89475901,
-  "end_to_end_seconds": 47986.91,
+  "end_to_end_seconds": 48761.993,
   "environment": {
     "node": "v24.22.3",
     "platform": "linux",

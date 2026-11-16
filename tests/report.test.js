@@ -5,4 +5,5 @@ test('reports distinguish interrupted work, request errors, and model quality fa
   writeJSON(path.join(dir,'run.json'),{id:'test',profile:'full',status:'interrupted',started_at:new Date().toISOString(),active_ms:300,planned_cases:3,environment:{},models:[],targeted_rerun:{total:2,completed:['done'],pending:['pending'],kits:['03-prose-summary-short']},cases:{a:{...base,status:'interrupted'},b:{...base,kit:'02-prose-long',status:'error'},c:{...base,kit:'03-prose-summary-short',status:'completed'}}});
   const report=createReport(dir);assert.equal(report.completed_cases,2);assert.equal(report.interrupted_cases.length,1);assert.equal(report.harness_errors,1);assert.equal(report.quality_failures,1);assert.equal(report.rows.length,2);
   assert.equal(report.targeted_rerun.total,2);assert.match(fs.readFileSync(path.join(dir,'report.html'),'utf8'),/Targeted rerun: 1\/2/);
+  const markdown=fs.readFileSync(path.join(dir,'REPORT.md'),'utf8');assert.match(markdown,/Model aggregates/);assert.match(markdown,/TTFT mean \| TTFT median \| TTFT min \| TTFT max/);assert.match(markdown,/End-to-end elapsed time/);
 });
