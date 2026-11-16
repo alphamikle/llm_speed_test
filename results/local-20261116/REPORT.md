@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 129/192 cases. Quality passes: 94. Active wall time: 39673.23 s.
+Profile: **full**. Finished 132/192 cases. Quality passes: 95. Active wall time: 44799.17 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -39,6 +39,9 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek | zh | 07-json-prefill | fail | 4483.29 | 4483.29 | 4483.29 | 4483.29 | 32.51 | 32.51 | 32.51 | 32.51 | 38925.46 | 42.38 | 0.00 |
 | deepseek | zh | 08-code-generation | pass | 174.58 | 174.58 | 174.58 | 174.58 | 40.03 | 40.03 | 40.03 | 40.03 | 2123.52 | 51.72 | 0.00 |
 | deepseek | zh | 09-code-prefill | pass | 4623.30 | 4623.30 | 4623.30 | 4623.30 | 37.44 | 37.44 | 37.44 | 37.44 | 19690.32 | 31.23 | 0.00 |
+| deepseek | zh | 10-agent-battleship | fail | 294.26 | 161.84 | 64.32 | 3148.08 | 56.93 | 57.82 | 34.53 | 73.53 | 1411.88 | 4665.17 | 141.00 |
+| deepseek | zh | 11-agent-repair | pass | 206.67 | 145.63 | 74.41 | 571.58 | 53.06 | 54.39 | 39.44 | 63.06 | 1226.75 | 198.97 | 14.00 |
+| deepseek | zh | 12-mixed-iterations | fail | 824.11 | 117.53 | 108.60 | 4366.96 | 66.59 | 72.20 | 38.36 | 75.22 | 2956.65 | 261.20 | 0.00 |
 | flash-next | en | 01-prose-short | pass | 3838.20 | 4255.66 | 557.22 | 4423.56 | 276.42 | 280.60 | 248.10 | 307.59 | 908.21 | 117.38 | 0.00 |
 | flash-next | en | 02-prose-long | pass | 4598.95 | 4888.42 | 2652.83 | 4960.82 | 296.38 | 297.79 | 281.15 | 311.12 | 1173.80 | 115.98 | 0.00 |
 | flash-next | en | 03-prose-summary-short | pass | 10694.46 | 10694.46 | 10694.46 | 10694.46 | 264.34 | 264.34 | 264.34 | 264.34 | 2869.63 | 10.82 | 0.00 |
