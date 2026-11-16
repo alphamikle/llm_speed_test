@@ -29,7 +29,7 @@ export function parsePositive(value, label, max = 10000000) {
 }
 export function redact(value) {
   if (Array.isArray(value)) return value.map(redact);
-  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, /api.?key$|authorization|password|secret|access.?token/i.test(key) ? '[REDACTED]' : redact(item)]));
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, /api.?key$|authorization|password|secret|access.?token|^headers$|^env$/i.test(key) ? '[REDACTED]' : redact(item)]));
   return value;
 }
 export async function runCommand(command, args = [], options = {}) {
