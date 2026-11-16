@@ -23,7 +23,7 @@ test('tool arguments start TTFT and are reconstructed across deltas',()=>{
 test('aggregation separates native and estimated rates and reports missing counts',()=>{
   const a=new Measurement({},0);a.ingest({choices:[{delta:{content:'a'}}]},10);a.ingest({choices:[{delta:{content:'b'}}],usage:{prompt_tokens:100,completion_tokens:3},timings:{prompt_n:100,prompt_ms:100,predicted_n:3,predicted_ms:50}},60);
   const b=new Measurement({},0);b.ingest({choices:[{delta:{content:'x'}}]},20);
-  const summary=aggregate([a.finish(70),b.finish(30)]);assert.equal(summary.metrics.pp_tps.count,1);assert.equal(summary.metrics.pp_tps.missing,1);assert.equal(summary.metrics.pp_tps.weighted,1000);assert.equal(summary.metrics.pp_estimate_tps.count,1);assert.equal(summary.missing_token_usage,1);
+  const summary=aggregate([a.finish(70),b.finish(30)]);assert.equal(summary.metrics.pp_tps.count,1);assert.equal(summary.metrics.pp_tps.missing,1);assert.equal(summary.metrics.pp_tps.weighted,1000);assert.equal(summary.metrics.pp_estimate_tps.count,1);assert.equal(summary.missing_token_usage,1);assert.equal(summary.input_tokens,null);assert.equal(summary.output_tokens,null);assert.equal(summary.known_input_tokens,100);assert.equal(summary.known_output_tokens,3);
 });
 test('SSE parser preserves fragmented UTF-8, CRLF, comments and multiline data',()=>{
   const events=[];const parser=new SSEParser(event=>events.push(event));

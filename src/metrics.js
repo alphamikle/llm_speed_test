@@ -78,8 +78,9 @@ export function aggregate(records) {
     const matching = good.filter(r => Number.isFinite(r[key]));
     metrics[key].weighted = rate(matching.reduce((n, r) => n + r[tokens], 0), matching.reduce((n, r) => n + r[ms], 0));
   }
+  const knownInput=good.reduce((n,r)=>n+(r.input_tokens??0),0),knownOutput=good.reduce((n,r)=>n+(r.output_tokens??0),0);
   return {requests: records.length, successful_requests: good.length, failed_requests: records.length - good.length,
-    input_tokens: good.reduce((n, r) => n + (r.input_tokens ?? 0), 0), output_tokens: good.reduce((n, r) => n + (r.output_tokens ?? 0), 0),
+    input_tokens:good.every(r=>Number.isFinite(r.input_tokens))?knownInput:null,output_tokens:good.every(r=>Number.isFinite(r.output_tokens))?knownOutput:null,known_input_tokens:knownInput,known_output_tokens:knownOutput,
     missing_token_usage: good.filter(r => r.input_tokens === null || r.output_tokens === null).length,
     cached_tokens: good.reduce((n,r) => n + (r.cached_tokens ?? 0),0), metrics};
 }
