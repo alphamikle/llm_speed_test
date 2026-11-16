@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 120/192 cases. Quality passes: 88. Active wall time: 36908.86 s.
+Profile: **full**. Finished 129/192 cases. Quality passes: 94. Active wall time: 39673.23 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`.
 
@@ -30,6 +30,15 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek | ste | 10-agent-battleship | pass | 347.70 | 234.10 | 60.95 | 2258.21 | 51.82 | 50.99 | 35.37 | 72.75 | 1818.45 | 2842.92 | 142.00 |
 | deepseek | ste | 11-agent-repair | pass | 235.98 | 159.30 | 70.15 | 973.36 | 55.08 | 57.37 | 36.30 | 68.36 | 1257.67 | 376.43 | 28.00 |
 | deepseek | ste | 12-mixed-iterations | pass | 793.89 | 113.76 | 102.85 | 4198.08 | 55.77 | 59.24 | 33.58 | 64.30 | 2560.98 | 147.24 | 0.00 |
+| deepseek | zh | 01-prose-short | fail | 1648.83 | 2065.48 | 152.81 | 2720.13 | 68.35 | 59.52 | 43.69 | 108.05 | 3031.49 | 774.09 | 0.00 |
+| deepseek | zh | 02-prose-long | pass | 1908.99 | 2468.36 | 252.91 | 2526.52 | 83.71 | 85.32 | 44.49 | 100.08 | 3456.59 | 1230.89 | 0.00 |
+| deepseek | zh | 03-prose-summary-short | pass | 4120.74 | 4120.74 | 4120.74 | 4120.74 | 44.56 | 44.56 | 44.56 | 44.56 | 8917.94 | 78.85 | 0.00 |
+| deepseek | zh | 04-prose-summary-long | pass | 4532.23 | 4532.23 | 4532.23 | 4532.23 | 46.96 | 46.96 | 46.96 | 46.96 | 13863.66 | 59.65 | 0.00 |
+| deepseek | zh | 05-sql-generation | fail | 188.48 | 202.38 | 153.50 | 209.55 | 46.18 | 46.69 | 38.72 | 53.12 | 1851.65 | 62.08 | 0.00 |
+| deepseek | zh | 06-json-generation | pass | 161.14 | 160.81 | 157.57 | 165.05 | 70.50 | 72.87 | 65.21 | 73.42 | 1600.89 | 431.64 | 0.00 |
+| deepseek | zh | 07-json-prefill | fail | 4483.29 | 4483.29 | 4483.29 | 4483.29 | 32.51 | 32.51 | 32.51 | 32.51 | 38925.46 | 42.38 | 0.00 |
+| deepseek | zh | 08-code-generation | pass | 174.58 | 174.58 | 174.58 | 174.58 | 40.03 | 40.03 | 40.03 | 40.03 | 2123.52 | 51.72 | 0.00 |
+| deepseek | zh | 09-code-prefill | pass | 4623.30 | 4623.30 | 4623.30 | 4623.30 | 37.44 | 37.44 | 37.44 | 37.44 | 19690.32 | 31.23 | 0.00 |
 | flash-next | en | 01-prose-short | pass | 3838.20 | 4255.66 | 557.22 | 4423.56 | 276.42 | 280.60 | 248.10 | 307.59 | 908.21 | 117.38 | 0.00 |
 | flash-next | en | 02-prose-long | pass | 4598.95 | 4888.42 | 2652.83 | 4960.82 | 296.38 | 297.79 | 281.15 | 311.12 | 1173.80 | 115.98 | 0.00 |
 | flash-next | en | 03-prose-summary-short | pass | 10694.46 | 10694.46 | 10694.46 | 10694.46 | 264.34 | 264.34 | 264.34 | 264.34 | 2869.63 | 10.82 | 0.00 |
