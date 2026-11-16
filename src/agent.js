@@ -55,7 +55,9 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const extraEnv=Object.fromEntries(Object.entries(agent.env||{}).map(([key,value])=>[key,String(value).replace(/\$\{([A-Za-z_][A-Za-z0-9_]*)\}/g,(_,name)=>{if(process.env[name]===undefined)throw new Error(`Missing agent environment variable: ${name}`);return process.env[name];})]));
   const proxy=await startMeteringProxy({slot,defaults,dir,metadata,signal,maxSteps:agent.native_model?10000:defaults.agent_max_steps,onRecord});
   const model={id:slot.model,name:'sllm benchmark model',api:'openai-completions',reasoning:true,input:agent.input||['text'],contextWindow:agent.context_window,maxTokens:agent.max_tokens,cost:{input:0,output:0,cacheRead:0,cacheWrite:0},compat:agent.compat};
-  writeJSON(path.join(home,'models.json'),{providers:{sllm:{baseUrl:proxy.baseUrl,api:'openai-completions',apiKey:'local-benchmark',models:[model]}}});
+  const providers={sllm:{baseUrl:proxy.baseUrl,api:'openai-completions',apiKey:'local-benchmark',models:[model]}};
+  if(agent.native_provider&&agent.native_model)providers[agent.native_provider]={modelOverrides:{[agent.native_model]:{maxTokens:agent.max_tokens,contextWindow:agent.context_window}}};
+  writeJSON(path.join(home,'models.json'),{providers});
   writeJSON(path.join(home,'settings.json'),{compaction:{enabled:false},retry:{enabled:false},packages:[],shellPath:process.platform==='win32'?undefined:process.env.SHELL||'/bin/bash'});
   const promptFile=path.join(dir,'agent-prompt.txt');fs.writeFileSync(promptFile,prompt);
   const systemFile=path.join(dir,'agent-system.txt');fs.writeFileSync(systemFile,system);
@@ -77,7 +79,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
     if(event.type==='message_update'&&fallback){const e=event.assistantMessageEvent;const delta=e?.type==='text_delta'?{content:e.delta}:e?.type==='thinking_delta'?{reasoning_content:e.delta}:e?.type==='toolcall_delta'?{tool_calls:[{index:e.contentIndex,function:{arguments:e.delta}}]}:{};fallback.ingest({choices:[{delta}]},time);}
     if(event.type==='message_end'&&event.message?.role==='assistant'){
       const m=event.message;finalMessage=(m.content||[]).filter(x=>x.type==='text').map(x=>x.text).join('\n');
-      if(fallback){fallback.usage={prompt_tokens:typeof m.usage?.input==='number'?m.usage.input+(m.usage.cacheRead||0)+(m.usage.cacheWrite||0):undefined,completion_tokens:m.usage?.output,prompt_tokens_details:{cached_tokens:m.usage?.cacheRead}};fallback.finishReason=m.stopReason;const record=fallback.finish(time);if(m.stopReason==='error'||m.errorMessage){record.status='error';record.error=m.errorMessage;}fallbackRecords.push(record);fallback=null;}
+      if(fallback){fallback.metadata={...fallback.metadata,actual_model:m.model,provider:m.provider};fallback.usage={prompt_tokens:typeof m.usage?.input==='number'?m.usage.input+(m.usage.cacheRead||0)+(m.usage.cacheWrite||0):undefined,completion_tokens:m.usage?.output,prompt_tokens_details:{cached_tokens:m.usage?.cacheRead}};fallback.finishReason=m.stopReason;const record=fallback.finish(time);if(m.stopReason==='error'||m.errorMessage){record.status='error';record.error=m.errorMessage;}fallbackRecords.push(record);fallback=null;}
     }
     if(event.type==='tool_execution_start'){toolStarts.set(event.toolCallId,{name:event.toolName,args:event.args,start:time});onProgress?.({type:'tool_start',tool:event.toolName,turn:turns});}
     if(event.type==='tool_execution_end'){

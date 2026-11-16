@@ -1,0 +1,146 @@
+[
+  {
+    "id": "sllm@0.1.0",
+    "name": "sllm",
+    "version": "0.1.0",
+    "size": 84644,
+    "unpackedSize": 229500,
+    "shasum": "a26bbf0bcbce36d4712e17c45497aa5602c2b7a2",
+    "integrity": "sha512-/IF2wrmqDeModtetyUbeIIE1V+Bp/ER8X7iQTBegMgD+BW4J3B0f2wFgTfcvWPIsLxxuG31wvNSZJnJkwhf0Rw==",
+    "filename": "sllm-0.1.0.tgz",
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 1067,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 9569,
+        "mode": 420
+      },
+      {
+        "path": "bin/sllm.js",
+        "size": 70,
+        "mode": 493
+      },
+      {
+        "path": "data/prompts/en.json",
+        "size": 22943,
+        "mode": 420
+      },
+      {
+        "path": "data/prompts/ru.json",
+        "size": 43704,
+        "mode": 420
+      },
+      {
+        "path": "data/prompts/ste.json",
+        "size": 23639,
+        "mode": 420
+      },
+      {
+        "path": "data/prompts/zh.json",
+        "size": 20778,
+        "mode": 420
+      },
+      {
+        "path": "docs/LOCAL-RUN.md",
+        "size": 2517,
+        "mode": 420
+      },
+      {
+        "path": "docs/METRICS.md",
+        "size": 2383,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 805,
+        "mode": 420
+      },
+      {
+        "path": "scripts/postinstall.js",
+        "size": 754,
+        "mode": 420
+      },
+      {
+        "path": "src/agent.js",
+        "size": 11469,
+        "mode": 420
+      },
+      {
+        "path": "src/battleship-child.js",
+        "size": 2210,
+        "mode": 420
+      },
+      {
+        "path": "src/browser.js",
+        "size": 4819,
+        "mode": 420
+      },
+      {
+        "path": "src/catalog.js",
+        "size": 3033,
+        "mode": 420
+      },
+      {
+        "path": "src/cli.js",
+        "size": 9292,
+        "mode": 420
+      },
+      {
+        "path": "src/config.js",
+        "size": 6039,
+        "mode": 420
+      },
+      {
+        "path": "src/fixtures.js",
+        "size": 10128,
+        "mode": 420
+      },
+      {
+        "path": "src/metrics.js",
+        "size": 6224,
+        "mode": 420
+      },
+      {
+        "path": "src/pi-path.js",
+        "size": 683,
+        "mode": 420
+      },
+      {
+        "path": "src/report.js",
+        "size": 9782,
+        "mode": 420
+      },
+      {
+        "path": "src/runner.js",
+        "size": 19027,
+        "mode": 420
+      },
+      {
+        "path": "src/transport.js",
+        "size": 6022,
+        "mode": 420
+      },
+      {
+        "path": "src/util.js",
+        "size": 4350,
+        "mode": 420
+      },
+      {
+        "path": "src/validate-child.js",
+        "size": 2168,
+        "mode": 420
+      },
+      {
+        "path": "src/validators.js",
+        "size": 6025,
+        "mode": 420
+      }
+    ],
+    "entryCount": 26,
+    "bundled": []
+  }
+]

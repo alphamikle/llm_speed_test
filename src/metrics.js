@@ -13,10 +13,11 @@ export class Measurement {
   constructor(metadata = {}, start = now()) {
     this.start = start; this.metadata = metadata; this.first = null; this.firstAnswer = null; this.last = null;
     this.content = ''; this.reasoning = ''; this.toolCalls = new Map(); this.usage = {}; this.native = {}; this.intervals = [];
-    this.finishReason = null; this.eventCount = 0; this.error = null;
+    this.finishReason = null; this.eventCount = 0; this.error = null; this.serverModel = null;
   }
   ingest(event, time = now()) {
     this.eventCount++;
+    if(typeof event.model==='string')this.serverModel=event.model;
     if (event.error) this.error = typeof event.error === 'string' ? event.error : JSON.stringify(event.error);
     if (event.usage) this.usage = {...this.usage, ...event.usage};
     if (event.timings) this.native = {...this.native, ...event.timings};
@@ -56,7 +57,7 @@ export class Measurement {
     const estimatedInput = uncached ?? inputTokens;
     const generationMs = this.first !== null && this.last > this.first ? this.last - this.first : null;
     const estimatedTG = outputTokens > 1 && generationMs > 0 ? (outputTokens - 1) * 1000 / generationMs : null;
-    return {...this.metadata, status: this.error ? 'error' : 'ok', error: this.error, duration_ms: end - this.start,
+    return {...this.metadata, server_model:this.serverModel, status: this.error ? 'error' : 'ok', error: this.error, duration_ms: end - this.start,
       ttft_ms: ttft, first_answer_ms: this.firstAnswer === null ? null : this.firstAnswer - this.start,
       input_tokens: inputTokens, output_tokens: outputTokens, cached_tokens: cachedTokens, uncached_tokens: uncached,
       pp_tps: rate(promptCount, promptMs), pp_estimate_tps: rate(estimatedInput, ttft),

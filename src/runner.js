@@ -143,8 +143,14 @@ export async function runSuite(options) {
       const startupStart=now();
       if(slot.startup){const {command,args=[],timeout_seconds=900}=slot.startup;if(typeof command!=='string'||!Array.isArray(args))throw new Error('startup must contain command and args');const result=await runCommand(command,args,{timeoutMs:timeout_seconds*1000,signal:options.signal});writeJSON(path.join(dir,'startup',`${slotName}-${Date.now()}.json`),result);if(result.code!==0)throw new Error(`Startup failed for ${slotName}: ${result.stderr||result.stdout}`);}
       state.startups=state.startups||[];state.startups.push({slot:slotName,duration_ms:now()-startupStart});
-      const warmup=new Client({slot,defaults:{...defaults,retries:defaults.retries},dir:path.join(dir,'warmup',`${slotName}-${Date.now()}`),signal:options.signal});
-      await warmup.chat([{role:'user',content:'Reply with OK.'}],{slot:slotName,phase:'warmup'},{max_tokens:8});
+      const warmupDir=path.join(dir,'warmup',`${slotName}-${Date.now()}`);
+      if(options.via==='pi'){
+        const warmup=await runAgent({slot,defaults,agent,dir:warmupDir,workspace:path.join(warmupDir,'workspace'),prompt:'Reply with OK.',system:'Give a short answer without tools.',metadata:{slot:slotName,phase:'warmup'},signal:options.signal,noTools:true});
+        if(!warmup.success)throw new Error(`Pi warmup failed: ${warmup.stderr||warmup.error}`);
+      }else{
+        const warmup=new Client({slot,defaults:{...defaults,retries:defaults.retries},dir:warmupDir,signal:options.signal});
+        await warmup.chat([{role:'user',content:'Reply with OK.'}],{slot:slotName,phase:'warmup'},{max_tokens:8});
+      }
       for(const language of languages)for(let repetition=1;repetition<=repetitions;repetition++)for(const kit of kits){
         const key=`${slotName}/${language}/${kit.id}/${repetition}`;const previous=state.cases[key];
         if(previous&&previous.status!=='interrupted'&&!(options.retryFailed&&!previous.validation?.passed))continue;
