@@ -97,6 +97,7 @@ sllm --slot server run --kits 03,07,09 --languages en
 sllm --slot server run --via pi --profile smoke --languages en
 
 sllm report ./matrix
+sllm audit-prose ./matrix
 ```
 
 The full matrix is intentionally expensive. Each of the two screenplays contains 50 explicitly paginated A4-equivalent pages with a minimum text length, generated in bounded page batches. Each batch has its own measured prefill and decode. Continuity context grows between batches; this is documented rather than presented as one uninterrupted decode. The HTML screenplay artifact uses real A4 print page breaks. The short-prompt screenplay has a short initial premise; the detailed counterpart repeats a coherent historical/scientific dossier, including twelve secondary characters.
@@ -135,6 +136,8 @@ For a Pi-native provider without an OpenAI-compatible endpoint, set `agent.nativ
 `report.html` is a standalone searchable/sortable matrix. `matrix.csv` aggregates repetitions; `cases.csv` retains each case; `steps.csv` contains every inference request; `report.json` is machine-readable. `run.json` checkpoints every case. Individual directories retain prompts, outputs, validation, raw SSE, agent events, generated projects, screenshots and failed attempts. Direct API credentials stay in the parent metering proxy. Explicitly configured Pi-native credentials follow Pi's environment/authentication behavior.
 
 Every PP/TG/TTFT summary has mean, median, min, max, sample count and missing count; percentile and weighted rates are also available. One-sample statistics are valid but not an uncertainty estimate. Increase `--repetitions` for repeatability studies. Cached-token usage is reported, and cache eviction is never assumed. Full-run duration includes startup, tools, validators and orchestration.
+
+`audit-prose` adds an independent post-run repetition diagnostic (`PROSE-AUDIT.json` and `.md`). It detects near-duplicate pages and extensive internal loops, including counters that change while the scene repeats. It never rewrites original structural validation or measured timings. A flag requests human review. Literary merit and plot continuity require separate review. Original output files must remain available for this audit.
 
 Exit codes: `0` complete and quality checks passed; `1` configuration/runtime failure; `2` harness/request errors; `3` model output failed quality checks; `130` interrupted. A quality failure is a measured model result, not permission to silently replace its output. Retries and repair requests are retained and included in timing totals. Resume rejects changed workload identities and prevents two processes from writing the same run.
 

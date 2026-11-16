@@ -9,6 +9,7 @@ import {piPath} from './pi-path.js';
 import {parsePositive,redact,runCommand,safeName} from './util.js';
 import {runSuite} from './runner.js';
 import {createReport} from './report.js';
+import {createProseAudit} from './prose-audit.js';
 
 const integer=(label,max)=>value=>parsePositive(value,label,max);
 export function program() {
@@ -41,6 +42,7 @@ export function program() {
     finally{process.removeListener('SIGINT',stop);process.removeListener('SIGTERM',stop);}
   });
   root.command('report <directory>').description('Rebuild CSV, JSON, Markdown and interactive HTML reports').action(directory=>{const report=createReport(path.resolve(directory));console.log(`${report.completed_cases}/${report.planned_cases} cases; report: ${path.resolve(directory,'report.html')}`);});
+  root.command('audit-prose <directory>').description('Diagnose screenplay repetition without changing measured results').action(directory=>{const audit=createProseAudit(path.resolve(directory));console.log(`Prose audit: ${audit.audited_cases}/${audit.cases} cases; ${audit.flagged_cases} flagged; ${audit.unavailable_cases} unavailable`);});
   root.addHelpText('after',`\nExamples:\n  sllm init\n  sllm slot add local --base-url http://localhost:8000/v1 --model my-model\n  sllm --slot local run --profile smoke --languages en\n  sllm run --slots model-a,model-b --languages en,ste,zh,ru --output ./matrix\n  sllm run --slots model-a,model-b --output ./matrix --resume\n\nExit codes: 0 success; 1 configuration/runtime failure; 2 harness errors; 3 model quality failures; 130 interrupted.\nAgent kits execute model-generated code in their dedicated workspaces. This is not an OS sandbox.`);
   return root;
 }
