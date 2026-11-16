@@ -1,0 +1,193 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>sllm benchmark matrix</title><style>body{font:14px system-ui;margin:28px;background:#101720;color:#e4ecf5}h1{font-size:30px}a{color:#72c8ff}input,select{padding:10px;background:#1b2937;color:inherit;border:1px solid #546778;border-radius:5px}table{border-collapse:collapse;white-space:nowrap;font-variant-numeric:tabular-nums}th,td{padding:9px;border-bottom:1px solid #344454;text-align:right}th{position:sticky;top:0;background:#213246;cursor:pointer}td:nth-child(-n+4){text-align:left}.scroll{overflow:auto;max-height:72vh;border:1px solid #344454;margin-top:18px}.bad{background:#49252b}.good{color:#9fe0b0}.meta{line-height:1.8;color:#bacadb}.cards{display:flex;gap:24px;flex-wrap:wrap;margin:20px 0}.card{padding:18px;background:#1b2937;border-radius:8px}.card b{font-size:25px;display:block}details{margin:20px 0}caption{text-align:left;padding:12px}</style><h1>sllm inference benchmark matrix</h1><p class="meta">Run full-local-20261116 · Profile <b>full</b> · Status running<br>Native throughput is in tokens/s. TTFT is in milliseconds. Wall time is in seconds. Estimates include client/network effects. A dash means that the provider did not expose this measurement.</p><div class="cards"><div class="card"><b>9 / 192</b>finished cases</div><div class="card"><b>8</b>quality passes</div><div class="card"><b>389.73</b>active suite seconds</div><div class="card"><b>536.21</b>end-to-end seconds</div></div><label>Filter <input id="filter" placeholder="Model, language, kit, status"></label> <label><input type="checkbox" id="failed"> Only quality failures</label><p><a href="matrix.csv">Matrix CSV</a> · <a href="cases.csv">All repetitions CSV</a> · <a href="steps.csv">Every inference step CSV</a> · <a href="report.json">JSON report</a></p><div class="scroll"><table><thead><tr><th>slot</th><th>language</th><th>kit</th><th>status</th><th>quality_passed</th><th>requests</th><th>agent_steps</th><th>agent_turns</th><th>tool_calls</th><th>tool_errors</th><th>pp_tps_mean</th><th>pp_tps_median</th><th>pp_tps_min</th><th>pp_tps_max</th><th>tg_tps_mean</th><th>tg_tps_median</th><th>tg_tps_min</th><th>tg_tps_max</th><th>ttft_ms_mean</th><th>ttft_ms_median</th><th>ttft_ms_min</th><th>ttft_ms_max</th><th>pp_estimate_tps_mean</th><th>tg_estimate_tps_mean</th><th>wall_seconds</th><th>input_tokens</th><th>output_tokens</th><th>cached_tokens</th></tr></thead><tbody><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">01-prose-short</td><td title="">completed</td><td title="">true</td><td title="">10.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">3838.20</td><td title="">4255.66</td><td title="">557.22</td><td title="">4423.56</td><td title="">276.42</td><td title="">280.60</td><td title="">248.10</td><td title="">307.59</td><td title="">908.21</td><td title="">964.96</td><td title="">438.42</td><td title="">992.00</td><td title="">3657.11</td><td title="">277.53</td><td title="">117.38</td><td title="">34916.00</td><td title="">29920.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">02-prose-long</td><td title="">completed</td><td title="">true</td><td title="">10.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">4598.95</td><td title="">4888.42</td><td title="">2652.83</td><td title="">4960.82</td><td title="">296.38</td><td title="">297.79</td><td title="">281.15</td><td title="">311.12</td><td title="">1173.80</td><td title="">1190.67</td><td title="">852.77</td><td title="">1286.90</td><td title="">4400.26</td><td title="">297.42</td><td title="">115.98</td><td title="">52271.00</td><td title="">31030.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">03-prose-summary-short</td><td title="">completed</td><td title="">true</td><td title="">1.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">10694.46</td><td title="">10694.46</td><td title="">10694.46</td><td title="">10694.46</td><td title="">264.34</td><td title="">264.34</td><td title="">264.34</td><td title="">264.34</td><td title="">2869.63</td><td title="">2869.63</td><td title="">2869.63</td><td title="">2869.63</td><td title="">10486.02</td><td title="">265.77</td><td title="">10.82</td><td title="">30091.00</td><td title="">2112.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">04-prose-summary-long</td><td title="">completed</td><td title="">true</td><td title="">1.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">10625.60</td><td title="">10625.60</td><td title="">10625.60</td><td title="">10625.60</td><td title="">246.48</td><td title="">246.48</td><td title="">246.48</td><td title="">246.48</td><td title="">2979.77</td><td title="">2979.77</td><td title="">2979.77</td><td title="">2979.77</td><td title="">10470.95</td><td title="">247.77</td><td title="">8.73</td><td title="">31201.00</td><td title="">1425.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">05-sql-generation</td><td title="">completed</td><td title="">true</td><td title="">1.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">595.29</td><td title="">595.29</td><td title="">595.29</td><td title="">595.29</td><td title="">195.18</td><td title="">195.18</td><td title="">195.18</td><td title="">195.18</td><td title="">484.08</td><td title="">484.08</td><td title="">484.08</td><td title="">484.08</td><td title="">532.97</td><td title="">196.54</td><td title="">6.29</td><td title="">258.00</td><td title="">1136.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">06-json-generation</td><td title="">completed</td><td title="">true</td><td title="">2.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">489.77</td><td title="">489.77</td><td title="">483.35</td><td title="">496.19</td><td title="">449.50</td><td title="">449.50</td><td title="">394.23</td><td title="">504.78</td><td title="">616.83</td><td title="">616.83</td><td title="">547.04</td><td title="">686.63</td><td title="">440.19</td><td title="">450.30</td><td title="">62.92</td><td title="">543.00</td><td title="">26584.00</td><td title="">0.00</td></tr><tr class="bad"><td title="">flash-next</td><td title="">en</td><td title="">07-json-prefill</td><td title="Incorrect quantity_total: expected 167986, got 175000; Incorrect inventory_value_cents: expected 1580889660, got 1575000000; Incorrect top_warehouse_id: expected &quot;w05&quot;, got &quot;w00&quot;">completed</td><td title="">false</td><td title="">1.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">10022.44</td><td title="">10022.44</td><td title="">10022.44</td><td title="">10022.44</td><td title="">105.26</td><td title="">105.26</td><td title="">105.26</td><td title="">105.26</td><td title="">18959.21</td><td title="">18959.21</td><td title="">18959.21</td><td title="">18959.21</td><td title="">9989.23</td><td title="">108.15</td><td title="">20.39</td><td title="">189388.00</td><td title="">154.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">08-code-generation</td><td title="">completed</td><td title="">true</td><td title="">1.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">585.43</td><td title="">585.43</td><td title="">585.43</td><td title="">585.43</td><td title="">220.89</td><td title="">220.89</td><td title="">220.89</td><td title="">220.89</td><td title="">695.73</td><td title="">695.73</td><td title="">695.73</td><td title="">695.73</td><td title="">547.63</td><td title="">221.40</td><td title="">10.44</td><td title="">381.00</td><td title="">2152.00</td><td title="">0.00</td></tr><tr class=""><td title="">flash-next</td><td title="">en</td><td title="">09-code-prefill</td><td title="">completed</td><td title="">true</td><td title="">1.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">0.00</td><td title="">10478.18</td><td title="">10478.18</td><td title="">10478.18</td><td title="">10478.18</td><td title="">187.64</td><td title="">187.64</td><td title="">187.64</td><td title="">187.64</td><td title="">9908.52</td><td title="">9908.52</td><td title="">9908.52</td><td title="">9908.52</td><td title="">10416.09</td><td title="">190.10</td><td title="">13.12</td><td title="">103208.00</td><td title="">611.00</td><td title="">0.00</td></tr></tbody></table></div><details><summary>Environment and model settings</summary><pre>{
+  &quot;environment&quot;: {
+    &quot;node&quot;: &quot;v24.22.3&quot;,
+    &quot;platform&quot;: &quot;linux&quot;,
+    &quot;arch&quot;: &quot;x64&quot;,
+    &quot;os&quot;: &quot;7.0.0-43-generic&quot;,
+    &quot;cpu&quot;: &quot;Intel(R) Core(TM) Ultra 9 285K&quot;,
+    &quot;logical_cpus&quot;: 24,
+    &quot;total_ram_bytes&quot;: 201946001408,
+    &quot;nvidia_gpus&quot;: [
+      &quot;NVIDIA GeForce RTX 5090, 595.99.02, 32607 MiB, 575.00 W&quot;
+    ],
+    &quot;hardware_scope&quot;: &quot;Client host; remote inference hardware is not inferred&quot;,
+    &quot;sllm_version&quot;: &quot;0.1.0&quot;,
+    &quot;source_revision&quot;: &quot;7d822c22012668b4fa555d5d064611a7490cb364&quot;
+  },
+  &quot;models&quot;: [
+    {
+      &quot;slot&quot;: &quot;flash-next&quot;,
+      &quot;base_url&quot;: &quot;http://127.0.0.1:1111/v1&quot;,
+      &quot;model&quot;: &quot;qwen3.8-flash-next&quot;,
+      &quot;api_key_env&quot;: &quot;SLLM_API_KEY&quot;,
+      &quot;headers&quot;: &quot;[REDACTED]&quot;,
+      &quot;request&quot;: {
+        &quot;reasoning_effort&quot;: &quot;none&quot;,
+        &quot;chat_template_kwargs&quot;: {
+          &quot;enable_thinking&quot;: false
+        }
+      },
+      &quot;output_token_field&quot;: &quot;max_tokens&quot;,
+      &quot;stream_options&quot;: true,
+      &quot;startup&quot;: {
+        &quot;command&quot;: &quot;/usr/local/bin/lai&quot;,
+        &quot;args&quot;: [
+          &quot;start&quot;,
+          &quot;qwen&quot;
+        ],
+        &quot;timeout_seconds&quot;: 900
+      },
+      &quot;agent&quot;: {
+        &quot;provider&quot;: &quot;pi&quot;,
+        &quot;command&quot;: null,
+        &quot;args&quot;: [],
+        &quot;thinking&quot;: &quot;off&quot;,
+        &quot;context_window&quot;: 262144,
+        &quot;max_tokens&quot;: 8192,
+        &quot;compat&quot;: {
+          &quot;supportsStore&quot;: false,
+          &quot;supportsDeveloperRole&quot;: false,
+          &quot;supportsReasoningEffort&quot;: false,
+          &quot;supportsUsageInStreaming&quot;: true
+        },
+        &quot;env&quot;: &quot;[REDACTED]&quot;,
+        &quot;validation_commands&quot;: [],
+        &quot;input&quot;: [
+          &quot;text&quot;,
+          &quot;image&quot;
+        ]
+      }
+    },
+    {
+      &quot;slot&quot;: &quot;flash-next-uncensored&quot;,
+      &quot;base_url&quot;: &quot;http://127.0.0.1:1111/v1&quot;,
+      &quot;model&quot;: &quot;qwen3.8-flash-next&quot;,
+      &quot;api_key_env&quot;: &quot;SLLM_API_KEY&quot;,
+      &quot;headers&quot;: &quot;[REDACTED]&quot;,
+      &quot;request&quot;: {
+        &quot;reasoning_effort&quot;: &quot;none&quot;,
+        &quot;chat_template_kwargs&quot;: {
+          &quot;enable_thinking&quot;: false
+        }
+      },
+      &quot;output_token_field&quot;: &quot;max_tokens&quot;,
+      &quot;stream_options&quot;: true,
+      &quot;startup&quot;: {
+        &quot;command&quot;: &quot;/usr/local/bin/lai&quot;,
+        &quot;args&quot;: [
+          &quot;start&quot;,
+          &quot;qwen&quot;,
+          &quot;--uncensored&quot;
+        ],
+        &quot;timeout_seconds&quot;: 900
+      },
+      &quot;agent&quot;: {
+        &quot;provider&quot;: &quot;pi&quot;,
+        &quot;command&quot;: null,
+        &quot;args&quot;: [],
+        &quot;thinking&quot;: &quot;off&quot;,
+        &quot;context_window&quot;: 262144,
+        &quot;max_tokens&quot;: 8192,
+        &quot;compat&quot;: {
+          &quot;supportsStore&quot;: false,
+          &quot;supportsDeveloperRole&quot;: false,
+          &quot;supportsReasoningEffort&quot;: false,
+          &quot;supportsUsageInStreaming&quot;: true
+        },
+        &quot;env&quot;: &quot;[REDACTED]&quot;,
+        &quot;validation_commands&quot;: [],
+        &quot;input&quot;: [
+          &quot;text&quot;,
+          &quot;image&quot;
+        ]
+      }
+    },
+    {
+      &quot;slot&quot;: &quot;deepseek&quot;,
+      &quot;base_url&quot;: &quot;http://127.0.0.1:1111/v1&quot;,
+      &quot;model&quot;: &quot;deepseek-v4.1-flash&quot;,
+      &quot;api_key_env&quot;: &quot;SLLM_API_KEY&quot;,
+      &quot;headers&quot;: &quot;[REDACTED]&quot;,
+      &quot;request&quot;: {
+        &quot;reasoning_effort&quot;: &quot;none&quot;,
+        &quot;chat_template_kwargs&quot;: {
+          &quot;enable_thinking&quot;: false
+        }
+      },
+      &quot;output_token_field&quot;: &quot;max_tokens&quot;,
+      &quot;stream_options&quot;: true,
+      &quot;startup&quot;: {
+        &quot;command&quot;: &quot;/usr/local/bin/lai&quot;,
+        &quot;args&quot;: [
+          &quot;start&quot;,
+          &quot;deepseek&quot;
+        ],
+        &quot;timeout_seconds&quot;: 900
+      },
+      &quot;agent&quot;: {
+        &quot;provider&quot;: &quot;pi&quot;,
+        &quot;command&quot;: null,
+        &quot;args&quot;: [],
+        &quot;thinking&quot;: &quot;off&quot;,
+        &quot;context_window&quot;: 1048576,
+        &quot;max_tokens&quot;: 8192,
+        &quot;compat&quot;: {
+          &quot;supportsStore&quot;: false,
+          &quot;supportsDeveloperRole&quot;: false,
+          &quot;supportsReasoningEffort&quot;: false,
+          &quot;supportsUsageInStreaming&quot;: true
+        },
+        &quot;env&quot;: &quot;[REDACTED]&quot;,
+        &quot;validation_commands&quot;: [],
+        &quot;input&quot;: [
+          &quot;text&quot;,
+          &quot;image&quot;
+        ]
+      }
+    },
+    {
+      &quot;slot&quot;: &quot;deepseek-uncensored&quot;,
+      &quot;base_url&quot;: &quot;http://127.0.0.1:1111/v1&quot;,
+      &quot;model&quot;: &quot;deepseek-v4.1-flash&quot;,
+      &quot;api_key_env&quot;: &quot;SLLM_API_KEY&quot;,
+      &quot;headers&quot;: &quot;[REDACTED]&quot;,
+      &quot;request&quot;: {
+        &quot;reasoning_effort&quot;: &quot;none&quot;,
+        &quot;chat_template_kwargs&quot;: {
+          &quot;enable_thinking&quot;: false
+        }
+      },
+      &quot;output_token_field&quot;: &quot;max_tokens&quot;,
+      &quot;stream_options&quot;: true,
+      &quot;startup&quot;: {
+        &quot;command&quot;: &quot;/usr/local/bin/lai&quot;,
+        &quot;args&quot;: [
+          &quot;start&quot;,
+          &quot;deepseek&quot;,
+          &quot;--uncensored&quot;
+        ],
+        &quot;timeout_seconds&quot;: 900
+      },
+      &quot;agent&quot;: {
+        &quot;provider&quot;: &quot;pi&quot;,
+        &quot;command&quot;: null,
+        &quot;args&quot;: [],
+        &quot;thinking&quot;: &quot;off&quot;,
+        &quot;context_window&quot;: 1048576,
+        &quot;max_tokens&quot;: 8192,
+        &quot;compat&quot;: {
+          &quot;supportsStore&quot;: false,
+          &quot;supportsDeveloperRole&quot;: false,
+          &quot;supportsReasoningEffort&quot;: false,
+          &quot;supportsUsageInStreaming&quot;: true
+        },
+        &quot;env&quot;: &quot;[REDACTED]&quot;,
+        &quot;validation_commands&quot;: [],
+        &quot;input&quot;: [
+          &quot;text&quot;,
+          &quot;image&quot;
+        ]
+      }
+    }
+  ]
+}</pre></details><details><summary>Interpretation and limitations</summary><p>One row aggregates one model, language and kit across repetitions. Step-level raw measurements are in steps.csv. Retries and repairs are measured. Screenplay pages are explicit A4 page breaks with minimum body text; semantic film quality is not certified. STE uses constrained prompting and a sentence-length audit, not a licensed dictionary certification. Browser games are exercised with real Chromium and external rules/AI tests. Native PP can be absent even when TTFT and output-token usage are available.</p></details><script>const rows=[...document.querySelectorAll('tbody tr')];function filter(){const q=document.getElementById('filter').value.toLowerCase();const failed=document.getElementById('failed').checked;for(const row of rows)row.hidden=!row.textContent.toLowerCase().includes(q)||(failed&&!row.classList.contains('bad'));}document.getElementById('filter').oninput=filter;document.getElementById('failed').onchange=filter;document.querySelectorAll('th').forEach((th,index)=>{let direction=1;th.onclick=()=>{direction*=-1;rows.sort((a,b)=>{const x=a.children[index].textContent,y=b.children[index].textContent;return direction*(Number.isFinite(Number(x))&&Number.isFinite(Number(y))?Number(x)-Number(y):x.localeCompare(y));});for(const row of rows)document.querySelector('tbody').append(row);};});</script></html>

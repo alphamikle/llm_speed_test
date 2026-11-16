@@ -1,7 +1,9 @@
 name: Cross-platform CLI checks
 on:
   push:
+    paths-ignore: ['results/**', 'docs/**', 'README.md']
   pull_request:
+    paths-ignore: ['results/**', 'docs/**', 'README.md']
 jobs:
   test:
     strategy:
