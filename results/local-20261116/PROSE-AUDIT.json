@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "run_id": "full-local-20261116",
-  "created_at": "2026-11-16T18:25:10.592Z",
+  "created_at": "2026-11-16T19:05:36.009Z",
   "scope": "Post-run diagnostic only. Original validation and timing records are unchanged. A flag requests review; it is not a semantic quality verdict.",
   "method": {
     "version": 1,
