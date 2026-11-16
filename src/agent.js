@@ -56,7 +56,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const proxy=await startMeteringProxy({slot,defaults,dir,metadata,signal,maxSteps:agent.native_model?10000:defaults.agent_max_steps,onRecord});
   const model={id:slot.model,name:'sllm benchmark model',api:'openai-completions',reasoning:true,input:agent.input||['text'],contextWindow:agent.context_window,maxTokens:agent.max_tokens,cost:{input:0,output:0,cacheRead:0,cacheWrite:0},compat:agent.compat};
   const providers={sllm:{baseUrl:proxy.baseUrl,api:'openai-completions',apiKey:'local-benchmark',models:[model]}};
-  if(agent.native_provider&&agent.native_model)providers[agent.native_provider]={modelOverrides:{[agent.native_model]:{maxTokens:agent.max_tokens,contextWindow:agent.context_window}}};
+  if(agent.native_provider&&agent.native_model&&agent.native_provider!=='sllm')providers[agent.native_provider]={modelOverrides:{[agent.native_model]:{maxTokens:agent.max_tokens,contextWindow:agent.context_window}}};
   writeJSON(path.join(home,'models.json'),{providers});
   writeJSON(path.join(home,'settings.json'),{compaction:{enabled:false},retry:{enabled:false},packages:[],shellPath:process.platform==='win32'?undefined:process.env.SHELL||'/bin/bash'});
   const promptFile=path.join(dir,'agent-prompt.txt');fs.writeFileSync(promptFile,prompt);
@@ -96,7 +96,7 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   try {await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',(c,s)=>{code=c;exitSignal=s;resolve();});});buffer+=decoder.end();if(buffer.trim())processLine(buffer);}
   catch(e){error=e.message;}finally{clearTimeout(timeout);signal?.removeEventListener('abort',abort);await proxy.close();await eventWriter.close();}
   if(fallback){fallback.error=error||'Agent stopped before assistant completion';fallbackRecords.push(fallback.finish());}
-  const useFallback=agent.native_model||!proxy.records.length;
+  const useFallback=!proxy.records.length;
   const records=useFallback?fallbackRecords:proxy.records;
   if(useFallback)for(const record of records){appendJSON(path.join(dir,'requests.jsonl'),record);onRecord?.(record);}
   const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,pi_version:pi.version,content:finalMessage,records,success:code===0&&records.length>0&&records.every(r=>r.status==='ok')};

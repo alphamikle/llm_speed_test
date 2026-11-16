@@ -127,7 +127,7 @@ For a Pi-native provider without an OpenAI-compatible endpoint, set `agent.nativ
 
 ## Results and errors
 
-`report.html` is a standalone searchable/sortable matrix. `matrix.csv` aggregates repetitions; `cases.csv` retains each case; `steps.csv` contains every inference request; `report.json` is machine-readable. `run.json` checkpoints every case. Individual directories retain prompts, outputs, validation, raw SSE, agent events, generated projects, screenshots and failed attempts. Credentials are not sent to model-created workspaces.
+`report.html` is a standalone searchable/sortable matrix. `matrix.csv` aggregates repetitions; `cases.csv` retains each case; `steps.csv` contains every inference request; `report.json` is machine-readable. `run.json` checkpoints every case. Individual directories retain prompts, outputs, validation, raw SSE, agent events, generated projects, screenshots and failed attempts. Direct API credentials stay in the parent metering proxy. Explicitly configured Pi-native credentials follow Pi's environment/authentication behavior.
 
 Every PP/TG/TTFT summary has mean, median, min, max, sample count and missing count; percentile and weighted rates are also available. One-sample statistics are valid but not an uncertainty estimate. Increase `--repetitions` for repeatability studies. Cached-token usage is reported, and cache eviction is never assumed. Full-run duration includes startup, tools, validators and orchestration.
 
