@@ -7,7 +7,7 @@ import {StringDecoder} from 'node:string_decoder';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 import {Measurement} from './metrics.js';
-import {endpoint,requestHeaders,measureResponse} from './transport.js';
+import {endpoint,requestHeaders,measureResponse,endpointUnavailable,failureMessage} from './transport.js';
 import {piPath} from './pi-path.js';
 import {cleanupWorkspaceProcesses} from './process-cleanup.js';
 import {appendJSON,ensureDir,now,terminate,writeJSON,JSONLWriter} from './util.js';
@@ -39,7 +39,7 @@ export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxS
         await measureResponse(response,meter,{eventsFile:path.join(recordDir,'events.jsonl'),forward:async chunk=>{if(!res.write(chunk))await new Promise((resolve,reject)=>{const cleanup=()=>{res.removeListener('drain',drain);res.removeListener('close',close);res.removeListener('error',fail);};const drain=()=>{cleanup();resolve();};const close=()=>{cleanup();reject(new Error('Agent disconnected during response streaming'));};const fail=error=>{cleanup();reject(error);};res.once('drain',drain);res.once('close',close);res.once('error',fail);});}});
         if(!res.destroyed)res.end();
       }
-    }catch(error){meter.error=error.message;if(!res.headersSent)res.writeHead(502,{'content-type':'application/json'});if(!res.destroyed)res.end(JSON.stringify({error:{message:error.message}}));}
+    }catch(error){meter.error=failureMessage(error);if(endpointUnavailable(error))meter.metadata.endpoint_unavailable=true;if(!res.headersSent)res.writeHead(502,{'content-type':'application/json'});if(!res.destroyed)res.end(JSON.stringify({error:{message:meter.error}}));}
     finally{controllers.delete(controller);const record=meter.finish();records.push(record);appendJSON(path.join(dir,'requests.jsonl'),record);writeJSON(path.join(recordDir,'result.json'),record);onRecord?.(record);}
   });
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});

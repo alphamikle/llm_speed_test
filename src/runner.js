@@ -101,6 +101,7 @@ async function executeKit(context) {
     for(let attempt=0;attempt<=Math.min(defaults.repair_attempts,1);attempt++){
       const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord,onProgress:event=>log(`${event.type} ${event.tool||event.turn}`)});
       records.push(...result.records);agentInfo.agent_steps+=result.steps;agentInfo.agent_turns+=result.turns;agentInfo.tool_calls+=result.tool_count;agentInfo.tool_errors+=result.tool_errors;output=result.content;
+      if(!result.success&&result.records.some(record=>record.endpoint_unavailable)){const failure=new Error(`Agent endpoint became unavailable: ${result.records.findLast(record=>record.endpoint_unavailable).error}`);failure.endpointUnavailable=true;throw failure;}
       if(!result.records.length&&!signal?.aborted)throw new Error(`Agent harness produced no measured inference requests: ${result.error||result.stderr||'invalid JSON event protocol'}`);
       if(result.records.length&&!result.records.some(record=>record.status==='ok')&&!signal?.aborted)throw new Error(`Agent inference requests failed: ${result.error||result.records.at(-1).error||'upstream request error'}`);
       if(!result.success){validation={passed:false,errors:[result.error||result.stderr||result.records.filter(record=>record.status==='error').at(-1)?.error||`Agent did not complete successfully (exit ${result.code})`]};writeJSON(path.join(dir,`agent-validation-${attempt}.json`),validation);if(signal?.aborted)throw signal.reason;continue;}
@@ -127,6 +128,8 @@ export async function runSuite(options) {
   if(!languages.length||new Set(languages).size!==languages.length)throw new Error('Languages must be a nonempty unique list');
   const kits=selectKits(options.kits||'all');const repetitions=options.repetitions||initial.config.defaults.repetitions;
   const rerunKits=rerunSelection(options.rerunKits,kits,options.resume);
+  const casePauseSeconds=options.casePauseSeconds??initial.config.execution?.case_pause_seconds??0;
+  if(!Number.isSafeInteger(casePauseSeconds)||casePauseSeconds<0||casePauseSeconds>3600)throw new Error('Case pause must be an integer from 0 to 3600 seconds');
   if(!Number.isSafeInteger(repetitions)||repetitions<1||repetitions>100)throw new Error('Repetitions must be an integer from 1 to 100');
   const dir=path.resolve(options.output||path.join(initial.config.defaults.output_dir,new Date().toISOString().replace(/[:.]/g,'-')));ensureDir(dir);
   const selected=options.slots.map(name=>loadConfig(options.config,name));
@@ -146,11 +149,12 @@ export async function runSuite(options) {
     const pendingReruns=prepareRerun(state,rerunKits,rerunKeys,executionEnvironment.source_revision);
     if(!state.execution_segments&&state.active_ms>0)state.execution_segments=[{started_at:state.started_at,finished_at:state.updated_at,source_revision:state.environment.source_revision,status:state.status,duration_ms:state.active_ms,scope:'Legacy checkpoint before execution-segment tracking'}];
     segment={started_at:new Date().toISOString(),source_revision:executionEnvironment.source_revision,default_pi_shell_timeout_seconds:DEFAULT_TOOL_TIMEOUT_SECONDS};state.execution_segments=state.execution_segments||[];state.execution_segments.push(segment);
+    segment.case_pause_seconds=casePauseSeconds;
     if(pendingReruns.size){segment.targeted_rerun_id=state.targeted_rerun.id;segment.rerun_kits=state.targeted_rerun.kits;segment.rerun_start_completed=state.targeted_rerun.completed.length;}
     state.status='running';delete state.finished_at;delete state.error;writeJSON(file,state);
     for(const selectedSlot of selected){
       const {slot,slotName,agent,config}=selectedSlot;const defaults={...config.defaults,...options.overrides};const profile={...PROFILES[profileName],...options.dimensions};
-      const pending=languages.some(language=>kits.some(kit=>Array.from({length:repetitions},(_,i)=>`${slotName}/${language}/${kit.id}/${i+1}`).some(key=>pendingReruns.has(key)||!state.cases[key]||state.cases[key].status==='interrupted'||(options.retryFailed&&(!state.cases[key].validation?.passed)))));
+      const pending=languages.some(language=>kits.some(kit=>Array.from({length:repetitions},(_,i)=>`${slotName}/${language}/${kit.id}/${i+1}`).some(key=>pendingReruns.has(key)||!state.cases[key]||['interrupted','error'].includes(state.cases[key].status)||(options.retryFailed&&(!state.cases[key].validation?.passed)))));
       if(!pending)continue;
       options.signal?.throwIfAborted();log(`Starting slot ${slotName} (${slot.model})`);
       const startupStart=now();
@@ -167,7 +171,9 @@ export async function runSuite(options) {
       for(const language of languages)for(let repetition=1;repetition<=repetitions;repetition++)for(const kit of kits){
         const key=`${slotName}/${language}/${kit.id}/${repetition}`;const previous=state.cases[key];
         const forced=pendingReruns.has(key);
-        if(previous&&previous.status!=='interrupted'&&!forced&&!(options.retryFailed&&!previous.validation?.passed))continue;
+        if(previous&&!['interrupted','error'].includes(previous.status)&&!forced&&!(options.retryFailed&&!previous.validation?.passed))continue;
+        let cooldownMs=0;
+        if(casePauseSeconds){const pauseStart=now();log(`Cooling interval: ${casePauseSeconds}s before ${key}`);await new Promise((resolve,reject)=>{const timer=setTimeout(done,casePauseSeconds*1000);function done(){options.signal?.removeEventListener('abort',abort);resolve();}function abort(){clearTimeout(timer);options.signal?.removeEventListener('abort',abort);reject(options.signal.reason);}options.signal?.addEventListener('abort',abort,{once:true});if(options.signal?.aborted)abort();});cooldownMs=now()-pauseStart;}
         options.signal?.throwIfAborted();let attempt=previous?.attempt||0;let caseDir;
         do{attempt++;caseDir=path.join(dir,'cases',slotName,language,kit.id,String(repetition),`attempt-${attempt}`);}while(fs.existsSync(caseDir));
         ensureDir(caseDir);
@@ -175,20 +181,21 @@ export async function runSuite(options) {
         if(kit.kind==='mixed')metadata.mixed_contract_version=2;
         if(forced)metadata.targeted_rerun_id=state.targeted_rerun.id;
         const client=new Client({slot,defaults,dir:caseDir,signal:options.signal,onProgress:event=>log(`${slotName}/${language}/${kit.id}: receiving ${event.phase} · ${event.elapsed_seconds.toFixed(0)} s · ${event.characters} characters`),onRecord:record=>log(`${slotName}/${language}/${kit.id}: ${record.phase||`agent step ${record.agent_step}`} · TTFT ${record.ttft_ms?.toFixed(0)??'?'} ms · PP ${record.pp_tps?.toFixed(1)??'?'} · TG ${record.tg_tps?.toFixed(1)??'?'} tok/s`)});
-        const dependency=id=>{const test=state.cases[`${slotName}/${language}/${id}/${repetition}`];if(!test?.output_file||!fs.existsSync(test.output_file))throw new Error(`Dependency artifact unavailable: ${id}`);return fs.readFileSync(test.output_file,'utf8');};
+        const dependency=id=>{const test=state.cases[`${slotName}/${language}/${id}/${repetition}`];if(test?.status!=='completed'||!test.output_file||!fs.existsSync(test.output_file))throw new Error(`Dependency artifact unavailable: ${id}`);return fs.readFileSync(test.output_file,'utf8');};
         const finishedBefore=Object.values(state.cases).filter(test=>test.status!=='interrupted').length-(previous&&previous.status!=='interrupted'?1:0);
         log(forced?`RERUN ${state.targeted_rerun.completed.length+1}/${state.targeted_rerun.total}: ${key}`:`CASE ${finishedBefore+1}/${state.planned_cases}: ${key}${previous?' (retry)':''}`);let result;
         try{result=await executeKit({kit,language,profile,dir:caseDir,dependency,client,defaults,slot,agent,signal:options.signal,log:message=>log(`${key}: ${message}`),metadata,via:options.via||'api'});result.status='completed';}
-        catch(error){result={status:options.signal?.aborted?'interrupted':'error',error:error.message,validation:{passed:false,errors:[error.message]},records:error.records||client.records,...error.agentInfo};log(`ERROR ${key}: ${error.message}`);}
-        delete result.output;result={...metadata,...result,attempt,duration_ms:now()-caseStart,output_file:fs.existsSync(path.join(caseDir,'output.txt'))?path.join(caseDir,'output.txt'):null,artifact_dir:caseDir};result.statistics=aggregate(result.records||[]);
+        catch(error){result={status:options.signal?.aborted?'interrupted':'error',error:error.record?.error||error.message,endpoint_unavailable:Boolean(error.endpointUnavailable),validation:{passed:false,errors:[error.record?.error||error.message]},records:error.records||client.records,...error.agentInfo};log(`ERROR ${key}: ${result.error}`);}
+        delete result.output;result={...metadata,...result,attempt,duration_ms:now()-caseStart,cooldown_before_ms:cooldownMs,output_file:fs.existsSync(path.join(caseDir,'output.txt'))?path.join(caseDir,'output.txt'):null,artifact_dir:caseDir};result.statistics=aggregate(result.records||[]);
         writeJSON(path.join(caseDir,'case.json'),result);
         if(forced)recordRerun(state,pendingReruns,key,previous,result);
         state.cases[key]=result;state.updated_at=new Date().toISOString();writeJSON(file,{...state,active_ms:state.active_ms+now()-start});createReport(dir);
         if(options.signal?.aborted)throw options.signal.reason;
+        if(result.endpoint_unavailable){const failure=new Error(`Endpoint unavailable for slot '${slotName}'; checkpoint saved. Restore the endpoint and use --resume.`);failure.exitCode=2;throw failure;}
       }
     }
     if(pendingReruns.size)throw new Error('Targeted rerun has unmatched pending cases');
-    state.status='completed';state.finished_at=new Date().toISOString();
+    state.status=Object.values(state.cases).some(test=>test.status==='error')?'completed_with_errors':'completed';state.finished_at=new Date().toISOString();
   }catch(error){if(state){state.status=options.signal?.aborted?'interrupted':'error';state.error=error.message;}throw error;}
   finally{if(state){state.active_ms+=now()-start;state.updated_at=new Date().toISOString();if(segment){segment.finished_at=state.updated_at;segment.duration_ms=now()-start;segment.status=state.status;}writeJSON(file,state);createReport(dir);}if(lock!==undefined)fs.closeSync(lock);fs.rmSync(lockFile,{force:true});}
   return {dir,report:createReport(dir)};

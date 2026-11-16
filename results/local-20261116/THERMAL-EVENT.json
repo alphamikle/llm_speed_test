@@ -1,0 +1,15 @@
+{
+  "event_utc": "2026-11-16T22:48:14.302492+00:00",
+  "model_slot": "deepseek-uncensored",
+  "reason": "Temperature limit: coretemp:hwmon7:temp26:Core 24",
+  "cpu_limit_c": 98,
+  "maximum_cpu_temperature_c": 98.0,
+  "maximum_gpu_temperature_c": 72.0,
+  "minimum_available_bytes": 46792527872,
+  "peak_service_memory_bytes": 166319484928,
+  "model_swap_bytes": 0,
+  "all_target_experts_resident": true,
+  "hugetlb_pool_gib": 128,
+  "recovery": "Same model and performance settings, unchanged watchdog and temperature limits; five-second cooling intervals before cases. Retain the first four completed cases and retry 44 infrastructure-error cases.",
+  "local_runtime_directory": "/home/alfa/Documents/LocalAI/experiments/deepseek-opt-20261106/best-verified/runtime/20261116T222133Z-84f9d52c"
+}

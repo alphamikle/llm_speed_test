@@ -28,6 +28,15 @@ export class SSEParser {
   finish() {this.buffer += this.decoder.decode(); this.drain(); if (this.buffer.trim()) this.block(this.buffer);}
 }
 export function endpoint(base) {return `${base.replace(/\/+$/, '')}/chat/completions`;}
+const connectionCodes=new Set(['ECONNREFUSED','ECONNRESET','ENOTFOUND','EAI_AGAIN','EHOSTUNREACH','ENETUNREACH','EPIPE','UND_ERR_SOCKET','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT','UND_ERR_BODY_TIMEOUT']);
+export function endpointUnavailable(error,seen=new Set()) {
+  if(!error||typeof error!=='object'||seen.has(error))return false;seen.add(error);
+  return connectionCodes.has(error.code)||endpointUnavailable(error.cause,seen)||(Array.isArray(error.errors)&&error.errors.some(item=>endpointUnavailable(item,seen)));
+}
+export function failureMessage(error) {
+  const detail=error.cause?.code||error.cause?.message;
+  return `${error.message}${detail&&!error.message.includes(detail)?` [${detail}]`:''}`;
+}
 export function requestHeaders(slot) {
   const key = slot.api_key ?? (slot.api_key_env ? process.env[slot.api_key_env] : undefined);
   return {'Content-Type': 'application/json', ...(key ? {Authorization: `Bearer ${key}`} : {}), ...slot.headers};
@@ -95,14 +104,14 @@ export class Client {
         await measureResponse(response, meter, {eventsFile: path.join(requestDir, `events-${attempt}.jsonl`)});
         if (meter.error) throw new Error(meter.error);
         if (!meter.content && !meter.reasoning && !meter.refusal && !meter.toolCalls.size) throw new Error('The model returned no content, reasoning, refusal, or tool calls');
-      } catch (error) {failure = error; meter.error = error.message;}
+      } catch (error) {failure = error;meter.error=failureMessage(error);if(endpointUnavailable(error)){failure.endpointUnavailable=true;meter.metadata.endpoint_unavailable=true;}}
       if(heartbeat)clearInterval(heartbeat);
       const record = meter.finish();
       this.records.push(record); appendJSON(path.join(this.dir, 'requests.jsonl'), record); writeJSON(path.join(requestDir, `result-${attempt}.json`), record); this.onRecord?.(record);
       if (!failure) return record;
       if (this.signal?.aborted) throw failure;
       const retryable = !failure.httpStatus || [408,409,425,429,500,502,503,504].includes(failure.httpStatus);
-      if (attempt === maxRetries || !retryable) {failure.record = record; throw failure;}
+      if (attempt === maxRetries || !retryable) {failure.record = record;failure.exitCode=2;throw failure;}
       await sleep(Math.min(30000, 1000 * 2 ** attempt));
     }
   }

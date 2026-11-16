@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--wait-pid', type=int)
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--rerun-kits')
+    parser.add_argument('--case-pause', type=int, default=0)
     args = parser.parse_args()
     if args.rerun_kits and not args.resume:
         parser.error('--rerun-kits requires --resume')
@@ -55,6 +56,8 @@ def main():
                 command.append('--resume')
             if args.rerun_kits:
                 command.extend(['--rerun-kits', args.rerun_kits])
+            if args.case_pause:
+                command.extend(['--case-pause', str(args.case_pause)])
             print('Running: ' + ' '.join(command), flush=True)
             child = subprocess.Popen(command)
             code = child.wait()

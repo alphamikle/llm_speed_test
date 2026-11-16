@@ -32,7 +32,7 @@ export function prepareRerun(state,requested,keys,sourceRevision) {
 export function recordRerun(state,pending,key,previous,result) {
   const rerun=state.targeted_rerun;
   rerun.attempts.push({key,previous_attempt:previous?.attempt??null,previous_artifact_dir:previous?.artifact_dir??null,attempt:result.attempt,artifact_dir:result.artifact_dir,status:result.status,source_revision:result.source_revision});
-  if(result.status!=='interrupted') {
+  if(result.status==='completed') {
     pending.delete(key);rerun.pending=[...pending];rerun.completed.push(key);
     if(!pending.size)rerun.finished_at=new Date().toISOString();
   }

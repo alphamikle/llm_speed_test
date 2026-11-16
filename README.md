@@ -148,6 +148,10 @@ Every PP/TG/TTFT summary has mean, median, min, max, sample count and missing co
 
 `--rerun-kits` repeats selected kits inside an existing plan. Keep the original `--kits`, slots, languages and workload settings. Completed prerequisites are reused; consumers of a repeated kit are also refreshed so their input artifacts stay consistent. Earlier attempts remain on disk. A persistent rerun queue resumes with `--resume` after interruption; supplying the same rerun selection also continues that queue. A different selection is rejected until the active queue finishes. Reports expose the queue and replacement provenance. Mixed iteration requests include an explicit JSON Schema with the numeric step and the required test array, and use that same schema for validation.
 
+Connection loss stops the run after retries and a checkpoint, preventing cascaded failures when a server disappears. `--resume` retries infrastructure-error and interrupted cases while retaining completed results, including measured model-quality failures. Completed counts exclude harness-error cases; attempted counts and errors remain visible. Dependencies require a completed producer, so partial output from a failed request is not reused.
+
+`--case-pause 5` adds a cooling interval before each case. The optional YAML equivalent is `execution: {case_pause_seconds: 5}`. This is an orchestration control recorded in execution segments and `cooldown_before_ms`; it is excluded from request and kit timings and included in suite elapsed time. It does not change model settings or disable hardware guards.
+
 Exit codes: `0` complete and quality checks passed; `1` configuration/runtime failure; `2` harness/request errors; `3` model output failed quality checks; `130` interrupted. A quality failure is a measured model result, not permission to silently replace its output. Retries and repair requests are retained and included in timing totals. Resume rejects changed workload identities and prevents two processes from writing the same run.
 
 ## Develop

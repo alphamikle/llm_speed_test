@@ -37,6 +37,8 @@ export function resolveConfig(config,file,slotName) {
   const common = defaults();
   config.defaults = {...common.defaults, ...config.defaults};
   config.agent = {...common.agent, ...config.agent};
+  if(config.execution!==undefined&&(!config.execution||typeof config.execution!=='object'||Array.isArray(config.execution)))throw new Error('execution must be a mapping');
+  if(config.execution?.case_pause_seconds!==undefined&&(!Number.isSafeInteger(config.execution.case_pause_seconds)||config.execution.case_pause_seconds<0||config.execution.case_pause_seconds>3600))throw new Error('execution.case_pause_seconds must be an integer from 0 to 3600');
   if(!['full','smoke'].includes(config.defaults.profile))throw new Error('defaults.profile must be full or smoke');
   if(!Array.isArray(config.defaults.languages)||!config.defaults.languages.length||config.defaults.languages.some(value=>!['en','ste','zh','ru'].includes(value))||new Set(config.defaults.languages).size!==config.defaults.languages.length)throw new Error('defaults.languages must be a nonempty unique list of en, ste, zh, ru');
   for(const [key,min,max] of [['repetitions',1,100],['timeout_seconds',1,86400],['agent_timeout_seconds',1,86400],['max_output_tokens',1,1000000],['page_batch',1,50],['agent_max_steps',1,10000],['retries',0,10],['repair_attempts',0,10]]){
