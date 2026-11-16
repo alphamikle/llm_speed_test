@@ -54,9 +54,10 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   ensureDir(dir);ensureDir(workspace);const home=path.join(dir,'pi-home');ensureDir(home);
   const extraEnv=Object.fromEntries(Object.entries(agent.env||{}).map(([key,value])=>[key,String(value).replace(/\$\{([A-Za-z_][A-Za-z0-9_]*)\}/g,(_,name)=>{if(process.env[name]===undefined)throw new Error(`Missing agent environment variable: ${name}`);return process.env[name];})]));
   const proxy=await startMeteringProxy({slot,defaults,dir,metadata,signal,maxSteps:agent.native_model?10000:defaults.agent_max_steps,onRecord});
-  const model={id:slot.model,name:'sllm benchmark model',api:'openai-completions',reasoning:true,input:agent.input||['text'],contextWindow:agent.context_window,maxTokens:agent.max_tokens,cost:{input:0,output:0,cacheRead:0,cacheWrite:0},compat:agent.compat};
+  const outputBudget=noTools?defaults.max_output_tokens:agent.max_tokens;
+  const model={id:slot.model,name:'sllm benchmark model',api:'openai-completions',reasoning:true,input:agent.input||['text'],contextWindow:agent.context_window,maxTokens:outputBudget,cost:{input:0,output:0,cacheRead:0,cacheWrite:0},compat:agent.compat};
   const providers={sllm:{baseUrl:proxy.baseUrl,api:'openai-completions',apiKey:'local-benchmark',models:[model]}};
-  if(agent.native_provider&&agent.native_model&&agent.native_provider!=='sllm')providers[agent.native_provider]={modelOverrides:{[agent.native_model]:{maxTokens:agent.max_tokens,contextWindow:agent.context_window}}};
+  if(agent.native_provider&&agent.native_model&&agent.native_provider!=='sllm')providers[agent.native_provider]={modelOverrides:{[agent.native_model]:{maxTokens:outputBudget,contextWindow:agent.context_window}}};
   writeJSON(path.join(home,'models.json'),{providers});
   writeJSON(path.join(home,'settings.json'),{compaction:{enabled:false},retry:{enabled:false},packages:[],shellPath:process.platform==='win32'?undefined:process.env.SHELL||'/bin/bash'});
   const promptFile=path.join(dir,'agent-prompt.txt');fs.writeFileSync(promptFile,prompt);
