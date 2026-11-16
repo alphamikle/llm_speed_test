@@ -24,7 +24,10 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--wait-pid', type=int)
     parser.add_argument('--resume', action='store_true')
+    parser.add_argument('--rerun-kits')
     args = parser.parse_args()
+    if args.rerun_kits and not args.resume:
+        parser.error('--rerun-kits requires --resume')
     args.output.mkdir(parents=True, exist_ok=True)
     if args.wait_pid:
         print('Waiting for the active agent smoke process to finish.', flush=True)
@@ -50,6 +53,8 @@ def main():
             command = ['sllm', 'run', '--slots', 'flash-next,flash-next-uncensored,deepseek,deepseek-uncensored', '--languages', 'en,ste,zh,ru', '--profile', 'full', '--output', str(args.output)]
             if args.resume:
                 command.append('--resume')
+            if args.rerun_kits:
+                command.extend(['--rerun-kits', args.rerun_kits])
             print('Running: ' + ' '.join(command), flush=True)
             child = subprocess.Popen(command)
             code = child.wait()

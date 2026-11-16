@@ -92,6 +92,9 @@ sllm run --slots default,another-model --languages en,ste,zh,ru --output ./matri
 # Continue with exactly the same settings and prompts
 sllm run --slots default,another-model --languages en,ste,zh,ru --output ./matrix --resume
 
+# Repeat a selected kit while keeping the original workload plan
+sllm run --slots default,another-model --languages en,ste,zh,ru --output ./matrix --resume --rerun-kits 12
+
 # Include dependency workloads automatically
 sllm --slot server run --kits 03,07,09 --languages en
 
@@ -142,6 +145,8 @@ For a Pi-native provider without an OpenAI-compatible endpoint, set `agent.nativ
 Every PP/TG/TTFT summary has mean, median, min, max, sample count and missing count; percentile and weighted rates are also available. One-sample statistics are valid but not an uncertainty estimate. Increase `--repetitions` for repeatability studies. Cached-token usage is reported, and cache eviction is never assumed. Full-run duration includes startup, tools, validators and orchestration.
 
 `audit-prose` adds an independent post-run repetition diagnostic (`PROSE-AUDIT.json` and `.md`). It detects near-duplicate pages and extensive internal loops, including counters that change while the scene repeats. It never rewrites original structural validation or measured timings. A flag requests human review. Literary merit and plot continuity require separate review. Original output files must remain available for this audit.
+
+`--rerun-kits` repeats selected kits inside an existing plan. Keep the original `--kits`, slots, languages and workload settings. Completed prerequisites are reused; consumers of a repeated kit are also refreshed so their input artifacts stay consistent. Earlier attempts remain on disk. A persistent rerun queue resumes with `--resume` after interruption; supplying the same rerun selection also continues that queue. A different selection is rejected until the active queue finishes. Reports expose the queue and replacement provenance. Mixed iteration requests include an explicit JSON Schema with the numeric step and the required test array, and use that same schema for validation.
 
 Exit codes: `0` complete and quality checks passed; `1` configuration/runtime failure; `2` harness/request errors; `3` model output failed quality checks; `130` interrupted. A quality failure is a measured model result, not permission to silently replace its output. Retries and repair requests are retained and included in timing totals. Resume rejects changed workload identities and prevents two processes from writing the same run.
 

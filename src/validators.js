@@ -7,6 +7,18 @@ import {CODE_CONTRACT,REPAIR_CONTRACT} from './fixtures.js';
 const ajv=new Ajv({allErrors:true});
 const itemSchema={type:'object',required:['warehouses','suppliers','items'],properties:{warehouses:{type:'array',minItems:4,items:{type:'object',required:['id','name','capacity'],properties:{id:{type:'string'},name:{type:'string'},capacity:{type:'integer',minimum:0}}}},suppliers:{type:'array',minItems:4,items:{type:'object',required:['id','name'],properties:{id:{type:'string'},name:{type:'string'}}}},items:{type:'array',items:{type:'object',required:['id','warehouse_id','supplier_id','name','quantity','unit_price_cents'],properties:{id:{type:'string'},warehouse_id:{type:'string'},supplier_id:{type:'string'},name:{type:'string'},quantity:{type:'integer',minimum:0},unit_price_cents:{type:'integer',minimum:0}}}}}};
 const validItems=ajv.compile(itemSchema);
+export function mixedOutputSchema(step) {
+  return {type:'object',required:['step','screenplay_facts','inventory_value_cents','code_risks','change_plan','tests'],properties:{step:{type:'integer',const:step},screenplay_facts:{},inventory_value_cents:{},code_risks:{},change_plan:{},tests:{type:'array',minItems:3}}};
+}
+const mixedChecks=new Map();
+export function validateMixedOutput(text,step) {
+  try {
+    const data=extractJSON(text);
+    if(!mixedChecks.has(step))mixedChecks.set(step,ajv.compile(mixedOutputSchema(step)));
+    const check=mixedChecks.get(step);const passed=check(data);
+    return {passed,errors:passed?[]:check.errors.map(error=>`${error.instancePath||'/'} ${error.message}`),contract_version:2};
+  }catch(error){return {passed:false,errors:[error.message],contract_version:2};}
+}
 export function unfence(text) {return text.trim().replace(/^```[A-Za-z]*\s*\n?/,'').replace(/\n?```\s*$/,'').trim();}
 export function validateLogistics(text,count) {
   let data;try{data=extractJSON(text);}catch(error){return {passed:false,errors:[error.message]};}

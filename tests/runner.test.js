@@ -12,5 +12,15 @@ test('complete case execution checkpoints, reports, resumes without duplicate ca
   const options={config:file,slots:['default'],languages:['en'],kits:'03',profile:'smoke',output:path.join(dir,'run')};
   const result=await runSuite(options);assert.equal(result.report.completed_cases,2);assert.equal(result.report.quality_passes,2);assert.ok(fs.existsSync(path.join(result.dir,'report.html')));assert.ok(fs.existsSync(path.join(result.dir,'steps.csv')));const before=calls;
   await runSuite({...options,resume:true});assert.equal(calls,before);assert.equal(readJSON(path.join(result.dir,'run.json')).status,'completed');
+  await assert.rejects(runSuite({...options,rerunKits:'03'}),/requires --resume/);
+  await assert.rejects(runSuite({...options,resume:true,rerunKits:'05'}),/outside the original/);assert.equal(calls,before);
+  const original=readJSON(path.join(result.dir,'run.json'));const summaryKey='default/en/03-prose-summary-short/1';const generationKey='default/en/01-prose-short/1';const oldCase=original.cases[summaryKey];
+  const orphan=path.join(path.dirname(oldCase.artifact_dir),'attempt-2');fs.mkdirSync(orphan);fs.writeFileSync(path.join(orphan,'crash.txt'),'Uncheckpointed crash output');
+  const controller=new AbortController();
+  await assert.rejects(runSuite({...options,resume:true,rerunKits:'03',signal:controller.signal,log:message=>{if(message.startsWith('RERUN '))controller.abort(new Error('Interrupted replay test'));}}),/Interrupted replay test/);
+  const interrupted=readJSON(path.join(result.dir,'run.json'));assert.equal(interrupted.status,'interrupted');assert.equal(interrupted.cases[summaryKey].attempt,3);assert.equal(interrupted.cases[generationKey].attempt,1);assert.deepEqual(interrupted.targeted_rerun.pending,[summaryKey]);assert.equal(calls,before+1);
+  const interruptedBytes=fs.readFileSync(path.join(result.dir,'run.json'),'utf8');await assert.rejects(runSuite({...options,resume:true,rerunKits:'01'}),/unfinished targeted rerun/);assert.equal(fs.readFileSync(path.join(result.dir,'run.json'),'utf8'),interruptedBytes);
+  await runSuite({...options,resume:true});const replayed=readJSON(path.join(result.dir,'run.json'));assert.equal(calls,before+3);assert.equal(replayed.cases[summaryKey].attempt,4);assert.equal(replayed.cases[generationKey].attempt,1);assert.deepEqual(replayed.targeted_rerun.pending,[]);assert.deepEqual(replayed.targeted_rerun.completed,[summaryKey]);assert.equal(replayed.targeted_rerun.attempts.length,2);assert.ok(fs.existsSync(path.join(oldCase.artifact_dir,'case.json')));assert.equal(fs.readFileSync(path.join(orphan,'crash.txt'),'utf8'),'Uncheckpointed crash output');
+  await runSuite({...options,resume:true});assert.equal(calls,before+3);
   const checkpoint=fs.readFileSync(path.join(result.dir,'run.json'),'utf8');await assert.rejects(runSuite({...options,resume:true,dimensions:{pages:3}}),/differ/);assert.ok(!fs.existsSync(path.join(result.dir,'run.lock')));assert.equal(fs.readFileSync(path.join(result.dir,'run.json'),'utf8'),checkpoint);
 });
