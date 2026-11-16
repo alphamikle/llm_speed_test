@@ -6,7 +6,7 @@ import {Client} from './transport.js';
 import {aggregate} from './metrics.js';
 import {runAgent} from './agent.js';
 import {loadConfig} from './config.js';
-import {KITS,LANGUAGES,PROFILES,locale,render,selectKits} from './catalog.js';
+import {KITS,LANGUAGES,PROFILES,locale,render,selectKits,ROOT} from './catalog.js';
 import {logisticsCorpus,corpusExpected,codeCorpus,repairWorkspace} from './fixtures.js';
 import {validateLogistics,validateProse,languageAudit,compareJSON,validateCode,validateSQL,validateRepair,unfence} from './validators.js';
 import {GAME_CONTRACT,browserHelperSource,inspectGame} from './browser.js';
@@ -18,6 +18,12 @@ function validateBatch(text,start,end,profile,language) {
   validation.errors=validation.errors.filter(error=>!/^Page (\d+) is missing or repeated$/.test(error)||Number(error.match(/\d+/)[0])>=start).filter(error=>!error.startsWith('Expected exactly'));
   if(validation.pages.length!==end-start+1)validation.errors.push(`Expected ${end-start+1} pages in this batch, got ${validation.pages.length}`);
   validation.passed=!validation.errors.length;return validation;
+}
+async function environmentInfo(){
+  const results=await Promise.allSettled([runCommand('git',['rev-parse','HEAD'],{cwd:ROOT,timeoutMs:5000}),runCommand('nvidia-smi',['--query-gpu=name,driver_version,memory.total,power.limit','--format=csv,noheader'],{timeoutMs:5000})]);
+  const revision=results[0].status==='fulfilled'&&results[0].value.code===0?results[0].value.stdout.trim():null;
+  const gpus=results[1].status==='fulfilled'&&results[1].value.code===0?results[1].value.stdout.trim().split('\n'):[];
+  return {node:process.version,platform:process.platform,arch:process.arch,os:os.release(),cpu:os.cpus()[0]?.model,logical_cpus:os.cpus().length,total_ram_bytes:os.totalmem(),nvidia_gpus:gpus,hardware_scope:'Client host; remote inference hardware is not inferred',sllm_version:'0.1.0',source_revision:revision};
 }
 async function screenplayExport(text,dir) {
   const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
@@ -127,7 +133,7 @@ export async function runSuite(options) {
     if(fs.existsSync(file)){
       if(!options.resume)throw new Error('Output directory already contains a run. Use --resume or choose a new --output directory.');
       const existing=readJSON(file);if(existing.fingerprint!==fingerprint)throw new Error('Resume configuration, prompts or workload differ from the original run');state=existing;
-    }else state={schema_version:1,id:path.basename(dir),fingerprint,profile:profileName,started_at:new Date().toISOString(),status:'running',active_ms:0,planned_cases:selected.length*languages.length*kits.length*repetitions,cases:{},models:selected.map(value=>({slot:value.slotName,...redact(value.slot),agent:redact(value.agent)})),environment:{node:process.version,platform:process.platform,arch:process.arch,os:os.release(),cpu:os.cpus()[0]?.model,logical_cpus:os.cpus().length,total_ram_bytes:os.totalmem(),sllm_version:'0.1.0'}};
+    }else state={schema_version:1,id:path.basename(dir),fingerprint,profile:profileName,started_at:new Date().toISOString(),status:'running',active_ms:0,planned_cases:selected.length*languages.length*kits.length*repetitions,cases:{},models:selected.map(value=>({slot:value.slotName,...redact(value.slot),agent:redact(value.agent)})),environment:await environmentInfo()};
     state.status='running';delete state.finished_at;writeJSON(file,state);
     for(const selectedSlot of selected){
       const {slot,slotName,agent,config}=selectedSlot;const defaults={...config.defaults,...options.overrides};const profile={...PROFILES[profileName],...options.dimensions};

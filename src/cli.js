@@ -44,5 +44,5 @@ export function program() {
   return root;
 }
 export async function main(argv=process.argv) {
-  try{await program().parseAsync(argv);}catch(error){console.error(`sllm: ${error.message}`);if(process.env.SLLM_DEBUG)console.error(error.stack);process.exitCode=error.name==='AbortError'||/Interrupted by user/.test(error.message)?130:1;}
+  try{const [major,minor]=process.versions.node.split('.').map(Number);if(major<24||(major===24&&minor<10))throw new Error('Node.js 24.10.0 or newer is required');await program().parseAsync(argv);}catch(error){console.error(`sllm: ${error.message}`);if(process.env.SLLM_DEBUG)console.error(error.stack);process.exitCode=error.name==='AbortError'||/Interrupted by user/.test(error.message)?130:1;}
 }

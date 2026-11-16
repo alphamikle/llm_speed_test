@@ -13,7 +13,7 @@ export const defaults = () => ({
   version: 1,
   defaults: {slot: 'default', profile: 'full', repetitions: 1, languages: ['en', 'ste', 'zh', 'ru'], output_dir: path.join(os.homedir(), 'sllm-results'), timeout_seconds: 1800, retries: 2, temperature: 0, max_output_tokens: 16384, page_batch: 5, agent_timeout_seconds: 3600, agent_max_steps: 100, repair_attempts: 2},
   agent: {provider: 'pi', command: null, args: [], thinking: 'off', context_window: 131072, max_tokens: 8192, compat: {supportsStore: false, supportsDeveloperRole: false, supportsReasoningEffort: false, supportsUsageInStreaming: true}, env: {}, validation_commands: []},
-  slots: {default: {base_url: 'http://127.0.0.1:1234/v1', model: 'deepseek-uncensored', api_key_env: 'SLLM_API_KEY', headers: {}, request: {}, stream_options: true, startup: null}}
+  slots: {default: {base_url: 'http://127.0.0.1:1234/v1', model: 'deepseek-uncensored', api_key_env: 'SLLM_API_KEY', headers: {}, request: {}, output_token_field:'max_tokens', stream_options: true, startup: null}}
 });
 export function saveConfig(file, config) {
   ensureDir(path.dirname(file));
@@ -40,7 +40,7 @@ export function resolveConfig(config,file,slotName) {
   for(const [key,min,max] of [['repetitions',1,100],['timeout_seconds',1,86400],['agent_timeout_seconds',1,86400],['max_output_tokens',1,1000000],['page_batch',1,50],['agent_max_steps',1,10000],['retries',0,10],['repair_attempts',0,10]]){
     const value=config.defaults[key];if(!Number.isSafeInteger(value)||value<min||value>max)throw new Error(`defaults.${key} must be an integer from ${min} to ${max}`);
   }
-  if(!Number.isFinite(config.defaults.temperature)||config.defaults.temperature<0||config.defaults.temperature>2)throw new Error('defaults.temperature must be between 0 and 2');
+  if(config.defaults.temperature!==null&&(!Number.isFinite(config.defaults.temperature)||config.defaults.temperature<0||config.defaults.temperature>2))throw new Error('defaults.temperature must be null or between 0 and 2');
   const name = slotName || config.defaults.slot;
   safeName(name);
   if (!Object.hasOwn(config.slots, name)) throw new Error(`Unknown slot '${name}'. Available slots: ${Object.keys(config.slots).join(', ')}`);
@@ -54,6 +54,7 @@ export function resolveConfig(config,file,slotName) {
   if (!slot.request || typeof slot.request !== 'object' || Array.isArray(slot.request)) throw new Error('Slot request must be a mapping');
   if (['model', 'messages', 'stream'].some(key => key in slot.request)) throw new Error('Slot request must not override model, messages, or stream');
   if(slot.request.n!==undefined&&slot.request.n!==1)throw new Error('The benchmark measures one completion per request; request.n must be 1');
+  if(!['max_tokens','max_completion_tokens','max_output_tokens'].includes(slot.output_token_field))throw new Error('output_token_field must be max_tokens, max_completion_tokens or max_output_tokens');
   const agent = {...config.agent, ...slot.agent, compat: {...config.agent.compat, ...slot.agent?.compat}, env: {...config.agent.env, ...slot.agent?.env}};
   for(const key of ['context_window','max_tokens'])if(!Number.isSafeInteger(agent[key])||agent[key]<1)throw new Error(`agent.${key} must be a positive integer`);
   for(const [key,value] of Object.entries(slot.headers))if(typeof value!=='string'||/[\r\n]/.test(key+value))throw new Error('Header names and values must be strings without newlines');

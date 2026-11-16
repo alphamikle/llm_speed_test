@@ -22,6 +22,8 @@ export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxS
     try{
       let body='';for await(const chunk of req){body+=chunk;if(body.length>32000000)throw new Error('Agent request exceeds 32 MB');}
       const payload={...JSON.parse(body),...slot.request,model:slot.model};
+      if(slot.output_token_field&&slot.output_token_field!=='max_tokens'&&payload.max_tokens!==undefined){payload[slot.output_token_field]=payload[slot.output_token_field]??payload.max_tokens;delete payload.max_tokens;}
+      if(payload.temperature===null)delete payload.temperature;
       if(payload.stream&&slot.stream_options!==false)payload.stream_options={include_usage:true};
       if(slot.stream_options===false)delete payload.stream_options;
       writeJSON(path.join(recordDir,'request.json'),payload);

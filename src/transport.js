@@ -67,7 +67,10 @@ export class Client {
   async chat(messages, metadata = {}, overrides = {}) {
     const id = `${String(++this.sequence).padStart(5, '0')}-${hash(metadata).slice(0, 6)}`;
     const requestDir = path.join(this.dir, 'requests', id); ensureDir(requestDir);
-    const payload = {model: this.slot.model, messages, temperature: this.defaults.temperature, max_tokens: this.defaults.max_output_tokens, ...this.slot.request, ...overrides, stream: true};
+    const {max_tokens:overrideBudget,...otherOverrides}=overrides;
+    const tokenField=this.slot.output_token_field||'max_tokens';
+    const payload = {model: this.slot.model, messages, temperature: this.defaults.temperature, ...this.slot.request, ...otherOverrides, [tokenField]:overrideBudget??this.slot.request[tokenField]??this.defaults.max_output_tokens, stream: true};
+    if(payload.temperature===null)delete payload.temperature;
     if (this.slot.stream_options !== false) payload.stream_options = {include_usage: true};
     writeJSON(path.join(requestDir, 'request.json'), payload);
     const maxRetries = this.defaults.retries;

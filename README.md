@@ -6,7 +6,7 @@ A cross-platform CLI for reproducible LLM inference and coding-agent benchmarks.
 
 ## Install
 
-Install Node.js 24 or newer on Linux, Windows or macOS, then:
+Install Node.js 24.10 or newer on Linux, Windows or macOS, then:
 
 ```sh
 npm install -g --allow-scripts=sllm git+https://github.com/alphamikle/llm_speed_test.git
@@ -74,6 +74,8 @@ slots:
 ```
 
 `slot.request` passes provider-specific sampling/reasoning fields to the API and the metering proxy used by Pi. It cannot override the benchmark's model, messages or streaming mode. Set `stream_options: false` for servers that reject streaming usage. Missing usage or native timings remain explicitly unavailable. `startup: {command: lai, args: [start, deepseek, --uncensored], timeout_seconds: 900}` can prepare a local model before its slot. Commands use argument arrays, not a shell string.
+
+For reasoning-model endpoints that reject `max_tokens`, set the slot's `output_token_field: max_completion_tokens`. Set `request: {temperature: null}` to omit unsupported sampling parameters. Pi's own provider compatibility fields can be set in `agent.compat`. Endpoint-specific requirements are configuration, not silently guessed measurements.
 
 ## Run
 
