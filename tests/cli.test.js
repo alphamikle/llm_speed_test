@@ -8,4 +8,5 @@ test('help works and invalid options, numbers and slots fail before model reques
   for(const args of [['run','--repetitions','0'],['run','--unknown'],['--slot','missing','run'],['run','--profile','invalid']]){const r=await call(args);assert.notEqual(r.code,0,JSON.stringify(args));}
   const before=fs.readFileSync(config,'utf8');const invalid=await call(['config','set','defaults.repetitions','-1']);assert.notEqual(invalid.code,0);assert.equal(fs.readFileSync(config,'utf8'),before);
   const add=await call(['slot','add','test','--base-url','https://example.test/v1','--model','abc']);assert.equal(add.code,0,add.stderr);assert.equal(loadConfig(config,'test').slot.model,'abc');
+  const added=fs.readFileSync(config,'utf8');for(const name of ['TEST','CON','trailing.']){const invalidName=await call(['slot','add',name,'--base-url','https://example.test/v1','--model','abc']);assert.notEqual(invalidName.code,0);assert.equal(fs.readFileSync(config,'utf8'),added);}
 });

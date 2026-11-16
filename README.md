@@ -37,6 +37,8 @@ Configuration locations:
 
 `SLLM_CONFIG` or `--config` overrides the location. A `default` slot is created automatically. Additional slots are unlimited. Prefer `api_key_env` instead of storing secrets. Reports redact authentication fields.
 
+Slot names contain 1-80 ASCII letters, digits, periods, hyphens or underscores and start with a letter or digit. Names are unique ignoring case, cannot contain `..` or end with a period, and exclude [reserved Windows device names](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file). These rules keep result directories portable across the supported systems.
+
 ```yaml
 version: 1
 defaults:

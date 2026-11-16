@@ -30,7 +30,7 @@ export class JSONLWriter {
   async close() {this.stream.end();await finished(this.stream);if(this.error)throw this.error;}
 }
 export function safeName(value) {
-  if (!/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$/.test(value) || value.includes('..')) throw new Error(`Invalid name: ${value}`);
+  if (typeof value!=='string' || !/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$/.test(value) || value.includes('..') || value.endsWith('.') || /^(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(value)) throw new Error(`Invalid name: ${value}`);
   return value;
 }
 export function parsePositive(value, label, max = 10000000) {

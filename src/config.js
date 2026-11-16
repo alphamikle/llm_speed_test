@@ -32,6 +32,8 @@ export function loadConfig(file = configPath(), slotName) {
 export function resolveConfig(config,file,slotName) {
   if (!config || config.version !== 1 || !config.slots || Array.isArray(config.slots)) throw new Error('Configuration must have version: 1 and a slots mapping');
   for (const name of Object.keys(config.slots)) safeName(name);
+  const slotNames=Object.keys(config.slots);
+  if(new Set(slotNames.map(name=>name.toLowerCase())).size!==slotNames.length)throw new Error('Slot names must be unique ignoring case');
   const common = defaults();
   config.defaults = {...common.defaults, ...config.defaults};
   config.agent = {...common.agent, ...config.agent};
