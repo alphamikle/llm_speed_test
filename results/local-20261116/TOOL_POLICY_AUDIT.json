@@ -1,0 +1,40 @@
+{
+  "reason": "Bound previously unbounded Pi shell commands; repeat the interrupted Chinese agent case",
+  "new_shell_deadline_seconds": 180,
+  "retention_basis": "Every measured tool call in completed retained agent cases finished below the new deadline. A real-Pi integration test verifies identical provider-visible schemas and prompts for a nonbinding guard.",
+  "cases": [
+    {
+      "slot": "flash-next",
+      "language": "en",
+      "kit": "10-agent-battleship",
+      "recorded_tools": 160,
+      "maximum_tool_seconds": 80.54964697699994,
+      "below_new_deadline": true
+    },
+    {
+      "slot": "flash-next",
+      "language": "en",
+      "kit": "11-agent-repair",
+      "recorded_tools": 24,
+      "maximum_tool_seconds": 0.24074660000000586,
+      "below_new_deadline": true
+    },
+    {
+      "slot": "flash-next",
+      "language": "ste",
+      "kit": "10-agent-battleship",
+      "recorded_tools": 210,
+      "maximum_tool_seconds": 74.70857458999986,
+      "below_new_deadline": true
+    },
+    {
+      "slot": "flash-next",
+      "language": "ste",
+      "kit": "11-agent-repair",
+      "recorded_tools": 18,
+      "maximum_tool_seconds": 0.2518108779999893,
+      "below_new_deadline": true
+    }
+  ],
+  "maximum_observed_tool_seconds": 80.54964697699994
+}

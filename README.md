@@ -53,6 +53,7 @@ defaults:
   agent_max_steps: 100
 agent:
   provider: pi
+  tool_timeout_seconds: 180
   thinking: off
   context_window: 131072
   max_tokens: 8192
@@ -121,7 +122,7 @@ Each kit has English (`en`), Simplified Technical English (`ste`), Simplified Ch
 
 ## Agent measurement
 
-Pi runs with its own isolated configuration and workspace. A localhost streaming proxy measures each upstream inference request, including tool-driven turns. `agent-events.jsonl` retains Pi's events; request SSE logs and final usage remain available even when Pi discards provider-specific timing extensions. Tool execution time is separate from inference time. A step limit, total deadline and cancellation protect against endless agent loops. Workspaces execute generated code; use a disposable machine/container for untrusted remote models. The provided isolation is configuration isolation, not an OS sandbox.
+Pi runs with its own isolated configuration and workspace. A localhost streaming proxy measures each upstream inference request, including tool-driven turns. `agent-events.jsonl` retains Pi's events; request SSE logs and final usage remain available even when Pi discards provider-specific timing extensions. Tool execution time is separate from inference time. Bundled Pi shell commands have a 180-second execution deadline, configurable with `agent.tool_timeout_seconds` (0 disables it). The guard retains Pi's original tool schema and prompt metadata and does not rewrite the model's recorded arguments. Custom CLIs control their own tool deadlines. A step limit, total deadline and cancellation protect against endless agent loops. Workspaces execute generated code; use a disposable machine/container for untrusted remote models. The provided isolation is configuration isolation, not an OS sandbox.
 
 For a Pi-native provider without an OpenAI-compatible endpoint, set `agent.native_provider`, `agent.native_model`, and the required credentials in `agent.env`. Such requests use Pi event timings and usage; native server PP is unavailable. An external event-producing CLI can be supplied through `agent.command` and `agent.args`; it must emit the documented Pi JSON event protocol. See [metrics](docs/METRICS.md).
 

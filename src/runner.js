@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {Client} from './transport.js';
 import {aggregate} from './metrics.js';
-import {runAgent} from './agent.js';
+import {runAgent,DEFAULT_TOOL_TIMEOUT_SECONDS} from './agent.js';
 import {loadConfig} from './config.js';
 import {KITS,LANGUAGES,PROFILES,locale,render,selectKits,ROOT} from './catalog.js';
 import {logisticsCorpus,corpusExpected,codeCorpus,repairWorkspace} from './fixtures.js';
@@ -96,7 +96,7 @@ async function executeKit(context) {
     fs.writeFileSync(path.join(workspace,'AGENTS.md'),l.agentSystem);
     let prompt=kit.id.startsWith('10')?l.battleship:l.repair;
     if(kit.id.startsWith('10'))prompt+='\n\n'+l.gameContract;
-    agentInfo={agent_steps:0,agent_turns:0,tool_calls:0,tool_errors:0};
+    agentInfo={agent_steps:0,agent_turns:0,tool_calls:0,tool_errors:0,tool_timeout_seconds:agent.command?null:agent.tool_timeout_seconds??DEFAULT_TOOL_TIMEOUT_SECONDS};
     for(let attempt=0;attempt<=Math.min(defaults.repair_attempts,1);attempt++){
       const result=await runAgent({slot,defaults,agent,dir:path.join(dir,`agent-${attempt}`),workspace,prompt:attempt?prompt+'\n\n'+l.agentSystem+'\n'+JSON.stringify({validation_errors:validation.errors}):prompt,system:l.agentSystem,metadata:{...metadata,agent_attempt:attempt},signal,onRecord:client.onRecord,onProgress:event=>log(`${event.type} ${event.tool||event.turn}`)});
       records.push(...result.records);agentInfo.agent_steps+=result.steps;agentInfo.agent_turns+=result.turns;agentInfo.tool_calls+=result.tool_count;agentInfo.tool_errors+=result.tool_errors;output=result.content;
@@ -141,7 +141,7 @@ export async function runSuite(options) {
     }else state={schema_version:1,id:path.basename(dir),fingerprint,profile:profileName,started_at:new Date().toISOString(),status:'running',active_ms:0,planned_cases:selected.length*languages.length*kits.length*repetitions,cases:{},models:selected.map(value=>({slot:value.slotName,...redact(value.slot),agent:redact(value.agent)})),environment:await environmentInfo()};
     const executionEnvironment=await environmentInfo();
     if(!state.execution_segments&&state.active_ms>0)state.execution_segments=[{started_at:state.started_at,finished_at:state.updated_at,source_revision:state.environment.source_revision,status:state.status,duration_ms:state.active_ms,scope:'Legacy checkpoint before execution-segment tracking'}];
-    segment={started_at:new Date().toISOString(),source_revision:executionEnvironment.source_revision};state.execution_segments=state.execution_segments||[];state.execution_segments.push(segment);
+    segment={started_at:new Date().toISOString(),source_revision:executionEnvironment.source_revision,default_pi_shell_timeout_seconds:DEFAULT_TOOL_TIMEOUT_SECONDS};state.execution_segments=state.execution_segments||[];state.execution_segments.push(segment);
     state.status='running';delete state.finished_at;delete state.error;writeJSON(file,state);
     for(const selectedSlot of selected){
       const {slot,slotName,agent,config}=selectedSlot;const defaults={...config.defaults,...options.overrides};const profile={...PROFILES[profileName],...options.dimensions};

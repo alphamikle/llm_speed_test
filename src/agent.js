@@ -4,11 +4,14 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {StringDecoder} from 'node:string_decoder';
+import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 import {Measurement} from './metrics.js';
 import {endpoint,requestHeaders,measureResponse} from './transport.js';
 import {piPath} from './pi-path.js';
 import {appendJSON,ensureDir,now,terminate,writeJSON,JSONLWriter} from './util.js';
+
+export const DEFAULT_TOOL_TIMEOUT_SECONDS=180;
 
 export async function startMeteringProxy({slot,defaults,dir,metadata,signal,maxSteps=100,onRecord}) {
   let sequence=0;const records=[];const controllers=new Set();
@@ -63,11 +66,13 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const promptFile=path.join(dir,'agent-prompt.txt');fs.writeFileSync(promptFile,prompt);
   const systemFile=path.join(dir,'agent-system.txt');fs.writeFileSync(systemFile,system);
   const pi=piPath();
+  const toolTimeout=agent.tool_timeout_seconds??DEFAULT_TOOL_TIMEOUT_SECONDS;
+  const guardArgs=!agent.command&&!noTools&&toolTimeout>0?['--extension',fileURLToPath(new URL('./pi-shell-guard.js',import.meta.url))]:[];
   const substitutions={base_url:proxy.baseUrl,model:slot.model,prompt_file:promptFile,workspace};
-  const args=agent.command?(agent.args||[]).map(value=>String(value).replace(/\{(base_url|model|prompt_file|workspace)\}/g,(_,key)=>substitutions[key])):[pi.cli,'--mode','json','--provider',agent.native_provider||'sllm','--model',agent.native_model||slot.model,'--thinking',agent.thinking,'--no-session','--no-extensions','--no-skills','--no-prompt-templates','--no-approve','--append-system-prompt',systemFile,...(noTools?['--no-tools']:['--tools','read,write,edit,bash']),`@${promptFile}`];
+  const args=agent.command?(agent.args||[]).map(value=>String(value).replace(/\{(base_url|model|prompt_file|workspace)\}/g,(_,key)=>substitutions[key])):[pi.cli,'--mode','json','--provider',agent.native_provider||'sllm','--model',agent.native_model||slot.model,'--thinking',agent.thinking,'--no-session','--no-extensions',...guardArgs,'--no-skills','--no-prompt-templates','--no-approve','--append-system-prompt',systemFile,...(noTools?['--no-tools']:['--tools','read,write,edit,bash']),`@${promptFile}`];
   const command=agent.command||process.execPath;
   const start=now();let buffer='',stderr='',finalMessage='',lastStopReason=null,lastMessageError=null,terminationReason=null,turns=0,toolStarts=new Map(),tools=[],events=0,ended=false,settled=false,fallback=null;const fallbackRecords=[];const eventWriter=new JSONLWriter(path.join(dir,'agent-events.jsonl'));
-  const child=spawn(command,args,{cwd:workspace,env:isolatedEnv(home,extraEnv),windowsHide:true,detached:process.platform!=='win32',stdio:['ignore','pipe','pipe']});
+  const child=spawn(command,args,{cwd:workspace,env:isolatedEnv(home,{...extraEnv,SLLM_TOOL_TIMEOUT_SECONDS:String(toolTimeout)}),windowsHide:true,detached:process.platform!=='win32',stdio:['ignore','pipe','pipe']});
   const decoder=new StringDecoder('utf8');
   const timeout=setTimeout(()=>{terminationReason='timeout';terminate(child);},defaults.agent_timeout_seconds*1000);
   const abort=()=>{terminationReason='interrupted';terminate(child);};signal?.addEventListener('abort',abort,{once:true});
@@ -105,5 +110,6 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   const recoveredErrors=records.filter(record=>record.status!=='ok');
   error=error||lastMessageError||(terminationReason?`Agent stopped: ${terminationReason} (step limit ${defaults.agent_max_steps}, timeout ${defaults.agent_timeout_seconds}s)`:null);
   const result={code,signal:exitSignal,error,stderr,duration_ms:now()-start,turns,steps:records.length,tools,tool_count:tools.length,tool_errors:tools.filter(t=>t.is_error).length,events,ended,settled,terminal_reason:lastStopReason,termination_reason:terminationReason,pi_version:pi.version,content:finalMessage,records,recovered_request_errors:recoveredErrors.length,success:!terminationReason&&code===0&&records.some(record=>record.status==='ok')&&(ended||settled)&&!['error','aborted'].includes(lastStopReason)&&!lastMessageError};
+  result.tool_timeout_seconds=!agent.command&&!noTools?toolTimeout:null;
   writeJSON(path.join(dir,'agent-result.json'),result);return result;
 }

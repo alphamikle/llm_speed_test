@@ -17,7 +17,7 @@ export const defaults = () => ({
 });
 export function saveConfig(file, config) {
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, '# sllm configuration. Prefer environment variables for credentials.\n' + YAML.stringify(config,{aliasDuplicateObjects:false}), {mode: 0o600});
+  fs.writeFileSync(file, '# sllm configuration. Prefer environment variables for credentials.\n# Optional agent.tool_timeout_seconds: 180 (0 disables the Pi shell deadline).\n' + YAML.stringify(config,{aliasDuplicateObjects:false}), {mode: 0o600});
 }
 export function initConfig(file = configPath()) {
   if (!fs.existsSync(file)) saveConfig(file, defaults());
@@ -57,6 +57,7 @@ export function resolveConfig(config,file,slotName) {
   if(!['max_tokens','max_completion_tokens','max_output_tokens'].includes(slot.output_token_field))throw new Error('output_token_field must be max_tokens, max_completion_tokens or max_output_tokens');
   const agent = {...config.agent, ...slot.agent, compat: {...config.agent.compat, ...slot.agent?.compat}, env: {...config.agent.env, ...slot.agent?.env}};
   for(const key of ['context_window','max_tokens'])if(!Number.isSafeInteger(agent[key])||agent[key]<1)throw new Error(`agent.${key} must be a positive integer`);
+  if(agent.tool_timeout_seconds!==undefined&&(!Number.isSafeInteger(agent.tool_timeout_seconds)||agent.tool_timeout_seconds<0||agent.tool_timeout_seconds>86400))throw new Error('agent.tool_timeout_seconds must be an integer from 0 to 86400');
   for(const [key,value] of Object.entries(slot.headers))if(typeof value!=='string'||/[\r\n]/.test(key+value))throw new Error('Header names and values must be strings without newlines');
   if(slot.startup&&(typeof slot.startup.command!=='string'||!Array.isArray(slot.startup.args)||slot.startup.args.some(value=>typeof value!=='string')))throw new Error('startup requires a command string and string args array');
   return {config, slot, slotName: name, agent, file};

@@ -1,0 +1,14 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import http from 'node:http';
+import {defaults} from '../src/config.js';import {runAgent} from '../src/agent.js';
+async function fixture(t,command){
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'sllm-shell-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));const bodies=[];
+  const server=http.createServer(async(req,res)=>{let data='';for await(const chunk of req)data+=chunk;const body=JSON.parse(data);bodies.push(body);const done=body.messages.some(message=>message.role==='tool');const delta=done?{content:'Done.'}:{tool_calls:[{index:0,id:'shell-test',type:'function',function:{name:'bash',arguments:JSON.stringify({command,timeout:900})}}]};res.writeHead(200,{'content-type':'text/event-stream'});res.end(`data: ${JSON.stringify({choices:[{index:0,delta}]})}\n\ndata: ${JSON.stringify({choices:[{index:0,delta:{},finish_reason:done?'stop':'tool_calls'}],usage:{prompt_tokens:100,completion_tokens:10}})}\n\ndata: [DONE]\n\n`);});
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>{server.closeAllConnections();return new Promise(resolve=>server.close(resolve));});const config=defaults();
+  return {bodies,run:cap=>runAgent({slot:{...config.slots.default,base_url:`http://127.0.0.1:${server.address().port}/v1`,model:'shell-model'},defaults:{...config.defaults,agent_timeout_seconds:20},agent:{...config.agent,tool_timeout_seconds:cap},dir:path.join(root,'artifacts'),workspace:path.join(root,'workspace'),prompt:'Run the requested shell command, then finish.',system:'Use bash, then report completion.',metadata:{kit:'shell'}})};
+}
+test('shell deadline clamps execution while retaining the model argument',{timeout:30000},async t=>{
+  const f=await fixture(t,'node -e "setInterval(()=>{},1000)"');const started=performance.now();const result=await f.run(1);assert.equal(result.success,true,JSON.stringify(result));assert.ok(performance.now()-started<10000);assert.equal(result.tool_timeout_seconds,1);assert.equal(result.tool_errors,1);assert.equal(result.tools[0].args.timeout,900);assert.match(JSON.stringify(result.tools[0].result),/timed out|timeout/i);assert.equal(JSON.parse(f.bodies[1].messages.find(message=>message.role==='assistant').tool_calls[0].function.arguments).timeout,900);
+});
+test('nonbinding shell guard leaves provider-visible schemas and prompts unchanged',{timeout:30000},async t=>{
+  const f=await fixture(t,'echo guard-contract');const baseline=await f.run(0);const guarded=await f.run(180);assert.equal(baseline.success,true,baseline.stderr);assert.equal(guarded.success,true,guarded.stderr);assert.deepEqual(f.bodies[0].tools,f.bodies[2].tools);assert.deepEqual(f.bodies[0].messages,f.bodies[2].messages);assert.equal(baseline.tool_errors,0);assert.equal(guarded.tool_errors,0);
+});
