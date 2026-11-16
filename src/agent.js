@@ -97,6 +97,8 @@ export async function runAgent({slot,defaults,agent,dir,workspace,prompt,system,
   try {await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',(c,s)=>{code=c;exitSignal=s;resolve();});});buffer+=decoder.end();if(buffer.trim())processLine(buffer);}
   catch(e){error=e.message;}finally{clearTimeout(timeout);signal?.removeEventListener('abort',abort);await proxy.close();await eventWriter.close();}
   if(fallback){fallback.error=error||'Agent stopped before assistant completion';fallbackRecords.push(fallback.finish());}
+  for(const [id,tool] of toolStarts)tools.push({id,name:tool.name,args:tool.args,duration_ms:now()-tool.start,is_error:true,incomplete:true,termination_reason:terminationReason||exitSignal||'agent_exit',result:null});
+  toolStarts.clear();
   const useFallback=!proxy.records.length;
   const records=(useFallback?fallbackRecords:proxy.records).toSorted((a,b)=>(a.agent_step||0)-(b.agent_step||0));
   if(useFallback)for(const record of records){appendJSON(path.join(dir,'requests.jsonl'),record);onRecord?.(record);}
