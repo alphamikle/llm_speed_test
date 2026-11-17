@@ -2,7 +2,7 @@
 
 Post-run diagnostic only. Original validation and timing records are unchanged. A flag requests review; it is not a semantic quality verdict.
 
-Audited 30/30 completed screenplay cases. Flagged 23; unavailable 0.
+Audited 32/32 completed screenplay cases. Flagged 25; unavailable 0.
 
 Compare five-token shingle multisets after NFKC/lowercase/number normalization; repeated shingles retain their frequency. Han characters are individual tokens. A page needs at least 100 tokens. Near duplicates have Dice similarity >= 0.90; internal repetition is flagged at >= 0.65. The first occurrence is excluded from the repeated-page count. This conservative heuristic does not certify plot continuity, factual accuracy or literary merit.
 
@@ -18,6 +18,8 @@ Compare five-token shingle multisets after NFKC/lowercase/number normalization; 
 | deepseek | zh | 02-prose-long | true | 29 / 50 | 0 | 1.0000 | review |
 | deepseek-uncensored | en | 01-prose-short | true | 6 / 50 | 0 | 0.9327 | review |
 | deepseek-uncensored | en | 02-prose-long | true | 18 / 50 | 0 | 1.0000 | review |
+| deepseek-uncensored | ru | 01-prose-short | true | 35 / 50 | 0 | 1.0000 | review |
+| deepseek-uncensored | ru | 02-prose-long | true | 20 / 50 | 0 | 0.9979 | review |
 | deepseek-uncensored | ste | 01-prose-short | true | 0 / 50 | 0 | 0.8985 | no flag |
 | deepseek-uncensored | ste | 02-prose-long | true | 4 / 50 | 0 | 1.0000 | review |
 | deepseek-uncensored | zh | 01-prose-short | true | 22 / 50 | 0 | 0.9931 | review |
