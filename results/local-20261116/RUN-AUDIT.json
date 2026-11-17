@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-11-17T05:07:43.799120+00:00",
+  "profile": "full",
+  "completed_cases": 192,
+  "harness_errors": 0,
+  "all_four_slots_have_48_cases": true,
+  "all_model_language_pairs_have_12_unique_kits": true,
+  "mixed_contract_version": 2,
+  "mixed_replayed_cases": 16,
+  "mixed_pending_cases": 0,
+  "original_mixed_attempts_preserved": true,
+  "latest_attempt_models": [
+    {
+      "slot": "flash-next",
+      "completed_cases": 48,
+      "output_checks_passed": 38,
+      "output_checks_failed": 10,
+      "inference_requests": 955,
+      "request_statuses": {
+        "ok": 955
+      },
+      "missing_metrics": {
+        "pp_tps": 0,
+        "tg_tps": 0,
+        "ttft_ms": 0
+      }
+    },
+    {
+      "slot": "flash-next-uncensored",
+      "completed_cases": 48,
+      "output_checks_passed": 30,
+      "output_checks_failed": 18,
+      "inference_requests": 1487,
+      "request_statuses": {
+        "ok": 1487
+      },
+      "missing_metrics": {
+        "pp_tps": 0,
+        "tg_tps": 0,
+        "ttft_ms": 0
+      }
+    },
+    {
+      "slot": "deepseek",
+      "completed_cases": 48,
+      "output_checks_passed": 38,
+      "output_checks_failed": 10,
+      "inference_requests": 873,
+      "request_statuses": {
+        "ok": 873
+      },
+      "missing_metrics": {
+        "pp_tps": 0,
+        "tg_tps": 0,
+        "ttft_ms": 0
+      }
+    },
+    {
+      "slot": "deepseek-uncensored",
+      "completed_cases": 48,
+      "output_checks_passed": 40,
+      "output_checks_failed": 8,
+      "inference_requests": 697,
+      "request_statuses": {
+        "ok": 697
+      },
+      "missing_metrics": {
+        "pp_tps": 0,
+        "tg_tps": 0,
+        "ttft_ms": 0
+      }
+    }
+  ],
+  "mixed_replacements": [
+    {
+      "case": "flash-next/en/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next/ste/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next/zh/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next/ru/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next-uncensored/en/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next-uncensored/ste/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next-uncensored/zh/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "flash-next-uncensored/ru/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek/en/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek/ste/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek/zh/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": false,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek/ru/12-mixed-iterations/1",
+      "previous_attempt": 1,
+      "final_attempt": 2,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek-uncensored/en/12-mixed-iterations/1",
+      "previous_attempt": 2,
+      "final_attempt": 3,
+      "previous_output_checks_passed": false,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek-uncensored/ste/12-mixed-iterations/1",
+      "previous_attempt": 2,
+      "final_attempt": 3,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek-uncensored/zh/12-mixed-iterations/1",
+      "previous_attempt": 2,
+      "final_attempt": 3,
+      "previous_output_checks_passed": false,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    },
+    {
+      "case": "deepseek-uncensored/ru/12-mixed-iterations/1",
+      "previous_attempt": 2,
+      "final_attempt": 3,
+      "previous_output_checks_passed": true,
+      "final_output_checks_passed": true,
+      "final_contract_version": 2,
+      "final_requests": 6,
+      "previous_attempt_preserved": true
+    }
+  ],
+  "execution_segments": [
+    {
+      "started_at": "2026-11-16T08:38:03.472Z",
+      "finished_at": "2026-11-16T08:57:29.732Z",
+      "source_revision": "7d822c22012668b4fa555d5d064611a7490cb364",
+      "status": "interrupted",
+      "duration_ms": 1166260.1203110002,
+      "scope": "Legacy checkpoint before execution-segment tracking"
+    },
+    {
+      "started_at": "2026-11-16T09:01:30.841Z",
+      "source_revision": "fffbdfa7d6b86d28cf5437baade51cb35cd966e9",
+      "finished_at": "2026-11-16T09:18:56.566Z",
+      "duration_ms": 1045766.850545,
+      "status": "interrupted"
+    },
+    {
+      "started_at": "2026-11-16T09:20:19.184Z",
+      "source_revision": "bf8a54ab7b0c3ccd7b451cef8a415078cd47b93c",
+      "finished_at": "2026-11-16T11:00:54.088Z",
+      "duration_ms": 6034942.099867,
+      "status": "interrupted"
+    },
+    {
+      "started_at": "2026-11-16T11:05:46.029Z",
+      "source_revision": "a1fda1c0d99f3466c63e952d96de983267c9b3da",
+      "default_pi_shell_timeout_seconds": 180,
+      "finished_at": "2026-11-16T18:07:20.032Z",
+      "duration_ms": 25294049.521124,
+      "status": "interrupted"
+    },
+    {
+      "started_at": "2026-11-16T18:07:48.456Z",
+      "source_revision": "fac76d842149968ddb1f44109258d34cff1fdf66",
+      "default_pi_shell_timeout_seconds": 180,
+      "finished_at": "2026-11-16T22:49:20.225Z",
+      "duration_ms": 16891857.064344,
+      "status": "completed"
+    },
+    {
+      "started_at": "2026-11-16T23:26:25.133Z",
+      "source_revision": "ecbfe08367a55a8c97e23df6092fb8bddcbc8bff",
+      "default_pi_shell_timeout_seconds": 180,
+      "case_pause_seconds": 5,
+      "finished_at": "2026-11-17T04:18:00.135Z",
+      "duration_ms": 17495106.823820997,
+      "status": "completed"
+    },
+    {
+      "started_at": "2026-11-17T04:18:30.410Z",
+      "source_revision": "d54e399f59b06513269548cd859815ccaa134048",
+      "default_pi_shell_timeout_seconds": 180,
+      "case_pause_seconds": 5,
+      "targeted_rerun_id": "1794889110410-d54e399f",
+      "rerun_kits": [
+        "12-mixed-iterations"
+      ],
+      "rerun_start_completed": 0,
+      "finished_at": "2026-11-17T05:07:06.631Z",
+      "duration_ms": 2916335.658307,
+      "status": "completed"
+    }
+  ],
+  "interpretation": "Output-check failures are retained model results. Request statistics use latest case attempts; active and end-to-end time also include recorded recovery and replay overhead. No generated project or model response was manually repaired."
+}

@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-11-17T05:09:36.348920+00:00",
+  "compute_reservation_released": true,
+  "active_model": "deepseek-v4.1-flash",
+  "active_variant": "uncensored",
+  "backend_health": "ok",
+  "api_discovery_passed": true,
+  "server_context_slots": 1,
+  "user_yaml_bytes_preserved": true,
+  "remaining_campaign_workspace_processes": 0,
+  "chromium_report_check": {
+    "rows": 192,
+    "failed_output_checks": 46,
+    "mixed_rows": 16,
+    "rerun_completed": 16,
+    "page_errors": 0
+  },
+  "hardware_guards": "Existing lai thermal/watchdog protection was retained.",
+  "ram_context_retention_cap": 6,
+  "context_slot_note": "The server parallel inference slot count differs from the Strata RAM context retention cap.",
+  "hugetlb_pool_gib": 128.0
+}

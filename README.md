@@ -4,14 +4,22 @@ A cross-platform CLI for reproducible LLM inference and coding-agent benchmarks.
 
 **12 workloads × 4 languages × any number of model slots.** Native PP/TG, honest client estimates, TTFT, every agent inference step, tool durations, quality checks, resumable execution and a searchable HTML/CSV matrix.
 
+The requested four-model local campaign is recorded in [the detailed results directory](https://github.com/alphamikle/llm_speed_test/tree/main/results/local-20261116), including per-request CSV files, a standalone HTML report and recovery/replay provenance.
+
 ## Install
 
-Install Node.js 24.10 or newer on Linux, Windows or macOS, plus Git for the source installation command below:
+Install Node.js 24.10 or newer on Linux, Windows or macOS. Windows agent workloads also need Bash, such as Git Bash from Git for Windows, because the bundled Pi uses its Bash tool.
+
+```sh
+npm install -g --allow-scripts=sllm https://github.com/alphamikle/llm_speed_test/releases/download/v0.1.0/sllm-0.1.0.tgz
+sllm --help
+sllm doctor --offline
+```
+
+Alternatively, install the current source with Git:
 
 ```sh
 npm install -g --allow-scripts=sllm git+https://github.com/alphamikle/llm_speed_test.git
-sllm --help
-sllm doctor --offline
 ```
 
 Pi 1.5.2 is an automatically installed runtime dependency. The installation also downloads Playwright Chromium for actual browser tests and creates the user YAML config. There is no separate global Pi installation. An existing Pi or a different JSON-event CLI can be selected in YAML. For an air-gapped install, set `SLLM_SKIP_BROWSER_INSTALL=1` and provision Chromium with `npx playwright@1.65.1 install chromium` before running browser workloads. Linux servers may need the OS libraries listed by `npx playwright@1.65.1 install-deps chromium`. The version must match the pinned Playwright dependency so its browser revision is available.
