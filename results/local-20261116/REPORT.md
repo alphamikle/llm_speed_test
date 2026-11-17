@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 192/192 cases. Output checks passed: 143; failed: 49. Execution errors: 0. Active suite wall time: 67927.98 s. End-to-end elapsed time: 70850.08 s.
+Profile: **full**. Finished 192/192 cases. Output checks passed: 143; failed: 49. Execution errors: 0. Active suite wall time: 69194.34 s. End-to-end elapsed time: 72098.29 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`. Completed execution and passing output checks are separate: failed output checks retain their speed measurements. Checks are deterministic sllm rules, including benchmark-specific thresholds and budgets. Request statistics use the latest case attempts; original and interrupted attempts remain in raw artifacts.
 
@@ -8,10 +8,10 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 
 | Model | Completed/attempted | Requests | Validation passes | PP mean | PP median | PP min | PP max | TG mean | TG median | TG min | TG max | TTFT mean | TTFT median | TTFT min | TTFT max | Case wall s | Startup s |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| deepseek | 48/48 | 873 | 37/48 | 476.44 | 198.66 | 12.89 | 4626.29 | 57.68 | 57.70 | 32.51 | 108.05 | 1993.05 | 1386.24 | 43.57 | 39128.23 | 22814.27 | 68.05 |
+| deepseek | 48/48 | 873 | 37/48 | 476.65 | 198.66 | 12.89 | 4626.29 | 57.61 | 57.53 | 32.51 | 108.05 | 1997.75 | 1388.98 | 43.57 | 39128.23 | 22885.63 | 134.79 |
 | deepseek-uncensored | 48/48 | 697 | 38/48 | 528.47 | 215.97 | 16.39 | 4636.68 | 59.51 | 58.37 | 32.58 | 113.28 | 2181.16 | 1473.80 | 47.51 | 39111.39 | 18758.68 | 95.67 |
-| flash-next | 48/48 | 955 | 38/48 | 1362.09 | 509.28 | 115.58 | 10694.46 | 194.20 | 183.95 | 77.05 | 527.42 | 826.18 | 518.17 | 91.74 | 19603.89 | 5941.53 | 23.84 |
-| flash-next-uncensored | 48/48 | 1487 | 30/48 | 5708.96 | 6362.16 | 495.01 | 8600.66 | 167.61 | 166.72 | 82.37 | 531.03 | 1537.37 | 1344.79 | 400.63 | 24221.68 | 15069.35 | 23.77 |
+| flash-next | 48/48 | 955 | 38/48 | 1364.50 | 513.74 | 115.58 | 10694.46 | 194.30 | 184.43 | 77.05 | 527.42 | 828.06 | 524.39 | 91.74 | 19603.89 | 5964.60 | 48.87 |
+| flash-next-uncensored | 48/48 | 1487 | 30/48 | 5712.53 | 6362.16 | 495.01 | 8600.66 | 167.67 | 166.69 | 82.37 | 531.03 | 1537.86 | 1344.79 | 400.63 | 24221.68 | 15152.90 | 48.86 |
 
 ## Kit matrix
 
@@ -28,7 +28,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek | en | 09-code-prefill | passed | 4582.27 | 4582.27 | 4582.27 | 4582.27 | 38.91 | 38.91 | 38.91 | 38.91 | 19822.51 | 19822.51 | 19822.51 | 19822.51 | 31.31 | 0.00 |
 | deepseek | en | 10-agent-battleship | passed | 265.21 | 163.59 | 60.15 | 3088.20 | 54.87 | 56.91 | 35.66 | 70.16 | 1382.25 | 1136.87 | 233.49 | 4710.58 | 3499.89 | 149.00 |
 | deepseek | en | 11-agent-repair | passed | 224.73 | 213.91 | 89.63 | 565.73 | 54.98 | 56.23 | 39.76 | 63.27 | 1366.14 | 1095.94 | 699.71 | 3331.35 | 310.78 | 21.00 |
-| deepseek | en | 12-mixed-iterations | passed | 780.47 | 112.57 | 102.85 | 4128.87 | 56.19 | 62.47 | 33.75 | 68.52 | 2606.69 | 917.61 | 887.04 | 10963.42 | 133.58 | 0.00 |
+| deepseek | en | 12-mixed-iterations | passed | 786.35 | 152.54 | 129.83 | 3975.63 | 51.84 | 54.48 | 37.16 | 61.65 | 3000.58 | 1305.44 | 1181.77 | 11414.56 | 198.93 | 0.00 |
 | deepseek | ru | 01-prose-short | passed | 1332.32 | 1968.66 | 186.21 | 2029.10 | 72.85 | 64.23 | 46.36 | 98.75 | 2746.44 | 3142.49 | 1857.16 | 3448.88 | 693.34 | 0.00 |
 | deepseek | ru | 02-prose-long | passed | 1624.34 | 1695.13 | 965.08 | 1707.04 | 80.52 | 84.41 | 53.11 | 100.28 | 3055.28 | 2960.65 | 2928.83 | 3907.05 | 634.31 | 0.00 |
 | deepseek | ru | 03-prose-summary-short | passed | 4116.60 | 4116.60 | 4116.60 | 4116.60 | 52.73 | 52.73 | 52.73 | 52.73 | 8610.45 | 8610.45 | 8610.45 | 8610.45 | 88.10 | 0.00 |
@@ -52,7 +52,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek | ste | 09-code-prefill | passed | 4626.13 | 4626.13 | 4626.13 | 4626.13 | 40.50 | 40.50 | 40.50 | 40.50 | 19624.20 | 19624.20 | 19624.20 | 19624.20 | 29.55 | 0.00 |
 | deepseek | ste | 10-agent-battleship | passed | 347.70 | 234.10 | 60.95 | 2258.21 | 51.82 | 50.99 | 35.37 | 72.75 | 1818.45 | 1600.73 | 298.90 | 4190.39 | 2842.92 | 142.00 |
 | deepseek | ste | 11-agent-repair | passed | 235.98 | 159.30 | 70.15 | 973.36 | 55.08 | 57.37 | 36.30 | 68.36 | 1257.67 | 1195.44 | 242.45 | 3402.71 | 376.43 | 28.00 |
-| deepseek | ste | 12-mixed-iterations | passed | 793.89 | 113.76 | 102.85 | 4198.08 | 55.77 | 59.24 | 33.58 | 64.30 | 2560.98 | 945.90 | 873.59 | 10595.36 | 147.24 | 0.00 |
+| deepseek | ste | 12-mixed-iterations | passed | 819.22 | 158.81 | 153.42 | 4126.22 | 49.83 | 53.50 | 38.07 | 56.06 | 2851.80 | 1271.64 | 1202.32 | 10803.28 | 153.24 | 0.00 |
 | deepseek | zh | 01-prose-short | failed | 1648.83 | 2065.48 | 152.81 | 2720.13 | 68.35 | 59.52 | 43.69 | 108.05 | 3031.49 | 3517.06 | 1457.32 | 3961.43 | 774.09 | 0.00 |
 | deepseek | zh | 02-prose-long | passed | 1908.99 | 2468.36 | 252.91 | 2526.52 | 83.71 | 85.32 | 44.49 | 100.08 | 3456.59 | 3776.48 | 2137.40 | 3824.25 | 1230.89 | 0.00 |
 | deepseek | zh | 03-prose-summary-short | passed | 4120.74 | 4120.74 | 4120.74 | 4120.74 | 44.56 | 44.56 | 44.56 | 44.56 | 8917.94 | 8917.94 | 8917.94 | 8917.94 | 78.85 | 0.00 |
@@ -124,7 +124,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | en | 09-code-prefill | passed | 10478.18 | 10478.18 | 10478.18 | 10478.18 | 187.64 | 187.64 | 187.64 | 187.64 | 9908.52 | 9908.52 | 9908.52 | 9908.52 | 13.12 | 0.00 |
 | flash-next | en | 10-agent-battleship | passed | 662.91 | 372.15 | 115.58 | 4322.99 | 180.55 | 173.68 | 101.55 | 349.83 | 537.35 | 469.97 | 134.26 | 1462.35 | 1045.18 | 149.00 |
 | flash-next | en | 11-agent-repair | passed | 524.12 | 247.62 | 117.29 | 1688.26 | 172.75 | 167.52 | 102.93 | 246.13 | 467.64 | 391.67 | 186.26 | 1224.12 | 87.85 | 21.00 |
-| flash-next | en | 12-mixed-iterations | passed | 1953.65 | 327.50 | 317.82 | 10067.64 | 179.22 | 179.59 | 165.77 | 193.55 | 1010.08 | 402.01 | 365.25 | 4087.55 | 52.00 | 0.00 |
+| flash-next | en | 12-mixed-iterations | passed | 2008.54 | 416.43 | 385.63 | 9988.71 | 188.32 | 187.68 | 179.76 | 196.69 | 1141.77 | 548.79 | 517.10 | 4120.13 | 102.92 | 0.00 |
 | flash-next | ru | 01-prose-short | passed | 3909.93 | 4569.54 | 577.46 | 4845.87 | 247.18 | 248.30 | 213.96 | 274.81 | 947.84 | 1029.13 | 508.25 | 1074.50 | 143.95 | 0.00 |
 | flash-next | ru | 02-prose-long | passed | 5140.27 | 5342.75 | 3465.32 | 5398.37 | 254.16 | 253.80 | 232.78 | 265.38 | 1440.43 | 1489.91 | 997.79 | 1499.75 | 145.97 | 0.00 |
 | flash-next | ru | 03-prose-summary-short | passed | 10459.12 | 10459.12 | 10459.12 | 10459.12 | 209.77 | 209.77 | 209.77 | 209.77 | 2801.96 | 2801.96 | 2801.96 | 2801.96 | 14.12 | 0.00 |
@@ -136,7 +136,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | ru | 09-code-prefill | passed | 10482.71 | 10482.71 | 10482.71 | 10482.71 | 195.17 | 195.17 | 195.17 | 195.17 | 9892.95 | 9892.95 | 9892.95 | 9892.95 | 12.97 | 0.00 |
 | flash-next | ru | 10-agent-battleship | failed | 1109.30 | 492.28 | 139.29 | 10509.06 | 180.30 | 173.68 | 101.86 | 317.80 | 788.20 | 524.43 | 120.01 | 9650.35 | 929.62 | 200.00 |
 | flash-next | ru | 11-agent-repair | passed | 607.19 | 391.52 | 129.24 | 1591.14 | 186.35 | 194.66 | 88.04 | 271.62 | 560.84 | 409.30 | 262.90 | 1407.20 | 63.05 | 10.00 |
-| flash-next | ru | 12-mixed-iterations | passed | 1975.58 | 367.46 | 341.09 | 10038.88 | 177.31 | 181.32 | 156.53 | 188.44 | 1079.06 | 458.79 | 409.31 | 4250.40 | 69.05 | 0.00 |
+| flash-next | ru | 12-mixed-iterations | passed | 2062.74 | 488.29 | 463.85 | 9942.23 | 176.20 | 183.10 | 156.79 | 191.68 | 1146.97 | 537.65 | 468.89 | 4296.92 | 57.04 | 0.00 |
 | flash-next | ste | 01-prose-short | passed | 4033.17 | 4421.12 | 464.84 | 4623.93 | 300.58 | 296.23 | 272.15 | 337.96 | 936.94 | 965.93 | 559.94 | 1039.29 | 110.04 | 0.00 |
 | flash-next | ste | 02-prose-long | passed | 4542.03 | 4700.19 | 2728.69 | 4917.41 | 339.52 | 320.03 | 277.17 | 527.42 | 1388.99 | 1462.18 | 878.45 | 1515.52 | 132.04 | 0.00 |
 | flash-next | ste | 03-prose-summary-short | passed | 10603.60 | 10603.60 | 10603.60 | 10603.60 | 210.53 | 210.53 | 210.53 | 210.53 | 2921.49 | 2921.49 | 2921.49 | 2921.49 | 8.69 | 0.00 |
@@ -148,7 +148,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | ste | 09-code-prefill | passed | 10484.00 | 10484.00 | 10484.00 | 10484.00 | 180.78 | 180.78 | 180.78 | 180.78 | 9848.84 | 9848.84 | 9848.84 | 9848.84 | 13.06 | 0.00 |
 | flash-next | ste | 10-agent-battleship | failed | 531.91 | 342.88 | 123.19 | 3586.07 | 189.21 | 181.56 | 99.25 | 332.66 | 468.96 | 414.49 | 91.74 | 1420.99 | 934.19 | 200.00 |
 | flash-next | ste | 11-agent-repair | passed | 654.96 | 533.22 | 139.67 | 1757.78 | 168.69 | 177.01 | 87.24 | 265.16 | 528.14 | 451.00 | 166.70 | 1376.87 | 73.14 | 16.00 |
-| flash-next | ste | 12-mixed-iterations | passed | 1958.72 | 308.77 | 274.67 | 10243.33 | 188.04 | 189.54 | 178.46 | 197.33 | 1159.35 | 456.36 | 408.32 | 4732.51 | 83.46 | 0.00 |
+| flash-next | ste | 12-mixed-iterations | passed | 2080.54 | 460.02 | 418.19 | 10231.33 | 191.24 | 191.98 | 175.97 | 205.28 | 1205.49 | 502.43 | 452.14 | 4746.51 | 60.81 | 0.00 |
 | flash-next | zh | 01-prose-short | passed | 4978.65 | 5845.26 | 407.75 | 6020.69 | 251.61 | 251.13 | 227.21 | 263.87 | 1340.33 | 1511.68 | 662.46 | 1557.01 | 128.15 | 0.00 |
 | flash-next | zh | 02-prose-long | passed | 6289.65 | 7042.37 | 2413.10 | 7161.14 | 245.83 | 244.11 | 219.79 | 293.85 | 1440.79 | 1542.45 | 956.71 | 1547.64 | 165.10 | 0.00 |
 | flash-next | zh | 03-prose-summary-short | passed | 10560.03 | 10560.03 | 10560.03 | 10560.03 | 219.53 | 219.53 | 219.53 | 219.53 | 2805.04 | 2805.04 | 2805.04 | 2805.04 | 8.42 | 0.00 |
@@ -160,7 +160,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next | zh | 09-code-prefill | passed | 10503.74 | 10503.74 | 10503.74 | 10503.74 | 193.52 | 193.52 | 193.52 | 193.52 | 9899.67 | 9899.67 | 9899.67 | 9899.67 | 13.18 | 0.00 |
 | flash-next | zh | 10-agent-battleship | failed | 1073.17 | 553.41 | 120.13 | 10520.13 | 180.82 | 177.63 | 77.05 | 312.97 | 731.31 | 515.46 | 92.00 | 10598.06 | 826.91 | 200.00 |
 | flash-next | zh | 11-agent-repair | passed | 507.72 | 250.98 | 116.17 | 1512.20 | 192.18 | 184.72 | 96.64 | 329.53 | 453.04 | 324.09 | 174.43 | 1315.15 | 54.37 | 11.00 |
-| flash-next | zh | 12-mixed-iterations | passed | 1891.62 | 304.98 | 272.73 | 9854.87 | 174.02 | 180.43 | 152.08 | 190.88 | 1109.39 | 433.01 | 400.61 | 4525.06 | 58.77 | 0.00 |
+| flash-next | zh | 12-mixed-iterations | passed | 2011.68 | 438.37 | 410.51 | 9897.33 | 178.32 | 177.91 | 161.28 | 197.87 | 1163.06 | 496.87 | 468.67 | 4517.64 | 65.58 | 0.00 |
 | flash-next-uncensored | en | 01-prose-short | passed | 2974.46 | 3308.16 | 495.48 | 3500.31 | 214.77 | 212.23 | 201.11 | 233.71 | 1102.34 | 1170.39 | 452.05 | 1195.22 | 140.03 | 0.00 |
 | flash-next-uncensored | en | 02-prose-long | passed | 4345.72 | 4673.85 | 2659.79 | 4707.85 | 207.80 | 209.46 | 191.73 | 218.65 | 1151.80 | 1189.68 | 811.12 | 1197.46 | 131.83 | 0.00 |
 | flash-next-uncensored | en | 03-prose-summary-short | passed | 8283.52 | 8283.52 | 8283.52 | 8283.52 | 206.35 | 206.35 | 206.35 | 206.35 | 3382.38 | 3382.38 | 3382.38 | 3382.38 | 13.75 | 0.00 |
@@ -172,7 +172,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next-uncensored | en | 09-code-prefill | passed | 8391.80 | 8391.80 | 8391.80 | 8391.80 | 187.87 | 187.87 | 187.87 | 187.87 | 12417.41 | 12417.41 | 12417.41 | 12417.41 | 15.71 | 0.00 |
 | flash-next-uncensored | en | 10-agent-battleship | failed | 5735.27 | 6137.02 | 1019.47 | 8600.66 | 162.22 | 160.97 | 100.06 | 220.05 | 1461.26 | 1368.27 | 918.07 | 2612.75 | 4612.95 | 198.00 |
 | flash-next-uncensored | en | 11-agent-repair | passed | 6066.93 | 7188.33 | 927.79 | 8496.39 | 154.40 | 151.07 | 96.41 | 220.43 | 1478.42 | 1372.86 | 753.21 | 2152.87 | 343.68 | 74.00 |
-| flash-next-uncensored | en | 12-mixed-iterations | passed | 6234.97 | 7157.99 | 2336.68 | 8351.13 | 154.87 | 152.72 | 142.78 | 169.37 | 2233.46 | 1600.71 | 1205.66 | 5650.21 | 91.60 | 0.00 |
+| flash-next-uncensored | en | 12-mixed-iterations | passed | 7110.82 | 8035.90 | 3899.17 | 8276.85 | 154.19 | 153.76 | 150.79 | 158.73 | 2311.20 | 1696.76 | 1193.88 | 5762.94 | 115.69 | 0.00 |
 | flash-next-uncensored | ru | 01-prose-short | passed | 3482.26 | 3734.48 | 653.36 | 3999.20 | 169.06 | 170.30 | 140.60 | 181.26 | 1178.13 | 1223.52 | 504.64 | 1232.59 | 238.74 | 0.00 |
 | flash-next-uncensored | ru | 02-prose-long | passed | 5784.70 | 6188.74 | 2697.59 | 6233.79 | 170.84 | 171.39 | 157.32 | 177.21 | 1262.55 | 1266.98 | 1221.19 | 1273.35 | 184.54 | 0.00 |
 | flash-next-uncensored | ru | 03-prose-summary-short | passed | 8341.91 | 8341.91 | 8341.91 | 8341.91 | 175.48 | 175.48 | 175.48 | 175.48 | 3029.22 | 3029.22 | 3029.22 | 3029.22 | 15.28 | 0.00 |
@@ -184,7 +184,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next-uncensored | ru | 09-code-prefill | passed | 8377.34 | 8377.34 | 8377.34 | 8377.34 | 170.16 | 170.16 | 170.16 | 170.16 | 12331.64 | 12331.64 | 12331.64 | 12331.64 | 16.09 | 0.00 |
 | flash-next-uncensored | ru | 10-agent-battleship | failed | 5586.20 | 6358.36 | 554.70 | 8555.12 | 165.19 | 169.02 | 89.36 | 219.69 | 1432.42 | 1342.50 | 610.69 | 2384.14 | 1037.58 | 200.00 |
 | flash-next-uncensored | ru | 11-agent-repair | passed | 5988.31 | 6927.88 | 898.11 | 8509.03 | 163.76 | 166.81 | 90.51 | 219.04 | 1477.73 | 1371.17 | 772.70 | 2432.62 | 855.03 | 198.00 |
-| flash-next-uncensored | ru | 12-mixed-iterations | passed | 6618.85 | 8109.35 | 2494.71 | 8274.03 | 159.52 | 158.60 | 137.63 | 179.20 | 2171.58 | 1657.70 | 1066.74 | 5332.08 | 95.94 | 0.00 |
+| flash-next-uncensored | ru | 12-mixed-iterations | passed | 6872.26 | 8185.52 | 2984.10 | 8238.54 | 164.63 | 163.27 | 151.87 | 179.83 | 2228.29 | 1723.58 | 1181.01 | 5385.58 | 98.59 | 0.00 |
 | flash-next-uncensored | ste | 01-prose-short | passed | 3108.98 | 3498.43 | 495.01 | 3609.82 | 222.75 | 225.87 | 191.22 | 233.17 | 1140.63 | 1215.20 | 470.85 | 1234.86 | 119.81 | 0.00 |
 | flash-next-uncensored | ste | 02-prose-long | passed | 4465.30 | 4692.64 | 2720.27 | 4880.32 | 279.08 | 258.07 | 219.70 | 531.03 | 1191.97 | 1230.80 | 839.81 | 1235.48 | 141.24 | 0.00 |
 | flash-next-uncensored | ste | 03-prose-summary-short | passed | 8462.00 | 8462.00 | 8462.00 | 8462.00 | 152.23 | 152.23 | 152.23 | 152.23 | 2868.66 | 2868.66 | 2868.66 | 2868.66 | 12.06 | 0.00 |
@@ -196,7 +196,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next-uncensored | ste | 09-code-prefill | passed | 8401.53 | 8401.53 | 8401.53 | 8401.53 | 161.61 | 161.61 | 161.61 | 161.61 | 12198.63 | 12198.63 | 12198.63 | 12198.63 | 15.56 | 0.00 |
 | flash-next-uncensored | ste | 10-agent-battleship | failed | 5811.27 | 6431.38 | 670.64 | 8598.29 | 168.24 | 171.35 | 107.83 | 231.68 | 1440.30 | 1343.02 | 560.17 | 2191.33 | 3067.32 | 200.00 |
 | flash-next-uncensored | ste | 11-agent-repair | passed | 6219.79 | 7324.94 | 1362.89 | 8569.72 | 160.99 | 159.78 | 93.53 | 219.73 | 1466.04 | 1361.94 | 1004.38 | 2325.37 | 643.70 | 58.00 |
-| flash-next-uncensored | ste | 12-mixed-iterations | passed | 7511.76 | 8242.40 | 3689.06 | 8449.03 | 161.09 | 158.97 | 146.27 | 176.68 | 2268.23 | 1775.04 | 1222.55 | 5175.18 | 92.87 | 0.00 |
+| flash-next-uncensored | ste | 12-mixed-iterations | passed | 7116.97 | 8155.70 | 3589.27 | 8387.63 | 165.14 | 164.17 | 153.06 | 180.60 | 2206.43 | 1711.31 | 1186.39 | 5222.85 | 108.52 | 0.00 |
 | flash-next-uncensored | zh | 01-prose-short | passed | 5477.43 | 6824.65 | 505.25 | 6908.87 | 154.27 | 156.17 | 137.23 | 160.15 | 1155.14 | 1269.61 | 477.28 | 1284.01 | 223.45 | 0.00 |
 | flash-next-uncensored | zh | 02-prose-long | passed | 6793.93 | 8086.40 | 2384.85 | 8211.56 | 158.00 | 156.84 | 146.49 | 169.28 | 1248.11 | 1296.82 | 911.66 | 1321.03 | 194.93 | 0.00 |
 | flash-next-uncensored | zh | 03-prose-summary-short | passed | 8527.01 | 8527.01 | 8527.01 | 8527.01 | 151.26 | 151.26 | 151.26 | 151.26 | 3866.84 | 3866.84 | 3866.84 | 3866.84 | 13.86 | 0.00 |
@@ -208,8 +208,8 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | flash-next-uncensored | zh | 09-code-prefill | passed | 8407.33 | 8407.33 | 8407.33 | 8407.33 | 163.81 | 163.81 | 163.81 | 163.81 | 12439.92 | 12439.92 | 12439.92 | 12439.92 | 17.02 | 0.00 |
 | flash-next-uncensored | zh | 10-agent-battleship | failed | 5921.34 | 6714.61 | 1027.47 | 8545.94 | 162.78 | 164.90 | 82.37 | 215.18 | 1487.33 | 1353.90 | 786.14 | 2621.44 | 936.46 | 200.00 |
 | flash-next-uncensored | zh | 11-agent-repair | failed | 5900.62 | 6640.07 | 856.45 | 8537.11 | 163.52 | 166.26 | 90.94 | 228.68 | 1444.88 | 1347.30 | 849.99 | 2182.26 | 775.42 | 200.00 |
-| flash-next-uncensored | zh | 12-mixed-iterations | passed | 7523.53 | 8062.93 | 5448.10 | 8477.65 | 150.47 | 150.19 | 122.95 | 170.46 | 2422.87 | 1533.23 | 1263.60 | 6296.61 | 93.31 | 0.00 |
+| flash-next-uncensored | zh | 12-mixed-iterations | passed | 7674.68 | 8079.88 | 5696.35 | 8394.63 | 156.93 | 155.96 | 150.74 | 167.07 | 2470.75 | 1769.13 | 1227.63 | 6368.43 | 134.47 | 0.00 |
 
 [Independent prose repetition audit](PROSE-AUDIT.md) · [Audit JSON](PROSE-AUDIT.json)
 
-Targeted rerun: 0/16; pending 16. Kits: 12-mixed-iterations. Earlier attempts remain in the raw artifact directories.
+Targeted rerun: 10/16; pending 6. Kits: 12-mixed-iterations. Earlier attempts remain in the raw artifact directories.

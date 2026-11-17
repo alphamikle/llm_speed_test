@@ -1,0 +1,50 @@
+{
+  "verified_at": "2026-11-17T04:32:27.959742+00:00",
+  "version": "0.1.0",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "node": "v24.22.3",
+  "npm_prefix": "/home/alfa/.local",
+  "artifact": "sllm-0.1.0.tgz",
+  "artifact_sha256": "70e64fff7b4454b8f9843e307bcf6dba4ca104012fccb524c964dfaab1dcc783",
+  "standalone_global_package": true,
+  "checkout_symlink_removed": true,
+  "all_packaged_files_match_checkout_and_installed_package": true,
+  "packaged_files": 30,
+  "user_yaml_bytes_preserved": true,
+  "configured_slots": [
+    "default",
+    "flash-next",
+    "flash-next-uncensored",
+    "deepseek",
+    "deepseek-uncensored"
+  ],
+  "help_and_version_passed": true,
+  "doctor_offline_passed": true,
+  "chromium_ready": true,
+  "installed_agent_check": {
+    "standalone_global_package": true,
+    "real_bundled_pi_tool_execution": true,
+    "inference_requests": 2,
+    "tool_calls": 1,
+    "tool_errors": 0,
+    "native_pp_tps": 2000,
+    "native_tg_tps": 200,
+    "transport": "deterministic local mock; installation verification, not a model benchmark"
+  },
+  "cross_platform_ci": {
+    "source_revision": "d54e399f59b06513269548cd859815ccaa134048",
+    "url": "https://github.com/alphamikle/llm_speed_test/actions/runs/44015698573",
+    "os": [
+      "Linux",
+      "Windows",
+      "macOS"
+    ],
+    "node_major_versions": [
+      24,
+      26
+    ],
+    "all_six_jobs_passed": true
+  },
+  "platform_prerequisites": "Node.js >=24.10.0; Windows agent shell commands need Bash (for example Git Bash); Linux Chromium requires its standard OS libraries."
+}
