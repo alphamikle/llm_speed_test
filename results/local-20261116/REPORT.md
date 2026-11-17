@@ -1,6 +1,6 @@
 # sllm benchmark results
 
-Profile: **full**. Finished 165/192 cases. Quality passes: 122. Active suite wall time: 56716.89 s. End-to-end elapsed time: 60262.74 s.
+Profile: **full**. Finished 168/192 cases. Quality passes: 124. Active suite wall time: 60467.38 s. End-to-end elapsed time: 63402.65 s.
 
 PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `n/a`. Request statistics use the latest case attempts; original and interrupted attempts remain in raw artifacts.
 
@@ -9,7 +9,7 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | Model | Completed/attempted | Requests | Validation passes | PP mean | PP median | PP min | PP max | TG mean | TG median | TG min | TG max | TTFT mean | TTFT median | TTFT min | TTFT max | Case wall s | Startup s |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | deepseek | 48/48 | 873 | 37/48 | 476.44 | 198.66 | 12.89 | 4626.29 | 57.68 | 57.70 | 32.51 | 108.05 | 1993.05 | 1386.24 | 43.57 | 39128.23 | 22814.27 | 68.05 |
-| deepseek-uncensored | 21/48 | 230 | 17/48 | 643.39 | 212.70 | 16.39 | 4616.99 | 60.35 | 60.68 | 33.97 | 93.95 | 2596.16 | 1584.48 | 64.40 | 39111.39 | 7722.30 | 95.67 |
+| deepseek-uncensored | 24/48 | 462 | 19/48 | 438.42 | 204.60 | 16.39 | 4616.99 | 58.45 | 58.36 | 33.97 | 93.95 | 1989.85 | 1423.57 | 64.40 | 39111.39 | 11456.33 | 95.67 |
 | flash-next | 48/48 | 955 | 38/48 | 1362.09 | 509.28 | 115.58 | 10694.46 | 194.20 | 183.95 | 77.05 | 527.42 | 826.18 | 518.17 | 91.74 | 19603.89 | 5941.53 | 23.84 |
 | flash-next-uncensored | 48/48 | 1487 | 30/48 | 5708.96 | 6362.16 | 495.01 | 8600.66 | 167.61 | 166.72 | 82.37 | 531.03 | 1537.37 | 1344.79 | 400.63 | 24221.68 | 15069.35 | 23.77 |
 
@@ -98,9 +98,9 @@ PP/TG: native tokens/s. TTFT: milliseconds. Missing native values are shown as `
 | deepseek-uncensored | ste | 07-json-prefill | fail | 4490.71 | 4490.71 | 4490.71 | 4490.71 | 35.06 | 35.06 | 35.06 | 35.06 | 38679.55 | 38679.55 | 38679.55 | 38679.55 | 41.65 | 0.00 |
 | deepseek-uncensored | ste | 08-code-generation | pass | 178.55 | 178.55 | 178.55 | 178.55 | 42.36 | 42.36 | 42.36 | 42.36 | 2133.87 | 2133.87 | 2133.87 | 2133.87 | 38.12 | 0.00 |
 | deepseek-uncensored | ste | 09-code-prefill | pass | 4616.99 | 4616.99 | 4616.99 | 4616.99 | 39.41 | 39.41 | 39.41 | 39.41 | 19573.67 | 19573.67 | 19573.67 | 19573.67 | 30.13 | 0.00 |
-| deepseek-uncensored | ste | 10-agent-battleship | fail | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | 0.34 | 1.00 |
-| deepseek-uncensored | ste | 11-agent-repair | fail | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | 0.34 | 1.00 |
-| deepseek-uncensored | ste | 12-mixed-iterations | fail | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | 0.00 | 0.00 |
+| deepseek-uncensored | ste | 10-agent-battleship | fail | 235.48 | 200.73 | 63.55 | 2076.15 | 57.42 | 57.51 | 37.74 | 74.68 | 1403.74 | 1377.23 | 280.06 | 3839.17 | 2938.53 | 200.00 |
+| deepseek-uncensored | ste | 11-agent-repair | pass | 383.86 | 312.50 | 76.42 | 1994.61 | 51.33 | 51.52 | 36.76 | 63.12 | 1801.30 | 1919.73 | 250.51 | 3613.49 | 580.77 | 28.00 |
+| deepseek-uncensored | ste | 12-mixed-iterations | pass | 830.61 | 154.82 | 146.69 | 4212.43 | 64.64 | 70.39 | 37.02 | 75.89 | 2803.20 | 1289.55 | 1203.79 | 10384.67 | 215.42 | 0.00 |
 | deepseek-uncensored | zh | 01-prose-short | fail | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | 3.00 | 0.00 |
 | deepseek-uncensored | zh | 02-prose-long | fail | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | 3.01 | 0.00 |
 | deepseek-uncensored | zh | 03-prose-summary-short | fail | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | 0.00 | 0.00 |
